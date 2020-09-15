@@ -16,9 +16,19 @@ const router = new VueRouter({
             component:() => import('@/pages/index')
         },        
         {
+            path:'/basic',
+            name:'Basic',
+            component:() => import('@/pages/basic')
+        },        
+        {
             path:'/button',
             name:'Button',
             component:() => import('@/pages/button')
+        },        
+        {
+            path:'/form',
+            name:'Form',
+            component:() => import('@/pages/form')
         },
         {
             path:'/*',
