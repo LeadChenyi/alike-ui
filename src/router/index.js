@@ -29,6 +29,16 @@ const router = new VueRouter({
             path:'/form',
             name:'Form',
             component:() => import('@/pages/form')
+        },        
+        {
+            path:'/animation',
+            name:'Animation',
+            component:() => import('@/pages/animation')
+        },        
+        {
+            path:'/scrollview',
+            name:'ScrollView',
+            component:() => import('@/pages/scrollview')
         },
         {
             path:'/*',

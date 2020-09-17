@@ -1,10 +1,8 @@
 <template>
     <div class="index-page">
-        <div class="index-wrap">
-            <div class="index-item">
-                index
-            </div>
-        </div>
+        <alike-divider>首页</alike-divider>
+        <alike-button class="mr-10" @click="linkUrls('Animation')">animation 动画</alike-button>
+        <alike-button class="mr-10" @click="linkUrls('ScrollView')">scrollview 滚动器</alike-button>
     </div>
 </template>
 
@@ -14,7 +12,7 @@ import Api from '@/api/axios/index.js'
 export default {
     name:"Index",
     mounted(){
-        this.initData();
+        // this.initData();
     },
     methods:{
         initData(){
@@ -23,25 +21,14 @@ export default {
             }).catch((err)=>{
                 console.log(err);
             })
+        },
+        linkUrls(name){
+            this.$router.push({name:name});
         }
     }
 }
 </script>
 
-<style lang="scss" scoped>
-    .text-primary{color:$alike-color-primary;}
-    .index-wrap{
-        cursor:pointer;
-        display:flex;
-        background-color:$alike-color-white;
+<style>
 
-        &:hover{
-            background-color:$alike-color-default;
-        }
-
-        .index-item{
-            font-size:18px;
-            color:$alike-color-primary;
-        }
-    }
 </style>
