@@ -11,18 +11,17 @@
             <div class="hover-view__text">这是一个段落。。。</div>
         </div>      
 
-        <alike-line type="white"></alike-line>
-        <div class="hover-logos">
+        <div class="hover-logo">
             <div class="hover-logo__item hover-logo__item-v1"></div>
             <div class="hover-logo__item hover-logo__item-v2"></div>
             <div class="hover-logo__item hover-logo__item-v3"></div>
         </div>
 
         <div class="hover-image">
-            <div class="hover-image__item-v1">
+            <div class="hover-image__item hover-image__item-v1">
                 <img src="@/assets/img/ad_001.jpg" alt="">
             </div>
-            <div class="hover-image__item-v2">
+            <div class="hover-image__item hover-image__item-v2">
                 <img src="@/assets/img/game_001.png" alt="">
             </div>
         </div>
@@ -34,7 +33,38 @@
         </div>
 
         <div class="hover-sidebar">
+            <div class="sidebar-nav">
+                <div class="sidebar-nav__item">
+                    <alike-icon type="like" size="24px"></alike-icon>
+                    <div class="sidebar-nav__item-text">感兴趣</div>
+                </div>                
+                <div class="sidebar-nav__item">
+                    <alike-icon type="like" size="24px"></alike-icon>
+                    <div class="sidebar-nav__item-text">感兴趣</div>
+                </div>                
+                <div class="sidebar-nav__item">
+                    <alike-icon type="like" size="24px"></alike-icon>
+                    <div class="sidebar-nav__item-text">感兴趣</div>
+                </div>
+            </div>
+        </div>
 
+        <alike-divider>frame 序列帧动画</alike-divider>
+        <div class="frame-image">
+            <div class="frame-image__item frame-image__item-v1"></div>
+            <div class="frame-image__item frame-image__item-v2"></div>
+            <div class="frame-image__item frame-image__item-v3"></div>
+            <div class="frame-image__item frame-image__item-v4"></div>
+        </div>
+
+        <alike-divider>round 环绕动画</alike-divider>
+        <div class="rect-view"></div>
+        <div class="circle-view"></div>
+
+        <alike-divider>repeat 大波浪动画</alike-divider>
+        <div class="water-view">
+            <div class="water-view__item water-view__item-v1"></div>
+            <div class="water-view__item water-view__item-v2"></div>
         </div>
     </div>
 </template>
@@ -42,7 +72,22 @@
 <script>
 /**
 * 单张背景图用background-size:cover;
-* 雪碧背景图用background-position:x y;（类似中心点向左上角位移，所以x y属性的值一定是0或小于0的负数值）    
+* 雪碧背景图用background-position:x y;（类似中心点向左上角位移，所以x y属性的值一定是0或小于0的负数值） 
+* 
+* sprite计算帧数以水平方向为例：
+* 已知图像大小的宽度为640px，元素宽度为80px，所以一个动画流程需要8帧才能播完，即步数为steps(7)，步数默认帧为0
+* 
+* 图像大小的宽或高度 = 元素的宽或高度 * 帧数
+* 也就是说可以通过改变图像的大小，来相应的设置元素值的宽高度
+* 
+* 裁剪元素clip(top,right,bottom,left)
+* 已知环绕动画为8秒
+* -4秒执行出现两道边：相当于before从50%的进度开始
+* -2秒执行连接成一道长边：相当于before从25%的进度开始
+* 不延迟执行合并成一道边：相当于before同after都是从0%的进度开始
+* 
+* 波浪动画通过background-repeat:repeat-x;变成有规则的动画衔接
+* 当定义了图像大小之后，就可以使用100%来作为动画流程的进度值
 */
 export default {
     name:"Animation",
@@ -93,52 +138,60 @@ export default {
         background-repeat:no-repeat;
         cursor:pointer;
     }
+
     /* 直接切换 */
-    .hover-logo__item-v1:hover{
-        background-position:-640px 0;
+    .hover-logo__item-v1{
+        &:hover{
+            background-position:-640px 0;
+        }
     }
+
     /* 过度切换 */
     .hover-logo__item-v2{
         transition:background-position 300ms ease;
+
+        &:hover{
+            background-position:-320px 0;
+        }
     }
-    .hover-logo__item-v2:hover{
-        background-position:-320px 0;
-    }
+
     /* 过度悬停 */
     .hover-logo__item-v3{
         transition:background-position 300ms ease;
-    }
-    .hover-logo__item-v3:hover{
-        background-position:0 -10px;
-    }  
 
-    .hover-image__item-v1{
-        width:522px;height:255px;border-radius:1px;position:relative;overflow:hidden;cursor:pointer;
-
-        & img{
-            width:100%;height:100%;border-radius:1px;
-        }
-
-        &:before{
-            transition:opacity 300ms ease-in-out;
-            content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.1);opacity:0;
-        }
-
-        &:hover:before{
-            opacity:1;
+        &:hover{
+            background-position:0 -10px;
         }
     }
 
-    .hover-image__item-v2{
-        width:300px;height:160px;border-radius:10px;position:relative;overflow:hidden;cursor:pointer;
-        & img{
-            width:100%;height:100%;border-radius:10px;
-            transform:scale(1);
-            transition:transform 300ms ease-in-out;
+    .hover-image__item{
+        width:300px;height:160px;display:inline-block;margin-right:20px;border-radius:10px;position:relative;overflow:hidden;cursor:pointer;
+        
+        &.hover-image__item-v1{
+            & img{
+                width:100%;height:100%;border-radius:10px;
+            }
+
+            &:before{
+                transition:opacity 300ms ease-in-out;
+                content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.2);opacity:0;
+            }
+
+            &:hover:before{
+                opacity:1;
+            }
         }
 
-        &:hover img{
-            transform:scale(1.1);
+        &.hover-image__item-v2{
+            & img{
+                width:100%;height:100%;border-radius:10px;
+                transform:scale(1);
+                transition:transform 300ms ease-in-out;
+            }
+
+            &:hover img{
+                transform:scale(1.1);
+            }
         }
     }
 
@@ -174,4 +227,188 @@ export default {
             opacity:1;
         }
     }
+
+    .sidebar-nav{
+        width:50px;
+        text-align:center;
+        font-size:14px;
+        color:#ffffff;
+        transition:all 300ms ease;
+
+        &:hover{
+            width:70px;
+            color:#333333;
+        }
+
+        & .sidebar-nav__item{
+            margin-bottom:10px;
+            cursor:pointer;
+        }
+    }
+    .frame-image__item{
+        display:inline-block;margin-right:20px;
+    }
+
+    .frame-image__item-v1{
+        width:80px;
+        height:100px;
+        background-image:url('../assets/img/ani_001.png');
+        background-position:0 0;
+        background-size:640px 100px;
+        background-repeat:no-repeat;
+        cursor:pointer;
+
+        &:hover{
+            animation:aniHorizontal 800ms steps(7) infinite;
+        }
+    }
+
+    .frame-image__item-v2{
+        width:190px;
+        height:240px;
+        background-image:url('../assets/img/ani_002.png');
+        background-position:0 0;
+        background-size:1900px 240px;
+        background-repeat:no-repeat;
+        animation:aniHorizontal 1s steps(9) infinite;
+    }    
+    
+    .frame-image__item-v3{
+        width:264px;
+        height:130px;
+        background-image:url('../assets/img/ani_003.png');
+        background-position:0 0;
+        background-size:264px 780px;
+        background-repeat:no-repeat;
+        animation:aniVertical 600ms steps(5) infinite;
+    }
+    .frame-image__item-v4{
+        width:220px;
+        height:100px;
+        background-image:url('../assets/img/ani_003.png');
+        background-position:0 0;
+        background-size:220px 600px;
+        background-repeat:no-repeat;
+        animation:aniVertical 600ms steps(5) infinite;
+    }
+
+    .rect-view{
+        position:relative;
+        width: 200px;
+        height: 200px;
+        margin: 50px auto;
+        border:2px solid rgba(105, 202, 98, 1);
+        border-radius:4px;
+    
+        &:before,&:after{
+            content:" ";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index:0;
+            margin: -10px;
+            border:3px solid rgba(105, 202, 98, 0.5);
+            border-radius:6px;
+            animation:aniClipRound 8s linear infinite;
+        }
+
+        &:before {
+            animation-delay:-4s;
+        }
+
+        &:hover:before,&:hover:after{
+            background-color: rgba(255, 0, 0, 0.3);
+        }
+    }
+
+    .circle-view {
+        width:200px;
+        height:200px;
+        margin:0 auto;
+        border-radius:50%;
+        border:1px solid #ffff00;
+        border-top-color:#ff0000;
+        border-bottom-color:#ff0000;
+        animation:aniEmbattle 1s linear infinite;
+    }
+
+    .water-view{
+        width:100%;
+        height:60px;
+        position:relative;
+        background-color:#3485FB;
+
+        & .water-view__item{
+            position:absolute;
+			width:100%;
+			height:100%;
+            background-position:0 0;
+            background-repeat:repeat-x;
+            background-size:640px 100px;
+        }
+        & .water-view__item-v1{
+            background-image:url('../assets/img/water_001.svg');
+            animation:aniHorizontal 3.5s linear infinite;
+        }        
+        & .water-view__item-v2{
+            background-image:url('../assets/img/water_002.svg');
+            animation:aniHorizontal 6s linear infinite;
+        }
+    }
+
+    
+    @keyframes aniHorizontal {
+        0% {
+            background-position:0 0;
+        }
+
+        100% {
+            background-position:100% 0;
+        }
+    }    
+    
+    @keyframes aniVertical {
+        0% {
+            background-position:0 0%;
+        }
+
+        100% {
+            background-position:0 100%;
+        }
+    }
+    
+    @keyframes aniClipRound {
+        0%, 100% {
+            clip: rect(0px, 220px, 2px, 0px);
+        }
+        25% {
+            clip: rect(0px, 2px, 220px, 0px);
+        }
+        50% {
+            clip: rect(218px, 220px, 220px, 0px);
+        }
+        75% {
+            clip: rect(0px, 220px, 220px, 218px);
+        }
+    }
+    
+    @keyframes aniRotate{
+		0% {
+            transform:rotate(0deg);
+        } 		
+        100% {
+            transform:rotate(360deg);
+        } 
+	}
+
+    @keyframes aniEmbattle {
+        0%{
+            transform:scale(0.1) rotate(0deg);
+        }
+        100% {
+            transform:scale(1) rotate(360deg);
+        }
+	} 
 </style>
