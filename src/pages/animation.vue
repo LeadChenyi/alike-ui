@@ -66,6 +66,8 @@
             <div class="water-view__item water-view__item-v1"></div>
             <div class="water-view__item water-view__item-v2"></div>
         </div>
+
+        <img class="back-top" @click="toBackTop" :class="[isShowBackTop ? 'back-top--active':'']" src="@/assets/img/backtop.png" alt="">
     </div>
 </template>
 
@@ -88,17 +90,51 @@
 * 
 * 波浪动画通过background-repeat:repeat-x;变成有规则的动画衔接
 * 当定义了图像大小之后，就可以使用100%来作为动画流程的进度值
+* 
+* 监听元素事件不需要加on，绑定某个元素事件需要加on
+* 监听器或绑定事件中获取不到vue实现，原因是this指向的是调用它的对象，所以需要使用箭头函数或者.bind(this)，来改变this的指向。
 */
 export default {
     name:"Animation",
-        data(){
+    data(){
         return {
-            isShowTitle:true
+            limitBackTop:100,
+            isShowTitle:true,
+            isShowBackTop:false
         }
+    },
+    mounted(){
+        document.addEventListener('scroll',()=>{
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            // let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            
+            if(scrollTop >= this.limitBackTop){
+                this.isShowBackTop = true;
+            }else{
+                this.isShowBackTop = false;
+            }
+        })
     },
     methods:{
         toggleTitle(){
             this.isShowTitle = !this.isShowTitle;
+        },
+        toBackTop(){
+            if(!this.isShowBackTop){
+                return false;
+            }
+
+            // window.scrollTo(0,0);
+            // document.documentElement.scrollTop = document.body.scrollTop = 0;
+            
+            let timer = setInterval(function(){
+                let osTop = document.documentElement.scrollTop || document.body.scrollTop;
+                let ispeed = Math.floor(-osTop / 3);
+                document.documentElement.scrollTop = document.body.scrollTop = osTop+ispeed;
+                if (osTop == 0) {
+                    clearInterval(timer);
+                }
+            },50);
         }
     }
 }
@@ -358,7 +394,22 @@ export default {
         }
     }
 
+    .back-top{
+        position:fixed;
+        bottom:100px;
+        right:0;
+        width:98px;
+        height:178px;
+        transform:translateX(38px);
+        transition:transfrom 300ms ease;
+
+        &.back-top--active{
+            cursor:pointer;
+            transform:translateX(0);
+        }
+    }
     
+
     @keyframes aniHorizontal {
         0% {
             background-position:0 0;
