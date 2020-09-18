@@ -2,7 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
+// 全局引入样式
 import '@/assets/css/reset-pc.css'
+
+// 全局挂载脚本
+import './api/mock/index.js'
+import Api from './api/axios/index.js'
+Vue.prototype.$api = Api;
+
 // import plugin from './plugin'
 // Vue.use(plugin)
 

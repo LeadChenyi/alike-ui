@@ -30,15 +30,9 @@ export default {
             return await Request({baseURL:BaseURL.v3,url:`/photos?albumId=${albumId}`});
         }
     },
-    home:{
-        getProjects(){
-            return Request({baseURL:BaseURL.v1,url:'/home/projects'});
-        },        
-        getJournals(){
-            return Request({baseURL:BaseURL.v1,url:'/home/journals'});
-        },
-        getAlbums(){
-            return Request({baseURL:BaseURL.v1,url:'/home/albums'});
+    article:{
+        async getArticles(){
+            return await Request({baseURL:BaseURL.v1,url:'/articles'});
         }
     }
 };

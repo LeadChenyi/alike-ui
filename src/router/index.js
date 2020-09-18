@@ -36,6 +36,11 @@ const router = new VueRouter({
             component:() => import('@/pages/animation')
         },        
         {
+            path:'/animationthree',
+            name:'AnimationThree',
+            component:() => import('@/pages/animationthree')
+        },        
+        {
             path:'/scrollview',
             name:'ScrollView',
             component:() => import('@/pages/scrollview')
