@@ -1,13 +1,13 @@
 <template>
-    <div class="alike-draggable" :style="[{top:top,left:left,zIndex:zIndex},customStyle]" v-draggable>
+    <div class="alike-drag-view" :style="[{top:top,left:left,zIndex:zIndex},customStyle]" v-drag>
         <slot></slot>
     </div>
 </template>
 
 <script>
 /**
- * alike-draggable 拖动
- * @describe 拖动元素
+ * alike-drag-view 
+ * @describe 拖动视图
  * @website http://alike.galloping.xyz
  * @property customStyle {Object} 自定义根组件样式
  * @property top {String} 元素初始top值
@@ -17,7 +17,7 @@
  */
 
 export default {
-    name:"alike-draggable",
+    name:"alike-drag-view",
     props:{
         customStyle:{
             type: Object,
@@ -41,15 +41,15 @@ export default {
         }
     },
     directives:{
-        draggable(el,binding,vnode){
-            // 获取Vue实例，浏览器
-            let _this = vnode.context;
-            let _width = document.documentElement.clientWidth || document.body.clientWidth;
-            let _height = document.documentElement.clientHeight || document.body.clientHeight;
-
+        drag(el,binding,vnode){
             el.onmousedown = (e)=>{
+                // 获取vue实例
+                const vm = vnode.context;
+
                 el.style.zIndex++;
-                const elAttr = el.getBoundingClientRect();
+                const elRect = el.getBoundingClientRect();
+                const docAttr = document.body || document.documentElement;
+
                 let downX = e.clientX - el.offsetLeft;
                 let downY = e.clientY - el.offsetTop;
 
@@ -57,24 +57,24 @@ export default {
                     let moveX = e.clientX - downX;
                     let moveY = e.clientY - downY;
 
-                    if(_this.limits){
+                    if(vm.limits){
                         if(moveX < 0){
                             moveX = 0;
-                        }else if(moveX >= (_width - elAttr.width)){
-                            moveX = _width - elAttr.width;
+                        }else if(moveX >= (docAttr.clientWidth - elRect.width)){
+                            moveX = docAttr.clientWidth - elRect.width;
                         }                        
                         
                         if(moveY < 0){
                             moveY = 0;
-                        }else if(moveY >= (_height - elAttr.height)){
-                            moveY = _height - elAttr.height;
+                        }else if(moveY >= (docAttr.clientHeight - elRect.height)){
+                            moveY = docAttr.clientHeight - elRect.height;
                         }
                     }
 
                     el.style.left = moveX + "px";
                     el.style.top = moveY + "px";
 
-                    _this.$emit('change',{left:moveX,top:moveY});
+                    vm.$emit('change',{left:moveX,top:moveY});
                 }
 
                 document.onmouseup = ()=>{
@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .alike-draggable{
+    .alike-drag-view{
         position:fixed;display:inline-block;overflow:hidden;
 
         &:hover{

@@ -1,21 +1,21 @@
 <template>
     <div class="drag-page">
-        <div style="height:1500px"></div>
-        <alike-draggable :limits="true" :z-index="9" @change="changeDraggable">
+        <alike-line type="white" height="1000px"></alike-line>
+        <alike-drag-view :limits="true" :z-index="9" @change="changeDragView">
             <div class="rect-view"></div>
-        </alike-draggable>
+        </alike-drag-view>
     </div>
 </template>
 
 <script>
-import alikeDraggable from '../../packages/draggable/draggable'
+import alikeDragView from '../../packages/drag-view/drag-view'
 export default {
     name:"Drag",
     components:{
-        alikeDraggable
+        alikeDragView
     },
     methods:{
-        changeDraggable(e){
+        changeDragView(e){
             console.log('实时监听元素拖动位置：',e);
         }
     }

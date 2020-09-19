@@ -16,6 +16,11 @@ const router = new VueRouter({
             component:() => import('@/pages/index')
         },        
         {
+            path:'/cssom',
+            name:'Cssom',
+            component:() => import('@/pages/cssom')
+        },        
+        {
             path:'/basic',
             name:'Basic',
             component:() => import('@/pages/basic')
@@ -46,9 +51,9 @@ const router = new VueRouter({
             component:() => import('@/pages/animationthree')
         },        
         {
-            path:'/scrollview',
-            name:'ScrollView',
-            component:() => import('@/pages/scrollview')
+            path:'/scroll',
+            name:'Scroll',
+            component:() => import('@/pages/scroll')
         },
         {
             path:'/*',
