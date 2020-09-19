@@ -31,6 +31,11 @@ const router = new VueRouter({
             component:() => import('@/pages/form')
         },        
         {
+            path:'/drag',
+            name:'Drag',
+            component:() => import('@/pages/drag')
+        },        
+        {
             path:'/animation',
             name:'Animation',
             component:() => import('@/pages/animation')

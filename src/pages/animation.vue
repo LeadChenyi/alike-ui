@@ -126,15 +126,17 @@ export default {
 
             // window.scrollTo(0,0);
             // document.documentElement.scrollTop = document.body.scrollTop = 0;
-            
-            let timer = setInterval(function(){
-                let osTop = document.documentElement.scrollTop || document.body.scrollTop;
-                let ispeed = Math.floor(-osTop / 3);
-                document.documentElement.scrollTop = document.body.scrollTop = osTop+ispeed;
-                if (osTop == 0) {
+            this.aniEaseBackTop();
+        },
+        aniEaseBackTop(duration = 50,speed = 2){
+            let timer = setInterval(()=>{
+                let currentScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                document.documentElement.scrollTop = document.body.scrollTop = currentScrollTop + Math.floor(-currentScrollTop / speed);
+                if (currentScrollTop == 0) {
                     clearInterval(timer);
+                    timer = null;
                 }
-            },50);
+            },duration);
         }
     }
 }

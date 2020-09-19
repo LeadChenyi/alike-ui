@@ -1,9 +1,9 @@
 <template>
     <div class="form-page">
+        <alike-divider>单图上传器</alike-divider>
         <alike-uploader :file="file" @success="successFile" @fail="failFile" @delete="deleteFile"></alike-uploader>
-        <alike-line></alike-line>
+        <alike-divider>多图上传器</alike-divider>
         <alike-uploaders :files="files" @success="successFiles" @fail="failFiles" @delete="deleteFiles"></alike-uploaders>
-        <alike-line></alike-line>
     </div>
 </template>
 

@@ -17,9 +17,7 @@
         </div>
         <alike-line></alike-line>
 
-        <div class="alike-drag" v-drag>
-            <img class="alike-drag__image" src="http://cloud7.galloping.xyz/aliveui_mpcode.jpg" alt="" />
-        </div>
+
 
         <alike-line></alike-line>
 
@@ -63,29 +61,6 @@ export default {
         }
     },
     directives: {
-        drag(el) {
-            //获取当前元素
-            let dragBox = el; 
-            dragBox.onmousedown = (e) => {
-                //算出鼠标相对元素的位置
-                let disX = e.clientX - dragBox.offsetLeft;
-                let disY = e.clientY - dragBox.offsetTop;
-                document.onmousemove = (e) => {
-                    //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-                    let left = e.clientX - disX;
-                    let top = e.clientY - disY;
-                    //移动当前元素
-                    dragBox.style.left = left + "px";
-                    dragBox.style.top = top + "px";
-                };
-                document.onmouseup = () => {
-                    //鼠标弹起来的时候不再移动
-                    document.onmousemove = null;
-                    //预防鼠标弹起来后还会循环（即预防鼠标放上去的时候还会移动）  
-                    document.onmouseup = null;
-                };
-            };
-        },
         dragUpload(el){
             let dragBox = el;
 
@@ -143,19 +118,6 @@ export default {
         height:0;
     }
 
-    .alike-drag{
-        position:fixed;
-        top:20px;
-        left:200px;
-        width:200px;
-        height:200px;
-        /* background-color:rgba(162, 188, 234,.5); */
-    }
-    .alike-drag__image{
-        width:100%;
-        height:100%;
-        pointer-events:none;
-    }
 
     .alike-drag-upload{
         border: 1px dashed #d9d9d9;
