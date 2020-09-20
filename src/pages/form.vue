@@ -1,9 +1,10 @@
 <template>
     <div class="form-page">
         <alike-divider>单图上传器</alike-divider>
-        <alike-uploader :file="file" @success="successFile" @fail="failFile" @delete="deleteFile"></alike-uploader>
+        <alike-uploader :enable-drag="true" :file="file" @success="successFile" @fail="failFile" @delete="deleteFile"></alike-uploader>
+        
         <alike-divider>多图上传器</alike-divider>
-        <alike-uploaders :files="files" @success="successFiles" @fail="failFiles" @delete="deleteFiles"></alike-uploaders>
+        <alike-uploaders :enable-drag="true" :files="files" @success="successFiles" @fail="failFiles" @delete="deleteFiles"></alike-uploaders>
     </div>
 </template>
 

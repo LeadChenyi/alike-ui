@@ -1,5 +1,5 @@
 <template>
-	<div class="alike-uploader" :class="[file ? 'alike-uploader--active':'alike-uploader--default']" @click="chooseFile">
+	<div class="alike-uploader" :class="[file ? 'alike-uploader--active':'alike-uploader--default']" @click="chooseFile" v-drag-upload>
         <div class="alike-uploader__preview" v-if="file">
             <img class="alike-uploader__preview-image" :src="file" />
             <div class="alike-uploader__preview-mask">
@@ -18,7 +18,8 @@
 /**
  * alive-uploader
  * @property file {String} 图片地址
- * @property automatic {Boolean} 是否开启文件自动验证
+ * @property enableDrag {Boolean} 是否启用拖动上传文件
+ * @property autoVerify {Boolean} 是否开启文件自动验证
  * @property size {Boolean} 支持上传文件的大小
  * @property types {Array} 支持上传文件的格式
  * @event change {Function} 上传图片时触发
@@ -32,7 +33,11 @@ export default {
             type:String,
             default:""
         },
-        automatic:{
+        enableDrag:{
+            type:Boolean,
+            default:false
+        },
+        autoVerify:{
             type:Boolean,
             default:true
         },
@@ -46,7 +51,7 @@ export default {
         }
     },
 	methods: {
-		chooseFile() {
+		chooseFile(){
             // 是否已经有上传的文件
 			if (this.file || this.$refs.uploaderFinder.value) {
 				return false;
@@ -54,27 +59,28 @@ export default {
 
 			this.$refs.uploaderFinder.click();
 		},
-		changeFile(e) {
-			// 由于配置了babel-loader，无需处理兼容性
-            let tempFile = e.target.files[0];
-            let tempFilePath = window.URL.createObjectURL(tempFile);
-            this.$emit('change',tempFile); 
+		changeFile(e){
+            this.verifyFile(e.target.files[0]);
+		},
+        verifyFile(file){
+            let tempFilePath = window.URL.createObjectURL(file);
+            this.$emit('change',file); 
 
-            if(this.automatic){
-                if(tempFile.size > this.size){
+            if(this.autoVerify){
+                if(file.size > this.size){
                     this.$emit('fail',{msg:`图片上传大小不得超过${this.size}字节`});
                     return false;
                 }
 
-                if(!this.types.includes(tempFile.type)){
+                if(!this.types.includes(file.type)){
                     this.$emit('fail',{msg:`图片类型仅支持${this.types.join(',')}`});
                     return false;
                 }
             }
 
-            this.$emit('success',{file:tempFile,filePath:tempFilePath});
-		},
-		deleteFile() {
+            this.$emit('success',{file:file,filePath:tempFilePath});
+        },
+        deleteFile(){
             // 解决单文件上传模式被删除后无法再次触发上传控件的问题
             if(this.$refs.uploaderFinder.value){
                 this.$refs.uploaderFinder.value = null;
@@ -82,7 +88,57 @@ export default {
 
             this.$emit('delete');
 		}
-	}
+	},
+    directives:{
+        dragUpload(el,binding,vnode){
+            const vm = vnode.context;
+
+            // 判断是否支持上传器拖放事件
+            if(!vm.enableDrag){
+                return false;
+            }
+
+            // 针对文档         
+            // document.ondragenter = function(e){
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            // }           
+            // document.ondragover = function(e){
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            // }
+            // document.ondragleave = function(e){
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            // }  
+            // document.ondrop = function(e){
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            //     console.log('drop...')
+            //     vm.verifyFile(e.dataTransfer.files[0]);
+            // } 
+
+            // 指定元素
+            el.ondragenter = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+            }           
+            el.ondragover = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            el.ondragleave = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+            }  
+            el.ondrop = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                vm.verifyFile(e.dataTransfer.files[0]);
+            }  
+        }
+    }
 };
 </script>
 

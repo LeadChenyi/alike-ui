@@ -16,14 +16,6 @@
             </div>
         </div>
         <alike-line></alike-line>
-
-
-
-        <alike-line></alike-line>
-
-        <div class="alike-drag-upload" v-drag-upload>
-
-        </div>
     </div>
 </template>
 
@@ -59,34 +51,6 @@ export default {
                 this.collapses[index].checked = !this.collapses[index].checked;
             }
         }
-    },
-    directives: {
-        dragUpload(el){
-            let dragBox = el;
-
-            // 阻止浏览器默认行为（防止个别浏览器直接打开图片）
-            document.ondragleave = (e) => {//拖离
-                e.preventDefault();
-            };            
-            document.ondrop = (e) => {//拖后放
-                e.preventDefault();
-            };            
-            document.ondragenter = (e) => {//拖进
-                e.preventDefault();
-            };            
-            document.ondragover = (e) => {//拖来拖去
-                e.preventDefault();
-            };
-         
-            // 监听上传区域拖后放的事件
-            dragBox.addEventListener('drop', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                e.dataTransfer.dropEffect = 'copy';
-                console.log(e.dataTransfer.files);
-            });
-        }
     }
 }
 </script>
@@ -116,23 +80,5 @@ export default {
     }
     .alike-collapse__bodyer--default{
         height:0;
-    }
-
-
-    .alike-drag-upload{
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
-    }
-    .alike-drag-upload:hover{
-        border-color:#409EFF;
     }
 </style>

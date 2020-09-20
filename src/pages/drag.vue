@@ -1,5 +1,7 @@
 <template>
     <div class="drag-page">
+        <alike-divider>拖动排序</alike-divider>
+
         <alike-line type="white" height="1000px"></alike-line>
         <alike-drag-view :limits="true" :z-index="9" @change="changeDragView">
             <div class="rect-view"></div>

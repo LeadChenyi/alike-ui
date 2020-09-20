@@ -1,6 +1,8 @@
 <template>
     <div class="cssom-page">
-        <alike-button @click="goScrollIntoView('otherFinder')">跳至Other区域</alike-button>
+        <alike-button class="mr-20" @click="scrollToElement1">滚动至Other（可视区域顶端对齐）</alike-button>
+        <alike-button class="mr-20" @click="scrollToElement2">滚动至Other（可视区域底端对齐）</alike-button>
+        <alike-button class="mr-20" @click="scrollToElement3">滚动至Other（options）</alike-button>
         <alike-divider>WindowView 属性</alike-divider>
         <div class="cssom-wrapper">
             {{windowView}}
@@ -41,8 +43,27 @@ export default {
         this.elementView = JSON.stringify(this.getElementRect('otherFinder'));
     },
     methods:{
-        goScrollIntoView(el){// 滚动到元素选择器的指定位置
-            return typeof el === "string" ? this.$refs[el].scrollIntoView() : el.scrollIntoView();
+        scrollToElement1(){
+            this.goScrollIntoView('otherFinder');
+        },
+        scrollToElement2(){
+            this.goScrollIntoView('otherFinder',false);
+        },        
+        scrollToElement3(){
+            this.goScrollIntoView('otherFinder',{
+                behavior:"smooth",
+                block:"start",
+                inline:"nearest"
+            });
+        },
+        goScrollIntoView(el,options = true){// 滚动到指定元素选的位置
+            /**
+             * options参数详解
+             * true：元素与浏览器可视区域顶端对齐（默认值）
+             * false：元素与浏览器可视区域底端对齐
+             * options
+             */
+            return typeof el === "string" ? this.$refs[el].scrollIntoView(options) : el.scrollIntoView(options);
         },
         getWindowView(){
             /**

@@ -7,7 +7,7 @@
             </div>
         </div>
 
-        <div class="alike-uploader" :class="[files.length ? 'alike-uploader--active':'alike-uploader--invalid']" v-if="files.length < count" @click="chooseFiles">
+        <div class="alike-uploader" :class="[files.length ? 'alike-uploader--active':'alike-uploader--default']" v-if="files.length < count" @click="chooseFiles" v-drag-upload>
             <alike-icon type="plus" size="30px" color="#999999"></alike-icon>
             <input class="alike-uploader__input" ref="uploaderFinder" type="file" :multiple="count > 1" @change="changeFiles" />
         </div>
@@ -19,7 +19,8 @@
  * alive-uploaders
  * @property files {Array} 图片集合
  * @property count {Number} 最大上传数量（默认值：9）
- * @property automatic {Boolean} 是否开启文件自动验证
+ * @property enableDrag {Boolean} 是否启用拖动上传文件
+ * @property autoVerify {Boolean} 是否开启文件自动验证
  * @property size {Boolean} 支持上传文件的大小
  * @property types {Array} 支持上传文件的格式
  * @event change {Function} 上传图片时触发
@@ -39,7 +40,11 @@ export default {
             type:Number,
             default:9
         },
-        automatic:{
+        enableDrag:{
+            type:Boolean,
+            default:false
+        },
+        autoVerify:{
             type:Boolean,
             default:true
         },
@@ -57,28 +62,29 @@ export default {
 			this.$refs.uploaderFinder.click();
 		},
 		changeFiles(e) {
-			// 由于配置了babel-loader，无需处理兼容性
-            let tempFiles = e.target.files;
+            this.verifyFiles(e.target.files);
+        },
+        verifyFiles(files){
             let tempFilePaths = [];
             
-            if((tempFiles.length + this.files.length) > this.count){
+            if((files.length + this.files.length) > this.count){
                 this.$emit('fail',{msg:`最大支持上传${this.count}文件`});
                 return false;
             }
 
-            for(let i = 0;i < tempFiles.length;i++){
-                let item = window.URL.createObjectURL(tempFiles[i]);
+            for(let i = 0;i < files.length;i++){
+                let item = window.URL.createObjectURL(files[i]);
                 tempFilePaths.push(item);
             }
 
-            this.$emit('change',tempFiles,tempFilePaths);
+            this.$emit('change',files,tempFilePaths);
 
-            if(this.automatic){
-                const {collectFiles,collectFilePaths} = this.verifyFiles(tempFiles,tempFilePaths);
+            if(this.autoVerify){
+                const {collectFiles,collectFilePaths} = this.filterFiles(files,tempFilePaths);
                 this.$emit('success',{files:collectFiles,filePaths:collectFilePaths});
             }
         },
-        verifyFiles(tempFiles,tempFilePaths){
+        filterFiles(tempFiles,tempFilePaths){
             let collectFiles = [];				// 储存符合标准的文件
             let collectFilePaths = [];			// 储存符合标准的临时文件
             let collectIndexs = [];				// 储存不符合标准的文件下标（用于删除tempFilePaths中对应的临时路径）
@@ -115,6 +121,35 @@ export default {
 		deleteFiles(index) {
             this.$emit('delete',index);
 		}
+    },
+    directives:{
+        dragUpload(el,binding,vnode){
+            const vm = vnode.context;
+
+            if(!vm.enableDrag){
+                return false;
+            }
+
+            // 指定元素
+            el.ondragenter = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+            }           
+            el.ondragover = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            el.ondragleave = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+            }  
+            el.ondrop = function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                vm.verifyFiles(e.dataTransfer.files);
+            }  
+        }
     }
 }
 </script>
@@ -134,7 +169,8 @@ export default {
         line-height: 178px;
         text-align: center;
     }
-    .alike-uploader--invalid:hover{
+
+    .alike-uploader:hover{
         border-color:#409EFF;
     }
 
