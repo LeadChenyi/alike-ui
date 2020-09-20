@@ -1,23 +1,23 @@
 <template>
-    <div class="alike-drag-view" :style="[{top:top,left:left,zIndex:zIndex},customStyle]" v-drag>
+    <div class="alike-movable-view" :style="[{top:top,left:left,zIndex:zIndex},customStyle]" v-movable>
         <slot></slot>
     </div>
 </template>
 
 <script>
 /**
- * alike-drag-view 
- * @describe 拖动视图
+ * alike-movable-view 
+ * @describe 移动视图
  * @website http://alike.galloping.xyz
  * @property customStyle {Object} 自定义根组件样式
  * @property top {String} 元素初始top值
  * @property left {String} 元素初始left值
- * @property limits {Boolean} 限制元素移动的范围（默认值为false，可选值为true）
+ * @property enableRange {Boolean} 限制元素移动的范围（默认值为false，可选值为true）
  * @event change {function} 元素移动时触发，返回{left,top}
  */
 
 export default {
-    name:"alike-drag-view",
+    name:"alike-movable-view",
     props:{
         customStyle:{
             type: Object,
@@ -35,13 +35,13 @@ export default {
             type:Number,
             default:1
         },
-        limits:{
+        enableRange:{
             type:Boolean,
             default:false
         }
     },
     directives:{
-        drag(el,binding,vnode){
+        movable(el,binding,vnode){
             el.onmousedown = (e)=>{
                 // 获取vue实例
                 const vm = vnode.context;
@@ -57,7 +57,7 @@ export default {
                     let moveX = e.clientX - downX;
                     let moveY = e.clientY - downY;
 
-                    if(vm.limits){
+                    if(vm.enableRange){
                         if(moveX < 0){
                             moveX = 0;
                         }else if(moveX >= (docAttr.clientWidth - elRect.width)){
@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .alike-drag-view{
+    .alike-movable-view{
         position:fixed;display:inline-block;overflow:hidden;
 
         &:hover{
