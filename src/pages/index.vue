@@ -5,6 +5,8 @@
             <alike-button class="mr-10" @click="linkUrls('Cssom')">Cssom 视图属性</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Animation')">Animation 2D动画</alike-button>
             <alike-button class="mr-10" @click="linkUrls('AnimationThree')">Animation 3D动画</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Mouse')">Mouse 鼠标事件</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Drag')">Drag 拖动事件</alike-button>
         </div>
 
         <alike-divider>自定义组件</alike-divider>
@@ -12,7 +14,6 @@
             <alike-button class="mr-10" @click="linkUrls('Basic')">Basic 基础</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Button')">Button 按钮</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Form')">Form 表单</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('Drag')">Drag 拖动</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Scroll')">Scroll 滚动</alike-button>
         </div>
     </div>
