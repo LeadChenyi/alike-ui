@@ -1,12 +1,12 @@
 <template>
-    <div class="animation-three-view">
-        AnimationThree
+    <div class="hover-page">
+        hover
     </div>
 </template>
 
 <script>
 export default {
-    name:"AnimationThree"
+    name:"Hover"
 }
 </script>
 

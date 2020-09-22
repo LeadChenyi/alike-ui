@@ -2,9 +2,11 @@
     <div class="index-page">
         <alike-divider>前端交互</alike-divider>
         <div class="index-wrapper">
+            <alike-button class="mr-10" @click="linkUrls('Login')">Login 登录</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Cssom')">Cssom 视图属性</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Animation')">Animation 2D动画</alike-button>
             <alike-button class="mr-10" @click="linkUrls('AnimationThree')">Animation 3D动画</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Hover')">Hover 悬浮</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Mouse')">Mouse 鼠标事件</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Drag')">Drag 拖动事件</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Render')">Render 渲染模板</alike-button>

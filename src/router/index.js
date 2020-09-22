@@ -14,11 +14,19 @@ const router = new VueRouter({
             path:'/',
             name:'Index',
             component:() => import('@/pages/index')
+        },          
+        {
+            path:'/login',
+            name:'Login',
+            component:() => import('@/pages/login')
         },        
         {
             path:'/cssom',
             name:'Cssom',
-            component:() => import('@/pages/cssom')
+            component:() => import('@/pages/cssom'),
+            meta:{
+                requireAuth:true         // 用于判断用户是否要有权限才能访问该路由
+            }
         },        
         {
             path:'/basic',
@@ -51,14 +59,19 @@ const router = new VueRouter({
             component:() => import('@/pages/render')
         },        
         {
+            path:'/hover',
+            name:'Hover',
+            component:() => import('@/pages/hover')
+        },        
+        {
             path:'/animation',
             name:'Animation',
             component:() => import('@/pages/animation')
         },        
         {
-            path:'/animationthree',
+            path:'/animation/three',
             name:'AnimationThree',
-            component:() => import('@/pages/animationthree')
+            component:() => import('@/pages/animation/three')
         },        
         {
             path:'/scroll',
@@ -71,4 +84,16 @@ const router = new VueRouter({
         }
     ]
 })
+
+// 路由守卫（导航拦截）
+router.beforeEach((to, from, next) => {
+    // 如果访问的路由需要用户登录权限，则判断token是否存在，不存在则跳转去登录
+    if(to.meta.requireAuth && !localStorage.getItem('token')){
+        // 未登录重定向跳转至登录页
+        next({name:'Login'})
+    }else{
+        next();
+    }
+})
+
 export default router;
