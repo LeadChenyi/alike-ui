@@ -7,6 +7,7 @@
             <alike-button class="mr-10" @click="linkUrls('AnimationThree')">Animation 3D动画</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Mouse')">Mouse 鼠标事件</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Drag')">Drag 拖动事件</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Render')">Render 渲染模板</alike-button>
         </div>
 
         <alike-divider>自定义组件</alike-divider>

@@ -1,6 +1,6 @@
 <template>
     <div class="basic-page">
-        <alike-divider>Collapse</alike-divider>
+        <alike-divider>Collapse 静态布局</alike-divider>
         <alike-collapse :active="active" :accordion="true">
             <alike-collapse-item title="哪吒闹海" name="0">
                 <div>
