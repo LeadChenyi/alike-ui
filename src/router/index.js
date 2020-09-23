@@ -78,6 +78,16 @@ const router = new VueRouter({
             component:() => import('@/pages/animation/three')
         },        
         {
+            path:'/banner',
+            name:'Banner',
+            component:() => import('@/pages/banner')
+        },         
+        {
+            path:'/barrage',
+            name:'Barrage',
+            component:() => import('@/pages/barrage')
+        },        
+        {
             path:'/scroll',
             name:'Scroll',
             component:() => import('@/pages/scroll')

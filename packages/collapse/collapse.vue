@@ -38,12 +38,22 @@ export default {
     methods:{
         handleItemClick(item){
             if(this.accordion){
+                if(typeof this.activeName !== 'string'){
+                    console.error('当前不是手风琴模式，请将active属性值初始化字符串。');
+                    return false;
+                }
+
                 if(this.activeName != item.name){
                     this.activeName = item.name;
                 }else{
                     this.activeName = "";
                 }
             }else{
+                if(!Array.isArray(this.activeName)){
+                    console.error('当前为手风琴模式，请将active属性值初始化数组。');
+                    return false;
+                }
+
                 // 这里不推荐直接判断布尔值，因为数组是下标从0开始，而0即表示为false，或者用includes方法判断
                 if(this.activeName.indexOf(item.name) != -1){
                     let index = this.activeName.indexOf(item.name);

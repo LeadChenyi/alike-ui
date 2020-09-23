@@ -14,6 +14,8 @@
             <alike-button class="mr-10" @click="linkUrls('Mouse')">Mouse 鼠标事件</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Drag')">Drag 拖动事件</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Render')">Render 渲染模板</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Banner')">Banner 轮播图</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Barrage')">Barrage 弹幕</alike-button>
         </div>
 
         <alike-divider>自定义组件</alike-divider>
