@@ -1,5 +1,9 @@
 <template>
     <div class="index-page">
+        <alike-divider>登录状态：</alike-divider>
+        <div>{{isLogin ? '欢迎光临' :'未登录'}}</div>
+        <alike-button @click="unLogin" v-if="isLogin">退出登录</alike-button>
+
         <alike-divider>前端交互</alike-divider>
         <div class="index-wrapper">
             <alike-button class="mr-10" @click="linkUrls('Login')">Login 登录</alike-button>
@@ -25,6 +29,12 @@
 <script>
 export default {
     name:"Index",
+    data(){
+        return {
+            isLogin:localStorage.getItem('token') || false
+        }
+    },
+    
     mounted(){
         // this.initData();
     },
@@ -38,6 +48,10 @@ export default {
         },
         linkUrls(name){
             this.$router.push({name:name});
+        },
+        unLogin(){
+            this.isLogin = false;
+            localStorage.removeItem('token');
         }
     }
 }

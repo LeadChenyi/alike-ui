@@ -18,14 +18,18 @@ const router = new VueRouter({
         {
             path:'/login',
             name:'Login',
-            component:() => import('@/pages/login')
+            component:() => import('@/pages/login'),
+            beforeEnter (to, from, next) {
+                // console.log('beforeEnter');
+                next();
+            }
         },        
         {
             path:'/cssom',
             name:'Cssom',
             component:() => import('@/pages/cssom'),
             meta:{
-                requireAuth:true         // 用于判断用户是否要有权限才能访问该路由
+                requiresAuth:true
             }
         },        
         {
@@ -85,14 +89,31 @@ const router = new VueRouter({
     ]
 })
 
-// 路由守卫（导航拦截）
+
+// 全局后置导航栏（优先级最高）
 router.beforeEach((to, from, next) => {
-    // 如果访问的路由需要用户登录权限，则判断token是否存在，不存在则跳转去登录
-    if(to.meta.requireAuth && !localStorage.getItem('token')){
-        // 未登录重定向跳转至登录页
-        next({name:'Login'})
+    console.log('beforeEach：',to,from)
+
+    if(to.matched.some(record => record.meta.requiresAuth)){
+        // 判断用户是否已经登录，未登录重定向跳转至登录页
+        if(!localStorage.getItem('token') && to.name != 'Login'){
+            next({
+                path:'/login',
+                query:{redirect:to.name}
+            });
+        }else{
+            next();
+        }
     }else{
-        next();
+        if(localStorage.getItem('token') && to.name == 'Login'){
+            if(from.name){
+                next({name:from.name});
+            }else{
+                next({name:'Index'});
+            }
+        }else{
+            next();
+        }
     }
 })
 

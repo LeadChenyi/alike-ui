@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
 import store from './store'
+import router from './router'
 
 // 全局引入样式
 import '@/assets/css/reset-pc.css'
@@ -26,8 +26,9 @@ Vue.component(alikeButton.name,alikeButton);
 
 Vue.config.productionTip = false
 
+
 new Vue({
-    router,
     store,
-    render: h => h(App),
+    router,
+    render: h => h(App)
 }).$mount('#app')

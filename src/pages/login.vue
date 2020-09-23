@@ -1,28 +1,27 @@
 <template>
     <div class="login-page">
-        <div>登录状态：{{isLogin ? '欢迎光临' :'未登录'}}</div>
-        <alike-button @click="toLogin" v-if="!isLogin">立即登录</alike-button>
-        <alike-button @click="unLogin" v-else>退出登录</alike-button>
+        <alike-button @click="toLogin">立即登录</alike-button>
     </div>
 </template>
 
 <script>
 export default {
     name:"Login",
-    data(){
-        return {
-            isLogin:localStorage.getItem('token') || false
-        }
-    },
     methods:{
         toLogin(){
-            this.isLogin = true;
             localStorage.setItem('token','768472');
-        },
-        unLogin(){
-            this.isLogin = false;
-            localStorage.removeItem('token');
+
+            // 判断先前是否是通过重定向到登录流程的，登录成功后进行指定返回或回到首页
+            if(this.$route.query.redirect){
+                this.$router.push({name:this.$route.query.redirect});
+            }else{
+                this.$router.push({name:'Index'});
+            }
         }
+    },
+    beforeRouteEnter (to, from, next) {
+        // console.log('beforeRouteEnter');
+        next();
     }
 }
 </script>
