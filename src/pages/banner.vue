@@ -13,15 +13,24 @@
         <div ref="wheelContainerFinder" class="wheel-container">
             <div class="wheel-mian" id="wheel-main">
                 <div ref="wheelItemFinder" class="wheel-item" v-for="(item,index) in wheels" :key="index">
-                    <img :src="item" alt="">
+                    <img class="wheel-item__image" :src="item" alt="">
                 </div>
             </div>
             <div class="wheel-toggle" id="wheelToggleFinder">
-                <div class="wheel-prve" @click="prveWheel">左</div>
-                <div class="wheel-next" @click="nextWheel">右</div>
+                <div class="wheel-toggle-item wheel-toggle-item--prve" @click="prveWheel">左</div>
+                <div class="wheel-toggle-item wheel-toggle-item--next" @click="nextWheel">右</div>
             </div>
             <div class="wheel-indicator" id="wheelIndicatorFinder">
-                <div class="wheel-index" :class="[wheelActive == index ? 'wheel-index--active':'']" v-for="(item,index) in wheels" :key="index" @click="changeWheel(index)"></div>
+                <div class="wheel-indicator-item" :class="[wheelActive == index ? 'wheel-indicator-item--active':'']" v-for="(item,index) in wheels" :key="index" @click="changeWheel(index)"></div>
+            </div>
+        </div>
+
+        <alike-divider>无缝轮播图</alike-divider>
+        <div ref="swiperContainerFinder" class="swiper-container">
+            <div ref="swiperWrapFinder" class="swiper-wrap" :style="{transition:swiperTransition,transform:`translate3d(${swiperX}px,0,0)`}">
+                <div class="swiper-item" :class="[swiperActive == index?'swiper-item--active':'']" v-for="(item,index) in swipers" :key="index" @click="changeSwiper(index)">
+                    <img :src="item" alt="">
+                </div>
             </div>
         </div>
     </div>
@@ -53,13 +62,28 @@ export default {
             wheelActive:0,
             wheelTimer:null,
             wheelDuration:1000,
-            wheelWidth:0
+            wheelWidth:0,
+            swipers:[
+                require('@/assets/img/banner/banner_001.jpg'),
+                require('@/assets/img/banner/banner_002.jpg'),
+                require('@/assets/img/banner/banner_003.jpg'),
+                require('@/assets/img/banner/banner_004.jpg'),
+                require('@/assets/img/banner/banner_005.jpg'),
+                require('@/assets/img/banner/banner_001.jpg')
+            ],
+            swiperActive:0,
+            swiperTimer:null,
+            swiperTimerFirst:null,
+            swiperTransition:"transform 300ms ease",
+            swiperX:0,
+            swiperWidth:0
         }
     },
     mounted(){
         this.$nextTick(()=>{
             this.initPanorama();
             // this.initWheel();
+            this.initSwiper();
         })
         
     },
@@ -69,7 +93,7 @@ export default {
                 width:this.$refs.panoramaContainerFinder.offsetWidth,
                 height:this.$refs.panoramaContainerFinder.offsetHeight,
             }
-            console.log(this.containerAttr);
+            // console.log(this.containerAttr);
             // 想要拿到元素的集合，在指定ref时必须通过v-for遍历DOM
             // console.log(this.$refs.panoramaItemFinder.length);
 
@@ -108,6 +132,7 @@ export default {
         },
         initWheel(){
             this.wheelWidth = this.$refs.wheelContainerFinder.offsetWidth;
+            clearInterval(this.wheelTimer);
             this.wheelTimer = setInterval(() => {
                 this.animationWheel(this.$refs.wheelItemFinder[this.wheelActive],{left:-this.wheelWidth});
                 this.wheelActive++;
@@ -135,7 +160,7 @@ export default {
                     // 强制转为整形，Number类型，自动去除不是数值的字符，如100px => 100
                     startVal = parseInt(this.getStyleAttr(el,key));     
                     targetVal = parseInt(options[key]);
-                    console.log(startVal,targetVal);
+                    // console.log(startVal,targetVal);
 
                     // 求出步长 = (目标值 - 起始值) * 缓动系数
                     speed = (targetVal - startVal) * 0.2;
@@ -170,6 +195,29 @@ export default {
         },
         nextWheel(){
 
+        },
+        initSwiper(){
+            // 考虑自动轮播：1、2、3、4、5、1
+            // 考虑左右轮播：5、1、2、3、4、5、1
+            this.swiperWidth = this.$refs.swiperContainerFinder.offsetWidth;
+            clearInterval(this.swiperTimer);
+            this.swiperTimer = setInterval(()=>{
+                this.swiperActive++;
+                this.swiperTransition = 'transform 300ms ease';
+                this.swiperX = -(this.swiperWidth * this.swiperActive);
+                
+                if(this.swiperActive == (this.swipers.length - 1)){
+                    clearTimeout(this.swiperTimerFirst);
+                    this.swiperTimerFirst = setTimeout(() => {
+                        this.swiperActive = 0;
+                        this.swiperTransition = 'transform 0s ease';
+                        this.swiperX = 0;
+                    }, 500);
+                }
+            },2000)
+        },
+        changeSwiper(){
+
         }
     }
 }
@@ -189,16 +237,54 @@ export default {
         }
     }
 
-    .wheel-container{width:350px;height:180px;overflow:hidden;position:relative;margin:50px auto;}
-    .wheel-mian{width:700px;height:180px;position:relative;}
-    .wheel-mian .wheel-item{position:absolute;top:0;left:350px;width:350px;height:100%;}
-    .wheel-mian .wheel-item:nth-of-type(1){left:0;}
-    .wheel-mian .wheel-item>img{width:100%;height:100%;}
-    .wheel-toggle{position:absolute;top:45%;left:0;right:0;width:100%;color:#f2f2f2;font-size:20px;}
-    .wheel-toggle>div{background-color:rgba(0,0,0,.3);}
-    .wheel-toggle .wheel-prve{float:left;cursor:pointer;border-radius:0 3px 3px 0;}
-    .wheel-toggle .wheel-next{float:right;cursor:pointer;border-radius:3px 0 0 3px;}
-    .wheel-indicator{position:absolute;top:80%;left:0;right:0;width:100%;text-align:center;}
-    .wheel-index{display:inline-block;width:20px;height:5px;margin:0 5px;background-color:#f2f2f2;border-radius:3px;cursor:pointer;}
-    .wheel-index--active{background-color:#ee3148;}
+    .wheel-container{
+        width:350px;height:180px;overflow:hidden;position:relative;margin:50px auto;
+        
+        & .wheel-mian{
+            width:700px;height:180px;position:relative;
+            & .wheel-item{
+                position:absolute;top:0;left:350px;width:350px;height:100%;
+                &:first-child{
+                    left:0;
+                }
+            }
+            & .wheel-item__image{width:100%;height:100%;}
+        }
+
+        & .wheel-toggle{
+            position:absolute;top:45%;left:0;right:0;width:100%;color:#f2f2f2;font-size:20px;
+            & .wheel-toggle-item{
+                background-color:rgba(0,0,0,.3);
+                &.wheel-toggle-item--prve{float:left;cursor:pointer;border-radius:0 3px 3px 0;}
+                &.wheel-toggle-item--next{float:right;cursor:pointer;border-radius:3px 0 0 3px;}
+            }
+        }
+
+
+        & .wheel-indicator{
+            position:absolute;top:80%;left:0;right:0;width:100%;text-align:center;
+            & .wheel-indicator-item{
+                display:inline-block;width:20px;height:5px;margin:0 5px;background-color:#f2f2f2;border-radius:3px;cursor:pointer;
+                &.wheel-indicator-item--active{background-color:#ee3148;}
+            }
+        }
+    }
+    
+    .swiper-container{
+        position:relative;overflow:hidden;
+        width:523px;
+        height:208px;
+        
+        & .swiper-wrap{
+            position:relative;
+            width:100%;
+            height:100%;
+            display:flex;
+            box-sizing: content-box;
+        }
+        & .swiper-item{
+            width:100%;
+            height:100%;
+        }
+    }
 </style>
