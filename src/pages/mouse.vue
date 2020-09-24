@@ -1,7 +1,7 @@
 <template>
   <div class="mouse-page">
         <alike-divider>元素鼠标移动</alike-divider>
-        <alike-movable-view left="100px" top="100px" :enable-range="true" :z-index="9" @change="changeDragView">
+        <alike-movable-view left="100px" top="100px" :enable-range="true" :z-index="9" @change="changeMovable" @finish="finishMovable">
             <div class="rect-view">可移动的元素</div>
         </alike-movable-view>
         <alike-line type="white" height="1000px"></alike-line>
@@ -17,8 +17,11 @@ export default {
         alikeMovableView
     },
     methods:{
-        changeDragView(detail){
-            console.log('实时监听元素跟随鼠标移动位置：',detail);
+        changeMovable(detail){
+            console.log('监听元素移动时位置：',detail);
+        },
+        finishMovable(detail){
+            console.log('监听元素移动完成时位置：',detail);
         }
     }
 }
