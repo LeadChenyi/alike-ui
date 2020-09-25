@@ -121,14 +121,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    /* 指定transition标签的过渡动画样式 */
     .title-fade-enter-active,.title-fade-leave-active{
         transition: all .3s ease;
+    } 
+    .title-fade-enter-to,.title-fade-leave{
+        transform: translateX(0px);
+        opacity: 1;
     }
     .title-fade-enter,.title-fade-leave-to{
         transform: translateX(50px);
         opacity: 0;
-    }
+    }   
 
     /* 文本hover */
     .hover-view{
