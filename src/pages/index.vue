@@ -1,7 +1,7 @@
 <template>
     <div class="index-page">
-        <alike-divider>登录状态：</alike-divider>
-        <div>{{isLogin ? '欢迎光临' :'未登录'}}</div>
+        <alike-divider>登录状态</alike-divider>
+        <div class="index-wrapper">{{isLogin ? '欢迎光临' :'未登录'}}</div>
         <alike-button @click="unLogin" v-if="isLogin">退出登录</alike-button>
 
         <alike-divider>前端交互</alike-divider>

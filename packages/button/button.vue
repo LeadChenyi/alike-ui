@@ -1,5 +1,5 @@
 <template>
-    <div class="alike-button" :style="[customStyle]" @click="$emit('click')">
+    <div class="alike-button" :class="[disabled?'alike-button--disabled':'']" :style="[customStyle]" @click="handldClick">
         <slot></slot>
     </div>
 </template>
@@ -18,7 +18,19 @@
 			customStyle:{
 				type: Object,
 				default: ()=>{}
-			}
+            },
+            disabled:{
+                type:Boolean,
+                defualt:false
+            }
+        },
+        methods:{
+            handldClick(){
+                if(this.disabled){
+                    return false;
+                }
+                this.$emit('click');
+            }
         }
 	}
 </script>
@@ -30,5 +42,8 @@
     }
     .alike-button:active:before{
         content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.1);
+    }
+    .alike-button--disabled{
+        cursor:not-allowed;
     }
 </style>
