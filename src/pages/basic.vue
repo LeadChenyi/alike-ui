@@ -32,31 +32,34 @@
 
 
         <alike-divider>dropdown 下拉菜单</alike-divider>
-        <div class="dropdown">
-            <div class="meui-dropdown-btn" data-type="dropdown-menu" data-trigger="click">
-                click更多
-            </div>
-
-            <div class="meui-dropdown-menu-panel arrow-top" data-yield="true">
-                <a href="https://www.baidu.com" class="meui-dropdown-menu__item">百度</a>
-                <a href="https://www.taobao.com" class="meui-dropdown-menu__item">淘宝</a>
-                <a href="https://www.jd.com" class="meui-dropdown-menu__item">京东</a>
-            </div>
-        </div>
-
+        <alike-dropdown type="button" @change="changeDropdown">
+            下拉菜单
+            <alike-dropdown-menu>
+                <alike-dropdown-item name="baidu">百度</alike-dropdown-item>
+                <alike-dropdown-item name="ali">阿里</alike-dropdown-item>
+                <alike-dropdown-item name="tencent">腾讯</alike-dropdown-item>
+            </alike-dropdown-menu>
+        </alike-dropdown>
     </div>
 </template>
 
 <script>
-import alikePopup from '../../packages/popup/popup'
 import alikeCollapse from '../../packages/collapse/collapse'
-import alikeCollapseItem from '../../packages/collapse-item/collapse-item'
+import alikeCollapseItem from '../../packages/collapse/collapse-item'
+import alikePopup from '../../packages/popup/popup'
+import alikeDropdown from '../../packages/dropdown/dropdown'
+import alikeDropdownMenu from '../../packages/dropdown/dropdown-menu'
+import alikeDropdownItem from '../../packages/dropdown/dropdown-item'
+
 export default {
     name:"Basic",
     components:{
-        alikePopup,
         alikeCollapse,
-        alikeCollapseItem
+        alikeCollapseItem,
+        alikePopup,
+        alikeDropdown,
+        alikeDropdownMenu,
+        alikeDropdownItem
     },
     data(){
         return {
@@ -87,6 +90,9 @@ export default {
         },
         changeCenterPopup(detail){
             console.log('changeCenterPopup：',detail);
+        },
+        changeDropdown(detail){
+            console.log('changeDropdown',detail);
         }
     }
 }
@@ -135,15 +141,4 @@ export default {
             transition:transform 300ms ease-in-out;
         }
     }
-
-    .meui-dropdown-btn{position:relative;display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;-webkit-appearance:none;text-align:center;box-sizing:border-box;outline:none;margin:0;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px;color:#fff;background-color:#409eff;border-color:#409eff}
-    .meui-dropdown-menu-panel{position:absolute;top:0;left:0;padding:10px 0;margin:10px 0;background-color:#fff;border:1px solid #ebeef5;border-radius:4px;box-shadow:0 2px 12px 0 rgba(0,0,0,.1);z-index:10}
-    .meui-dropdown-menu__item{display:block;list-style:none;line-height:36px;padding:0 20px;margin:0;font-size:14px;color:#606266;cursor:pointer;outline:none}
-    .meui-dropdown-menu__item:hover{color:#409eff;background-color:#ECF5FF}
-    .meui-dropdown-menu-panel.arrow-top:before,.meui-dropdown-menu-panel.arrow-top:after{content:"";position:absolute;top:-10px;left:50%;margin-left:-10px;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;}
-    .meui-dropdown-menu-panel.arrow-top:before{border-bottom:10px solid #e6e6e6;}
-    .meui-dropdown-menu-panel.arrow-top:after{top:-9px;border-bottom:10px solid #ffffff;}
-    .meui-dropdown-menu-panel.arrow-bottom:before,.meui-dropdown-menu-panel.arrow-bottom:after{content:"";position:absolute;bottom:-10px;left:50%;margin-left:-10px;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;}
-    .meui-dropdown-menu-panel.arrow-bottom:before{border-top:10px solid #e6e6e6;}
-    .meui-dropdown-menu-panel.arrow-bottom:after{bottom:-9px;border-top:10px solid #ffffff;}
 </style>

@@ -1,9 +1,9 @@
 <template>
     <div ref="alikePopupFinder" class="alike-popup" :id="identifier">
-        <transition name="popup-mask">
+        <transition name="alike-fade">
             <div v-show="aniShow" class="alike-popup-mask" @click="handleMask"></div>
         </transition>
-        <transition name="popup-dialog">
+        <transition name="alike-zoom">
             <div v-show="aniShow" class="alike-popup-dialog">
                 <slot></slot>
             </div>
@@ -18,6 +18,10 @@ export default {
         show:{
             type:Boolean,
             default:false
+        },
+        duration:{// transition标签中duration属性指定是动画完成后等待时间，而不是动画过程中的持续时间
+            type:Number,
+            default:300
         },
         tapMaskClose:{
             type:Boolean,
@@ -68,35 +72,37 @@ export default {
 </script>
 
 <style scoped>
-    .popup-mask-enter-active,.popup-mask-leave-active{
-        transition:opacity 300ms ease;
+    .alike-fade-enter-active,.alike-fade-leave-active{
+        transition-property:opacity;
+        transition-duration:300ms;
+        transition-timing-function:ease;
     }
-    .popup-mask-enter-to,.popup-mask-leave{
+    .alike-fade-enter-to,.alike-fade-leave{
         opacity:1;
     } 
-    .popup-mask-enter,.popup-mask-leave-to{
+    .alike-fade-enter,.alike-fade-leave-to{
         opacity:0;
     }    
    
 
-    .popup-dialog-enter-active,.popup-dialog-leave-active{
+    .alike-zoom-enter-active,.alike-zoom-leave-active{
         transition-property:opacity,transform;
         transition-duration:300ms;
         transition-timing-function:ease;
     } 
-    .popup-dialog-enter-to,.popup-dialog-leave{
+    .alike-zoom-enter-to,.alike-zoom-leave{
         opacity:1;
         transform:scale(1,1);
     }
-    .popup-dialog-enter,.popup-dialog-leave-to{
+    .alike-zoom-enter,.alike-zoom-leave-to{
         opacity:0;
         transform:scale(.1,.1);
     }   
 
     .alike-popup-mask{
-        position:fixed;top:0;left:0;bottom:0;right:0;background-color:rgba(0,0,0,.7);z-index:99;
+        position:fixed;top:0;left:0;bottom:0;right:0;background-color:rgba(0,0,0,.7);z-index:1000;
     }
     .alike-popup-dialog{
-        position:fixed;top:50%;left:50%;z-index:100;width:500px;height:300px;background-color:#ffffff;margin-left:-250px;margin-top:-150px;
+        position:fixed;top:50%;left:50%;width:500px;height:300px;background-color:#ffffff;margin-left:-250px;margin-top:-150px;z-index:1001;
     }
 </style>
