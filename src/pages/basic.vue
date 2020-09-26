@@ -40,6 +40,15 @@
                 <alike-dropdown-item name="tencent">腾讯</alike-dropdown-item>
             </alike-dropdown-menu>
         </alike-dropdown>
+
+        <alike-divider>preview 图片预览器</alike-divider>
+        <div class="photo-wrap">
+            <div class="photo-item" v-for="(item,index) in photos" :key="index" @click="chooseImage(photos,item)">
+                <img class="photo-item__image" :src="item" alt="">
+            </div>
+        </div>
+
+        <alike-preview ref="previewFinder" :urls="previewUrls" :current="previewCurrent" :mask-close="true"></alike-preview>
     </div>
 </template>
 
@@ -50,6 +59,7 @@ import alikePopup from '../../packages/popup/popup'
 import alikeDropdown from '../../packages/dropdown/dropdown'
 import alikeDropdownMenu from '../../packages/dropdown/dropdown-menu'
 import alikeDropdownItem from '../../packages/dropdown/dropdown-item'
+import alikePreview from '../../packages/preview/preview'
 
 export default {
     name:"Basic",
@@ -59,7 +69,8 @@ export default {
         alikePopup,
         alikeDropdown,
         alikeDropdownMenu,
-        alikeDropdownItem
+        alikeDropdownItem,
+        alikePreview
     },
     data(){
         return {
@@ -68,7 +79,16 @@ export default {
             navs:['JavaScript','UniApp','MiniProgram'],
             navActive:0,
             navAttrs:[],
-            navIndicatorX:0
+            navIndicatorX:0,
+            photos:[
+                "http://cloud7.galloping.xyz/photo_001.jpg",
+                "http://cloud7.galloping.xyz/photo_002.jpg",
+                "http://cloud7.galloping.xyz/photo_003.jpg",
+                "http://cloud7.galloping.xyz/photo_004.jpg",
+                "http://cloud7.galloping.xyz/photo_005.jpg"
+            ],
+            previewUrls:[],
+            previewCurrent:""
         }
     },
     mounted(){
@@ -93,6 +113,12 @@ export default {
         },
         changeDropdown(detail){
             console.log('changeDropdown',detail);
+        },
+        chooseImage(urls,current){
+            console.log('chooseImage：',urls,current);
+            this.previewUrls = urls;
+            this.previewCurrent = current;
+            this.$refs.previewFinder.open();
         }
     }
 }
@@ -139,6 +165,16 @@ export default {
             left:0;
             z-index: 1;
             transition:transform 300ms ease-in-out;
+        }
+    }
+
+    .photo-wrap{
+        display:flex;flex-wrap:wrap;
+        & .photo-item{
+            width:100px;height:100px;border-radius:1px;margin-right:10px;cursor:pointer;
+            & .photo-item__image{
+                width:100%;height:100%;border-radius:1px;
+            }
         }
     }
 </style>
