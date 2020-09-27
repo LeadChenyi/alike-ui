@@ -39,18 +39,25 @@
                 </div>
             </div>
         </div>
+
+        <alike-divider>表单控件</alike-divider>
+        <alike-input v-model="userName"></alike-input>
+        <div>{{userName}}</div>
+        <alike-input type="password" v-model="password" :show-password="true"></alike-input>
     </div>
 </template>
 
 <script>
 import alikeUploader from '../../packages/uploader/uploader'
 import alikeUploaders from '../../packages/uploaders/uploaders'
+import alikeInput from '../../packages/input/input'
 
 export default {
     name:"Form",
     components:{
         alikeUploader,
-        alikeUploaders
+        alikeUploaders,
+        alikeInput
     },
     data(){
         return {
@@ -99,7 +106,9 @@ export default {
                 }
             ],
             transferLeft:[],
-            transferRight:[]
+            transferRight:[],
+            userName:"此言很差矣",
+            password:"123456"
         }
     },
     mounted(){
