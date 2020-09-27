@@ -1,16 +1,35 @@
 <template>
     <div class="alike-image" @click="handleClick">
-        <img class="alike-image__default" :src="defaultSrc" v-if="isShowDefault" :style="{width:width || naturalWidth,height:height || naturalHeight}" />
+        <img class="alike-image__default" :src="defaultSrc"
+            :width="naturalWidth || width"
+            :height="naturalHeight || height"
+            v-if="isShowDefault" />
         <img class="alike-image__primary" :class="[isShowDefault ?'alike-image__primary-hide':'']" :src="src"
+            :width="naturalWidth || width"
+            :height="naturalHeight || height"
             :loading="lazyLoad ? 'lazy':'eager'"
+            :style="{objectFit:mode}"
             @load="loadImage"
-			@error="errorImage"
-            :style="{width:width || naturalWidth,height:height || naturalHeight,objectFit:mode}"
-             />
+			@error="errorImage" />
     </div>
 </template>
 
 <script>
+/**
+ * alike-image 
+ * @describe 图片组件
+ * @website http://alke.galloping.xyz
+ * @property defaultSrc {String} 默认图路径
+ * @property src {String} 图片路径
+ * @property width {String} 图片的宽度
+ * @property height {String} 图片的高度
+ * @property mode {String} 图片显示模式（默认值：fill，可选值参考object-fit属性）
+ * @property original {Boolean} 是否显示原图的宽高度（默认值：false，可选值：true）
+ * @property lazyLoad {Boolean} 是否开启图片懒加载（默认值：false，可选值：true）
+ * @property disabled {Boolean} 是否禁止用户操作（默认值：false，可选值：true）
+ * @event click {Function} 点击图标时触发	
+ */
+
 export default {
     name:"alike-image",
     props:{
@@ -24,11 +43,11 @@ export default {
         },
         width:{
             type:String,
-            default:""
+            default:"200"
         },
         height:{
             type:String,
-            default:""
+            default:"200"
         },
         mode:{
             type:String,
@@ -50,8 +69,8 @@ export default {
     data(){
         return {
             isShowDefault:true,
-            naturalWidth:"200px",
-            naturalHeight:"200px"
+            naturalWidth:0,
+            naturalHeight:0
         }
     },
     methods: {
@@ -62,8 +81,8 @@ export default {
         },
         loadImage(e){
             if(this.original){
-                this.naturalWidth = e.path[0].naturalWidth + "px";
-                this.naturalHeight = e.path[0].naturalHeight  + "px";
+                this.naturalWidth = e.path[0].naturalWidth;
+                this.naturalHeight = e.path[0].naturalHeight;
             }
             this.isShowDefault = false;
         },
@@ -74,12 +93,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .alike-image{
         display:inline-block;
+        .alike-image__primary,.alike-image__default{max-width:100%;vertical-align:bottom;}
+        .alike-image__primary-hide{width:0;height:0;opacity:0;}
     }
-    .alike-image__primary,.alike-image__default{
-        max-width:100%;vertical-align:bottom;
-    }
-    .alike-image__primary-hide{width:0;height:0;opacity:0;}
 </style>

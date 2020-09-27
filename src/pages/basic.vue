@@ -50,7 +50,7 @@
 
         <alike-preview ref="previewFinder" :urls="previewUrls" :current="previewCurrent" :mask-close="true"></alike-preview>
 
-        <alike-image src="http://cloud7.galloping.xyz/photo_005.jpg" :original="false"></alike-image>
+        <alike-image src="http://cloud7.galloping.xyz/photo_005.jpg" width="300" height="300" :original="false"></alike-image>
     </div>
 </template>
 
