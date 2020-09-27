@@ -49,6 +49,8 @@
         </div>
 
         <alike-preview ref="previewFinder" :urls="previewUrls" :current="previewCurrent" :mask-close="true"></alike-preview>
+
+        <alike-image src="http://cloud7.galloping.xyz/photo_005.jpg" :original="false"></alike-image>
     </div>
 </template>
 
@@ -60,6 +62,7 @@ import alikeDropdown from '../../packages/dropdown/dropdown'
 import alikeDropdownMenu from '../../packages/dropdown/dropdown-menu'
 import alikeDropdownItem from '../../packages/dropdown/dropdown-item'
 import alikePreview from '../../packages/preview/preview'
+import alikeImage from '../../packages/image/image'
 
 export default {
     name:"Basic",
@@ -70,7 +73,8 @@ export default {
         alikeDropdown,
         alikeDropdownMenu,
         alikeDropdownItem,
-        alikePreview
+        alikePreview,
+        alikeImage
     },
     data(){
         return {
