@@ -3,14 +3,14 @@
         <img class="alike-image__default" :src="defaultSrc"
             :width="naturalWidth || width"
             :height="naturalHeight || height"
-            v-if="isShowDefault" />
-        <img class="alike-image__primary" :class="[isShowDefault ?'alike-image__primary-hide':'']" :src="src"
+            v-if="showDefault" />
+        <img class="alike-image__primary" :class="[showDefault ?'alike-image__primary-hide':'']" :src="src"
             :width="naturalWidth || width"
             :height="naturalHeight || height"
-            :loading="lazyLoad ? 'lazy':'eager'"
             :style="{objectFit:mode}"
             @load="loadImage"
-			@error="errorImage" />
+			@error="errorImage"
+            v-if="startLoading" />
     </div>
 </template>
 
@@ -68,12 +68,31 @@ export default {
     },
     data(){
         return {
-            isShowDefault:true,
+            startLoading:false,
+            showDefault:true,
             naturalWidth:0,
             naturalHeight:0
         }
     },
+    mounted(){
+        if(this.lazyLoad){
+            this.initLazyLoad();
+        }
+    },
     methods: {
+        initLazyLoad(){
+            let elOffsetTop = this.$el.getBoundingClientRect().top;
+            let docOffsetHeight = document.documentElement.offsetHeight || document.body.offsetHeight;
+
+            document.onscroll = (e)=>{
+                // console.log('initLazy',e.target.scrollingElement.scrollTop);
+                let scrollTop = e.target.scrollingElement.scrollTop;
+                if((docOffsetHeight + scrollTop) >= elOffsetTop){
+                    this.startLoading = true;
+                    document.onscroll = null;
+                }
+            }
+        },
         handleClick(){
             if(!this.disabled){
                 this.$emit('click');
@@ -84,10 +103,10 @@ export default {
                 this.naturalWidth = e.path[0].naturalWidth;
                 this.naturalHeight = e.path[0].naturalHeight;
             }
-            this.isShowDefault = false;
+            this.showDefault = false;
         },
         errorImage(e){
-            this.isShowDefault = true;
+            this.showDefault = true;
         }
     }
 }

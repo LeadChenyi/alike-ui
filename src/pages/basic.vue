@@ -41,7 +41,7 @@
             </alike-dropdown-menu>
         </alike-dropdown>
 
-        <alike-divider>preview 图片预览器</alike-divider>
+        <alike-divider>preview 图片预览</alike-divider>
         <div class="photo-wrap">
             <div class="photo-item" v-for="(item,index) in photos" :key="index" @click="chooseImage(photos,item)">
                 <img class="photo-item__image" :src="item" alt="">
@@ -50,7 +50,10 @@
 
         <alike-preview ref="previewFinder" :urls="previewUrls" :current="previewCurrent" :mask-close="true"></alike-preview>
 
-        <alike-image src="http://cloud7.galloping.xyz/photo_005.jpg" width="300" height="300" :original="false"></alike-image>
+        <alike-line type="white" height="1000px"></alike-line>
+
+        <alike-divider>image 图片器</alike-divider>
+        <alike-image src="http://cloud7.galloping.xyz/photo_006.jpg" width="300" height="300" :original="false" :lazyLoad="true"></alike-image>
     </div>
 </template>
 
