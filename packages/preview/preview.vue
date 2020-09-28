@@ -120,11 +120,9 @@ export default {
         display:flex;
         align-items:center;
         justify-content:center;
-        cursor: pointer;
     }
     .alike-preview__item{
         max-width:100%;
         max-height:100%;
-        cursor: auto;
     }
 </style>

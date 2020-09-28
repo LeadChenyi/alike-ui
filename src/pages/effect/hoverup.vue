@@ -1,12 +1,12 @@
 <template>
-    <div class="hover-page">
-        hover
+    <div class="hoverup-page">
+
     </div>
 </template>
 
 <script>
 export default {
-    name:"Hover"
+    name:"HoverUp"
 }
 </script>
 

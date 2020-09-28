@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import alikeMovableView from '../../packages/movable-view/movable-view'
+import alikeMovableView from '../../../packages/movable-view/movable-view'
 
 export default {
     name:"Mouse",

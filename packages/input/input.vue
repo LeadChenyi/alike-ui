@@ -10,10 +10,6 @@
 <script>
 export default {
     name:"alike-input",
-    model: {
-        prop: 'value',
-        event: 'change'
-    },
     props:{
         type:{
             type:String,
@@ -31,6 +27,10 @@ export default {
             type:Boolean,
             defualt:false
         }
+    },
+    model:{
+        prop:'value',
+        event:'change'
     },
     data(){
         return {

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import alikeScrollView from '../../packages/scroll-view/scroll-view'
+import alikeScrollView from '../../../packages/scroll-view/scroll-view'
 export default {
     name:"Scroll",
     components:{

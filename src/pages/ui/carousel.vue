@@ -21,23 +21,19 @@
         </div>
 
         <alike-divider>无缝轮播图</alike-divider>
-        <div ref="swiperContainerFinder" class="swiper-container">
-            <div ref="swiperWrapFinder" class="swiper-wrap" :style="{transition:swiperTransition,transform:`translate3d(${swiperX}px,0,0)`}">
-                <div class="swiper-item" :class="[swiperActive == index?'swiper-item--active':'']" v-for="(item,index) in swipers" :key="index" @click="changeSwiper(index)">
-                    <img :src="item" alt="">
-                </div>
-            </div>
-        </div>
+        <alike-swiper :swipers="swipers" :autoplay="true"></alike-swiper>
     </div>
 </template>
 
 <script>
-import alikePanorama from '../../packages/panorama/panorama'
+import alikePanorama from '../../../packages/panorama/panorama'
+import alikeSwiper from '../../../packages/swiper/swiper'
 
 export default {
     name:"Banner",
     components:{
-        alikePanorama
+        alikePanorama,
+        alikeSwiper
     },
     data(){
         return {
@@ -63,21 +59,10 @@ export default {
                 require('@/assets/img/banner/banner_002.jpg'),
                 require('@/assets/img/banner/banner_003.jpg'),
                 require('@/assets/img/banner/banner_004.jpg'),
-                require('@/assets/img/banner/banner_005.jpg'),
-                require('@/assets/img/banner/banner_001.jpg')
+                require('@/assets/img/banner/banner_005.jpg')
             ],
-            swiperActive:0,
-            swiperTimer:null,
-            swiperTimerFirst:null,
-            swiperTransition:"transform 300ms ease",
-            swiperX:0,
-            swiperWidth:0
+            swiperActive:0
         }
-    },
-    mounted(){
-        this.$nextTick(()=>{
-            this.initSwiper();
-        })
     },
     methods:{
         togglePanorama(){
@@ -150,24 +135,7 @@ export default {
 
         },
         initSwiper(){
-            // 考虑自动轮播：1、2、3、4、5、1
-            // 考虑左右轮播：5、1、2、3、4、5、1
-            this.swiperWidth = this.$refs.swiperContainerFinder.offsetWidth;
-            clearInterval(this.swiperTimer);
-            this.swiperTimer = setInterval(()=>{
-                this.swiperActive++;
-                this.swiperTransition = 'transform 300ms ease';
-                this.swiperX = -(this.swiperWidth * this.swiperActive);
-                
-                if(this.swiperActive == (this.swipers.length - 1)){
-                    clearTimeout(this.swiperTimerFirst);
-                    this.swiperTimerFirst = setTimeout(() => {
-                        this.swiperActive = 0;
-                        this.swiperTransition = 'transform 0s ease';
-                        this.swiperX = 0;
-                    }, 500);
-                }
-            },2000)
+            
         },
         changeSwiper(){
 
@@ -207,24 +175,6 @@ export default {
                 display:inline-block;width:20px;height:5px;margin:0 5px;background-color:#f2f2f2;border-radius:3px;cursor:pointer;
                 &.wheel-indicator-item--active{background-color:#ee3148;}
             }
-        }
-    }
-    
-    .swiper-container{
-        position:relative;overflow:hidden;
-        width:523px;
-        height:208px;
-        
-        & .swiper-wrap{
-            position:relative;
-            width:100%;
-            height:100%;
-            display:flex;
-            box-sizing: content-box;
-        }
-        & .swiper-item{
-            width:100%;
-            height:100%;
         }
     }
 </style>

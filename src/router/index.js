@@ -31,32 +31,7 @@ const router = new VueRouter({
             meta:{
                 requiresAuth:true
             }
-        },        
-        {
-            path:'/basic',
-            name:'Basic',
-            component:() => import('@/pages/basic')
-        },        
-        {
-            path:'/button',
-            name:'Button',
-            component:() => import('@/pages/button')
-        },        
-        {
-            path:'/form',
-            name:'Form',
-            component:() => import('@/pages/form')
-        },        
-        {
-            path:'/mouse',
-            name:'Mouse',
-            component:() => import('@/pages/mouse')
-        },        
-        {
-            path:'/drag',
-            name:'Drag',
-            component:() => import('@/pages/drag')
-        },        
+        },                              
         {
             path:'/render',
             name:'Render',
@@ -65,33 +40,68 @@ const router = new VueRouter({
         {
             path:'/hover',
             name:'Hover',
-            component:() => import('@/pages/hover')
-        },        
+            component:() => import('@/pages/effect/hover')
+        },          
+        {
+            path:'/hoverup',
+            name:'HoverUp',
+            component:() => import('@/pages/effect/hoverup')
+        },  
+        {
+            path:'/atransition',
+            name:'Atransition',
+            component:() => import('@/pages/effect/atransition')
+        },      
         {
             path:'/animation',
             name:'Animation',
-            component:() => import('@/pages/animation')
-        },        
+            component:() => import('@/pages/effect/animation')
+        },                
         {
-            path:'/animation/three',
-            name:'AnimationThree',
-            component:() => import('@/pages/animation/three')
+            path:'/animationup',
+            name:'AnimationUp',
+            component:() => import('@/pages/effect/animationup')
         },        
-        {
-            path:'/banner',
-            name:'Banner',
-            component:() => import('@/pages/banner')
-        },         
         {
             path:'/barrage',
             name:'Barrage',
-            component:() => import('@/pages/barrage')
+            component:() => import('@/pages/effect/barrage')
+        },
+        {
+            path:'/mouse',
+            name:'Mouse',
+            component:() => import('@/pages/event/mouse')
         },        
+        {
+            path:'/drag',
+            name:'Drag',
+            component:() => import('@/pages/event/drag')
+        },
+        {
+            path:'/basic',
+            name:'Basic',
+            component:() => import('@/pages/ui/basic')
+        }, 
+        {
+            path:'/button',
+            name:'Button',
+            component:() => import('@/pages/ui/button')
+        },        
+        {
+            path:'/form',
+            name:'Form',
+            component:() => import('@/pages/ui/form')
+        },         
         {
             path:'/scroll',
             name:'Scroll',
-            component:() => import('@/pages/scroll')
+            component:() => import('@/pages/ui/scroll')
         },
+        {
+            path:'/carousel',
+            name:'Carousel',
+            component:() => import('@/pages/ui/carousel')
+        }, 
         {
             path:'/*',
             redirect:{name:'Index'}

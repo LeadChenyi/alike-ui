@@ -1,7 +1,7 @@
 <template>
-    <div class="animation-three-page">
+    <div class="animationup-page">
         <alike-divider>翻牌子（左右）</alike-divider>
-        <div class="brand-wrap" :class="[activeBrand ? 'brand-wrap--active':'']" @click="toggleBrand">
+        <div class="brand-wrap" :class="[brandActive ? 'brand-wrap--active':'']" @click="toggleBrand">
             <div class="brand-item brand-item--front">
                 <p>正</p>
                 <p>面</p>
@@ -18,20 +18,55 @@
             <div class="face-image"></div>
             <div class="face-text"></div>
         </div>
+
+        <alike-line type="white" height="1000px"></alike-line>
+        <img class="back-top" @click="toBackTop" :class="[backTopActive ? 'back-top--active':'']" src="../../assets/img/backtop.png" alt="">
     </div>
 </template>
 
 <script>
 export default {
-    name:"AnimationThree",
+    name:"AnimationUp",
     data(){
         return {
-            activeBrand:false
+            brandActive:false,
+            backTopThreshold:100,
+            backTopActive:false
         }
+    },
+    mounted(){
+        document.addEventListener('scroll',()=>{
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+            if(scrollTop >= this.backTopThreshold){
+                this.backTopActive = true;
+            }else{
+                this.backTopActive = false;
+            }
+        })
     },
     methods:{
         toggleBrand(){
-            this.activeBrand = !this.activeBrand;
+            this.brandActive = !this.brandActive;
+        },
+        toBackTop(){
+            if(!this.backTopActive){
+                return false;
+            }
+
+            // window.scrollTo(0,0);
+            // document.documentElement.scrollTop = document.body.scrollTop = 0;
+            this.aniEaseBackTop();
+        },
+        aniEaseBackTop(duration = 50,speed = 2){
+            let timer = setInterval(()=>{
+                let currentScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                document.documentElement.scrollTop = document.body.scrollTop = currentScrollTop + Math.floor(-currentScrollTop / speed);
+                if (currentScrollTop == 0) {
+                    clearInterval(timer);
+                    timer = null;
+                }
+            },duration);
         }
     }
 }
@@ -80,7 +115,7 @@ export default {
         transform: translateZ(-50px) rotateX(95deg);
     }
 
-    & .face-image{
+    .face-image{
         position: absolute;
         top: 0;
         left:0;
@@ -100,7 +135,7 @@ export default {
         }
     }
 
-    & .face-text{
+    .face-text{
         position: absolute;
         top: 0;
         left:0;
@@ -126,6 +161,21 @@ export default {
         &:hover{
             border-radius:3px;
         }
+    }
+}
+
+.back-top{
+    position:fixed;
+    bottom:100px;
+    right:0;
+    width:98px;
+    height:178px;
+    transform:translateX(38px);
+    transition:transform 300ms ease;
+
+    &.back-top--active{
+        cursor:pointer;
+        transform:translateX(0);
     }
 }
 </style>

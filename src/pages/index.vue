@@ -4,26 +4,36 @@
         <div class="index-wrapper">{{isLogin ? '欢迎光临' :'未登录'}}</div>
         <alike-button @click="unLogin" v-if="isLogin">退出登录</alike-button>
 
-        <alike-divider>前端交互</alike-divider>
+        <alike-divider>Basic</alike-divider>
         <div class="index-wrapper">
             <alike-button class="mr-10" @click="linkUrls('Login')">Login 登录</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Cssom')">Cssom 视图属性</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('Animation')">Animation 2D动画</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('AnimationThree')">Animation 3D动画</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('Hover')">Hover 悬浮</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('Mouse')">Mouse 鼠标事件</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('Drag')">Drag 拖动事件</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Render')">Render 渲染模板</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('Banner')">Banner 轮播图</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('Barrage')">Barrage 弹幕</alike-button>
         </div>
 
-        <alike-divider>自定义组件</alike-divider>
+        <alike-divider>Effect - 效果相关</alike-divider>
+        <div class="index-wrapper">
+            <alike-button class="mr-10" @click="linkUrls('Hover')">Hover</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('HoverUp')">Hover Up</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Atransition')">Transition</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Animation')">Animation</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('AnimationUp')">Animation Up</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Barrage')">Barrage</alike-button>
+        </div>
+
+        <alike-divider>Event - 事件相关</alike-divider>
+        <div class="index-wrapper">
+            <alike-button class="mr-10" @click="linkUrls('Mouse')">Mouse 鼠标事件</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Drag')">Drag 拖动事件</alike-button>
+        </div>
+
+        <alike-divider>UI - 自定义组件</alike-divider>
         <div class="index-wrapper">
             <alike-button class="mr-10" @click="linkUrls('Basic')">Basic 基础</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Button')">Button 按钮</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Form')">Form 表单</alike-button>
-            <alike-button class="mr-10" @click="linkUrls('Scroll')">Scroll 滚动</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Scroll')">Scroll 滚动容器</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Carousel')">Carousel 轮播图</alike-button>
         </div>
     </div>
 </template>
