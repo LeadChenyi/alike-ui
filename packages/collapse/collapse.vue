@@ -70,7 +70,5 @@ export default {
 </script>
 
 <style scoped>
-    .alike-collapse{
-        position:relative;overflow:hidden;
-    }
+    .alike-collapse{position:relative;overflow:hidden;}
 </style>

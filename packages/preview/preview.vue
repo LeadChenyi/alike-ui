@@ -21,6 +21,14 @@
 </template>
 
 <script>
+/**
+ * alike-preview
+ * @describe 视图预览
+ * @website http://alike.galloping.xyz
+ * @property urls {Array} 视图数据对象
+ * @property current {String} 当前视图
+ * @property maskClose {Boolean} 是否开启遮罩层关闭
+ */
 export default {
     name:"alike-preview",
     props:{
@@ -79,7 +87,6 @@ export default {
             if(!this.maskClose){
                 return false;
             }
-            console.log('handleMask')
             this.close();
         }
     },

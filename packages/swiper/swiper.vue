@@ -9,6 +9,18 @@
 </template>
 
 <script>
+/**
+ * alike-swiper
+ * @describe 滑块视图容器
+ * @website http://alike.galloping.xyz
+ * @property swipers {Array} 数据对象
+ * @property active {Number} 当前选中项
+ * @property width {String} 根元素宽度
+ * @property height {String} 根元素高度
+ * @property duration {Number} 每次移动时间
+ * @property autoplay {Boolean} 是否自动播放
+ * @event change {Function} 当前选中项改变时触发
+ */
 export default {
     name:"alike-swiper",
     props:{

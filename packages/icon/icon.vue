@@ -305,6 +305,7 @@
 .alike-icon {
 	font-family: alike-icon;
 	font-size: 16px;
-	font-style: normal;
+    font-style: normal;
+    display:inline-flex;
 }
 </style>

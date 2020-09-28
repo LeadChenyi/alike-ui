@@ -5,12 +5,23 @@
 </template>
 
 <script>
+/**
+* alike-dropdown
+* @describe 下拉列表
+* @website http://alike.galloping.xyz
+* @property type {String} 元素类型（默认值：text，可选值：button）
+* @event change {Function}  点击下拉列表项时触发
+*/
 export default {
     name:"alike-dropdown",
     props:{
         type:{
             type:String,
             default:"text"
+        },
+        buttonType:{
+            type:String,
+            default:"primary"
         }
     },
     data(){

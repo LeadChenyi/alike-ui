@@ -7,6 +7,11 @@
 </template>
 
 <script>
+/**
+* alike-dropdown-menu
+* @describe 下拉列表菜单区
+* @website http://alike.galloping.xyz
+*/
 export default {
     name:"alike-dropdown-menu",
     data(){

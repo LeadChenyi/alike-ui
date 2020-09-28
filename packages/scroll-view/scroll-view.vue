@@ -6,10 +6,12 @@
 
 <script>
 /**
- * alike-drag-view 
+ * alike-scroll-view 
  * @describe 滚动视图
  * @website http://alike.galloping.xyz
- * @property customStyle {Object} 自定义根组件样式
+ * @property customStyle {Object} 自定义根元素样式
+ * @property width {String} 根元素宽度
+ * @property height {String} 根元素高度
  * @event scroll {function} 当元素滚动时触发，返回{scrollTop,scrollLeft}
  * @event scrolltolower {function} 当元素滚动至底部时触发
  */

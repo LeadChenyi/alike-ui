@@ -8,6 +8,16 @@
 </template>
 
 <script>
+/**
+* alike-input
+* @describe 表单
+* @website http://alike.galloping.xyz
+* @property type {String} 表单类型（默认值：text，可选值参考原生input标签）
+* @property value {String,Number} 表单的值（默认值：text，可选值参考原生input标签）
+* @property placeholder {String} 表单为空时的占位符
+* @property showPassword {Boolean} 是否显示明文密码
+* @event change {Function} 修改表单的值时触发
+*/
 export default {
     name:"alike-input",
     props:{

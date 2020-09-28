@@ -12,25 +12,24 @@
 </template>
 
 <script>
+/**
+ * alike-popup
+ * @describe 弹窗层
+ * @website http://alike.galloping.xyz
+ * @property maskClose {Number} 是否允许点击遮罩层时关闭
+ * @event change {Function} 遮罩层关闭或开启时触发
+ */
 export default {
     name:"alike-popup",
     props:{
-        show:{
-            type:Boolean,
-            default:false
-        },
-        duration:{// transition标签中duration属性指定是动画完成后等待时间，而不是动画过程中的持续时间
-            type:Number,
-            default:300
-        },
-        tapMaskClose:{
+        maskClose:{
             type:Boolean,
             default:true
         }
     },
     data(){
         return {
-            aniShow:this.show,
+            aniShow:false,
             identifier:Math.random() * 10000
         }
     },
@@ -55,7 +54,7 @@ export default {
             this.aniShow = false;
         },
         handleMask(){
-            if(!this.tapMaskClose){
+            if(!this.maskClose){
                 return false;
             }
             this.close();

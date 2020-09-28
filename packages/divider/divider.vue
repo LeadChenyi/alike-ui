@@ -11,7 +11,7 @@
 	 * alike-divider
 	 * @describe 通常用于分隔场景
 	 * @website http://alike.galloping.xyz
-	 * @property customStyle {Object} 自定义根组件样式
+	 * @property customStyle {Object} 自定义根元素样式
 	 */
 	
 	export default {

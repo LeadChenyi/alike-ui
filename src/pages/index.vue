@@ -1,18 +1,18 @@
 <template>
     <div class="index-page">
         <alike-divider>登录状态</alike-divider>
-        <div class="index-wrapper">{{isLogin ? '欢迎光临' :'未登录'}}</div>
+        <div class="global-wrapper">{{isLogin ? '欢迎光临' :'未登录'}}</div>
         <alike-button @click="unLogin" v-if="isLogin">退出登录</alike-button>
 
         <alike-divider>Basic</alike-divider>
-        <div class="index-wrapper">
+        <div class="global-wrapper">
             <alike-button class="mr-10" @click="linkUrls('Login')">Login 登录</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Cssom')">Cssom 视图属性</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Render')">Render 渲染模板</alike-button>
         </div>
 
         <alike-divider>Effect - 效果相关</alike-divider>
-        <div class="index-wrapper">
+        <div class="global-wrapper">
             <alike-button class="mr-10" @click="linkUrls('Hover')">Hover</alike-button>
             <alike-button class="mr-10" @click="linkUrls('HoverUp')">Hover Up</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Atransition')">Transition</alike-button>
@@ -22,13 +22,13 @@
         </div>
 
         <alike-divider>Event - 事件相关</alike-divider>
-        <div class="index-wrapper">
+        <div class="global-wrapper">
             <alike-button class="mr-10" @click="linkUrls('Mouse')">Mouse 鼠标事件</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Drag')">Drag 拖动事件</alike-button>
         </div>
 
         <alike-divider>UI - 自定义组件</alike-divider>
-        <div class="index-wrapper">
+        <div class="global-wrapper">
             <alike-button class="mr-10" @click="linkUrls('Basic')">Basic 基础</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Button')">Button 按钮</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Form')">Form 表单</alike-button>
@@ -69,8 +69,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    .index-wrapper{
-        display:flex;justify-content:center;align-items:center;flex-wrap:wrap;height:100px;padding:20px;
-    }
+<style>
+
 </style>

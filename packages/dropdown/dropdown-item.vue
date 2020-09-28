@@ -5,6 +5,12 @@
 </template>
 
 <script>
+/**
+* alike-dropdown-item
+* @describe 下拉列表可选项
+* @website http://alike.galloping.xyz
+* @property name {String} 下拉列表可选项的唯一标记符名称
+*/
 export default {
     name:"alike-dropdown-item",
     props:{

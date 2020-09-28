@@ -120,3 +120,6 @@ ul,ol,li{list-style:none;}
 .global-flex-scroll{overflow-x:scroll;-webkit-overflow-scrolling:touch;}
 .global-flex-scroll::-webkit-scrollbar{display:none;}
 .global-flex-scroll>[class$='-item']{-webkit-flex:none;flex:none;}
+
+/* 容器 */
+.global-wrapper{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;min-height:100px;padding:20px;}

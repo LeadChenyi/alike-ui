@@ -4,8 +4,8 @@
 
 <script>
 	/**
-	 * alike-line 块级行
-	 * @describe 通常用于占位的场景
+	 * alike-line 
+	 * @describe 块级占位行
 	 * @website http://alike.galloping.xyz
 	 * @property customStyle {Object} 自定义根组件样式
 	 * @property type {String} 行的类型

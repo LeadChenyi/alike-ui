@@ -7,6 +7,20 @@
 </template>
 
 <script>
+/**
+ * alike-panorama
+ * @describe 全景视图
+ * @website http://alike.galloping.xyz
+ * @property panoramas {Array} 数据对象
+ * @property width {String} 根元素宽度
+ * @property height {String} 根元素高度
+ * @property viewport {Number} 移动元素的区域视口
+ * @property direction {String} 移动方向
+ * @property duration {Number} 每次移动时间
+ * @property speed {Number} 每次移动速度
+ * @property step {Number} 每次移动频率
+ * @property autoplay {Boolean} 是否自动播放
+ */
 export default {
     name:"alike-panorama",
     props:{
