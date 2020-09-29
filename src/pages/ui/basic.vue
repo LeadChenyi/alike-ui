@@ -1,5 +1,8 @@
 <template>
     <div class="basic-page">
+        <alike-divider>count 计数</alike-divider>
+        <alike-count></alike-count>
+
         <alike-divider>Collapse 静态布局</alike-divider>
         <alike-collapse :active="collapseActive" :accordion="collapseAccordion">
             <alike-collapse-item title="哪吒闹海" name="0">
@@ -84,6 +87,7 @@ import alikeDropdownMenu from '../../../packages/dropdown/dropdown-menu'
 import alikeDropdownItem from '../../../packages/dropdown/dropdown-item'
 import alikePreview from '../../../packages/preview/preview'
 import alikeImage from '../../../packages/image/image'
+import alikeCount from '../../../packages/count/count'
 
 export default {
     name:"Basic",
@@ -95,7 +99,8 @@ export default {
         alikeDropdownMenu,
         alikeDropdownItem,
         alikePreview,
-        alikeImage
+        alikeImage,
+        alikeCount
     },
     data(){
         return {
