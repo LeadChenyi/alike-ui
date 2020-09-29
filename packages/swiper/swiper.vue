@@ -46,7 +46,7 @@ export default {
         },
         autoplay:{
             type:Boolean,
-            defualt:false
+            default:false
         }
     },
     data(){

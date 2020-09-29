@@ -19,27 +19,6 @@ ul,ol,li{list-style:none;}
 .fs-24{font-size:24px;}
 .fs-30{font-size:30px;}
 
-/* 字体色 */
-.c-primary{color:#409EFF;}
-.c-success{color:#67C23A;}
-.c-warning{color:#E6A23C;}
-.c-danger{color:#F56C6C;}
-.c-default,.c-info{color:#909399;}
-.c-white{color:#ffffff;}
-.c-3{color:#333333;}
-.c-6{color:#666666;}
-.c-9{color:#999999;}
-.c-b{color:#bbbbbb;}
-
-
-/* 背景色 */
-.bg-primary{color:#409EFF;}
-.bg-success{color:#67C23A;}
-.bg-warning{color:#E6A23C;}
-.bg-danger{color:#F56C6C;}
-.bg-default,.bg-info{color:#909399;}
-.bg-white{color:#ffffff;}
-
 /* 文本处理 */
 .text-left{text-align:left;}
 .text-center{text-align:center;}

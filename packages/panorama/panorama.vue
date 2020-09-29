@@ -136,16 +136,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    .alike-panorama{
-        position:relative;overflow:hidden;
-
-        .alike-panorama-wrap{
-            position:relative;display:flex;width:100%;height:100%;
-
-            .alike-panorama__image{
-                width:100%;height:100%;
-            }
-        }
-    }
+<style scoped>
+    .alike-panorama{position:relative;overflow:hidden;}
+    .alike-panorama-wrap{position:relative;display:flex;width:100%;height:100%;}
+    .alike-panorama__image{width:100%;height:100%;}
 </style>

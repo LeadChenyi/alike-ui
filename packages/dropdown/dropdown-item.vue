@@ -1,5 +1,5 @@
 <template>
-    <div class="alike-dropdown-item" @click="handleClick">
+    <div class="alike-dropdown-item" :class="['alike-dropdown-item--'+panelType]" @click="handleClick">
         <slot></slot>
     </div>
 </template>
@@ -19,10 +19,20 @@ export default {
             default:""
         }
     },
+    data(){
+        return {
+            panelType:"primary"
+        }
+    },
+    mounted(){
+        if(this.$parent.$parent.buttonType){
+            this.panelType = this.$parent.$parent.buttonType;
+        }
+    },
     methods:{
         handleClick(){
             if(this.name){
-                if(this.$parent.$parent.componentName == 'alike-dropdown'){
+                if(this.$parent.$parent.unionName == 'alike-dropdown'){
                     this.$parent.$parent.$emit('item-click',{name:this.name})
                 }
             }
@@ -31,7 +41,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .alike-dropdown-item{display:block;list-style:none;line-height:36px;padding:0 20px;margin:0;font-size:14px;color:#606266;cursor:pointer;outline:none}
-    .alike-dropdown-item:hover{color:#409eff;background-color:#ECF5FF}
+    .alike-dropdown-item--primary:hover{color:$alike-color-primary;background-color:$alike-color-light-primary;}
+    .alike-dropdown-item--success:hover{color:$alike-color-success;background-color:$alike-color-light-success;}
+    .alike-dropdown-item--fail:hover{color:$alike-color-fail;background-color:$alike-color-light-fail;}
+    .alike-dropdown-item--warn:hover{color:$alike-color-warn;background-color:$alike-color-light-warn;}
+    .alike-dropdown-item--info:hover{color:$alike-color-info;background-color:$alike-color-light-info;}
 </style>

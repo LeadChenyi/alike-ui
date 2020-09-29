@@ -16,7 +16,7 @@ export default {
     name:"alike-dropdown-menu",
     data(){
         return {
-            componentName:"alike-dropdown-menu",
+            unionName:"alike-dropdown-menu",
             aniShow:false
         }
     },
@@ -36,8 +36,7 @@ export default {
 
             this.aniShow = !this.aniShow;
             document.onclick = (e)=>{
-                // e.target.className获取到的是该元素所有类名的字符串，所有只能通过字符串查找检索，而不能直接使用“==”判断类名
-                if(this.aniShow && e.target.className.indexOf('alike-dropdown') == -1){
+                if(this.aniShow && e.target.id != this.$parent.unionId){
                     this.aniShow = false;
                     document.onclick = null;
                 }

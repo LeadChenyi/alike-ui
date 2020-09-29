@@ -23,19 +23,19 @@ export default {
     props:{
         type:{
             type:String,
-            defualt:"text"
+            default:"text"
         },   
         value:{
             type:[String,Number],
-            defualt:""
+            default:""
         },  
         placeholder:{
             type:String,
-            defualt:""
+            default:""
         },
         showPassword:{
             type:Boolean,
-            defualt:false
+            default:false
         }
     },
     model:{
@@ -84,7 +84,7 @@ export default {
             width: 100%;
 
             &:focus{
-                border: 1px solid #409eff;
+                border: 1px solid $alike-color-primary;
             }
         }
 

@@ -1,11 +1,11 @@
 <template>
     <div class="alike-collapse-item">
-        <div class="alike-collapse__header" @click="handleClick">
-            <div class="alike-collapse__header-title">{{title}}</div>
+        <div class="alike-collapse-item__header" @click="handleClick">
+            <div class="alike-collapse-item__header-title">{{title}}</div>
             <alike-icon type="arrow-right" size="16px" color="#999999"></alike-icon>
         </div>
-        <div ref="sectionFinder" class="alike-collapse__section" :class="[isActive ? 'alike-collapse__section--show':'alike-collapse__section--hide']" :style="{height:onceTotal || isActive ? sectionHeight+'px' : '0px',transition:transition}">
-            <div class="alike-collapse__section-inner">
+        <div ref="sectionFinder" class="alike-collapse-item__section" :class="[isActive ? 'alike-collapse-item__section--show':'alike-collapse-item__section--hide']" :style="{transition:transition,height:onceTotal || isActive ? sectionHeight+'px' : '0px'}">
+            <div class="alike-collapse-item__section-inner">
                 <slot></slot>
             </div>
         </div>
@@ -63,27 +63,11 @@ export default {
 </script>
 
 <style scoped>
-    .alike-collapse-item{
-        border-radius:6px;cursor:pointer;border:1px solid #DFDFDF;
-    }
-    .alike-collapse__header{
-        display:flex;align-items:center;
-        height:40px;padding:10px;box-sizing:border-box;
-        background-color:#f8f8f8;
-    }
-    .alike-collapse__header-title{
-        flex:1;
-    }
-    .alike-collapse__section{
-        overflow:hidden;
-    }
-    .alike-collapse__section--show{
-        border-top:1px solid #DFDFDF;
-    }
-    .alike-collapse__section--hide{
-        border-top:1px solid transparent;
-    }
-    .alike-collapse__section-inner{
-        padding:15px;
-    }
+.alike-collapse-item{border:1px solid #e8e8e8;border-radius:6px;cursor:pointer;}
+.alike-collapse-item__header{display:flex;box-sizing:border-box;padding:10px;height:40px;background-color:#f8f8f8;align-items:center;}
+.alike-collapse-item__header-title{flex:1;}
+.alike-collapse-item__section{position:relative;overflow:hidden;}
+.alike-collapse-item__section--show{border-top:1px solid #e8e8e8;}
+.alike-collapse-item__section--hide{border-top:1px solid transparent;}
+.alike-collapse-item__section-inner{padding:15px;}
 </style>

@@ -112,10 +112,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    .alike-image{
-        display:inline-block;
-        .alike-image__primary,.alike-image__default{max-width:100%;vertical-align:bottom;}
-        .alike-image__primary-hide{width:0;height:0;opacity:0;}
-    }
+<style scoped>
+    .alike-image{display:inline-block;}
+    .alike-image__primary,.alike-image__default{max-width:100%;vertical-align:bottom;}
+    .alike-image__primary-hide{width:0;height:0;opacity:0;}
 </style>

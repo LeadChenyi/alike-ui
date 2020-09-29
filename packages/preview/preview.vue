@@ -38,11 +38,11 @@ export default {
         },
         current:{
             type:String,
-            defualt:""
+            default:""
         },
         maskClose:{
             type:Boolean,
-            defualt:false
+            default:false
         }
     },
     data(){
@@ -101,35 +101,11 @@ export default {
 </script>
 
 <style scoped>
-    .alike-preview{
-        position:fixed;top:0;left:0;bottom:0;right:0;z-index:900;
-    }
-    .alike-preview__mask{
-        position:absolute;top:0;left:0;bottom:0;right:0;background-color:rgba(0,0,0,.7);z-index:1;
-    }
-    .alike-preview__page{
-        position:absolute;top:50%;right:20px;z-index:3;transform:translateY(-50%);
-        width:40px;height:40px;border-radius:50%;background-color:#606266;
-        display:flex;justify-content:center;align-items:center;cursor:pointer;user-select:none;
-    }
-    .alike-preview__page-prev{
-        left:20px;
-    }
-    .alike-preview__page-next{
-        right:20px;
-    }
-
-    .alike-preview__images{
-        position:absolute;top:0;left:0;
-        z-index:2;
-        width:100%;
-        height:100%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-    }
-    .alike-preview__item{
-        max-width:100%;
-        max-height:100%;
-    }
+    .alike-preview{position:fixed;top:0;right:0;bottom:0;left:0;z-index:900;}
+    .alike-preview__mask{position:absolute;top:0;right:0;bottom:0;left:0;z-index:1;background-color:rgba(0,0,0,.7);}
+    .alike-preview__page{position:absolute;top:50%;right:20px;z-index:3;display:flex;width:40px;height:40px;border-radius:50%;background-color:#606266;cursor:pointer;transform:translateY(-50%);justify-content:center;align-items:center;user-select:none;}
+    .alike-preview__page-prev{left:20px;}
+    .alike-preview__page-next{right:20px;}
+    .alike-preview__images{position:absolute;top:0;left:0;z-index:2;display:flex;width:100%;height:100%;align-items:center;justify-content:center;}
+    .alike-preview__item{max-width:100%;max-height:100%;}
 </style>

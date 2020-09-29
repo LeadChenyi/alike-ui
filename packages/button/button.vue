@@ -58,7 +58,7 @@
             },
             disabled:{
                 type:Boolean,
-                defualt:false
+                default:false
             }
         },
         methods:{
@@ -98,10 +98,6 @@
 	.alike-button-plain--warn{color:$alike-color-warn;border-color:$alike-color-warn;}
     .alike-button-plain--info{color:$alike-color-info;border-color:$alike-color-info;}
     
-    .alike-button:hover:before{
-        content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(255,255,255,.1);
-    }
-    .alike-button:active:before{
-        content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.1);
-    }
+    .alike-button:hover:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(255,255,255,.1);}
+    .alike-button:active:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.1);}
 </style>

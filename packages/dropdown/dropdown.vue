@@ -1,5 +1,5 @@
 <template>
-    <div class="alike-dropdown" :class="['alike-dropdown--'+type]" @click="handleClick">
+    <div :id="unionId" class="alike-dropdown" :class="['alike-dropdown-'+type,type == 'button'?'alike-dropdown-button--'+buttonType:'']" @click="handleClick">
         <slot></slot>
     </div>
 </template>
@@ -26,7 +26,8 @@ export default {
     },
     data(){
         return {
-            componentName:"alike-dropdown"
+            unionName:"alike-dropdown",
+            unionId:Math.random() * 1000
         }
     },
     mounted(){
@@ -41,7 +42,7 @@ export default {
                 height:e.target.offsetHeight,
             }
             
-            if(this.$children[0].componentName == 'alike-dropdown-menu'){
+            if(this.$children[0].unionName == 'alike-dropdown-menu'){
                 this.$children[0].$emit('toggle',rect);
             }
         },
@@ -53,18 +54,16 @@ export default {
 }
 </script>
 
-<style scoped>
-    .alike-dropdown{
-        display: inline-block;
-        position: relative;
-        color: #606266;
-        font-size: 14px;
-        font-weight:400;
-        white-space:nowrap;
-        cursor:pointer;
-        user-select:none;
-    }
-    .alike-dropdown--button{
-        height:40px;padding:10px 15px;border-radius:4px;box-sizing:border-box;color:#fff;background-color:#409eff;outline:none;margin:0;
-    }
+<style lang="scss" scoped>
+    .alike-dropdown{position:relative;display:inline-block;white-space:nowrap;font-weight:400;font-size:15px;cursor:pointer;user-select:none;}
+    .alike-dropdown-text{color: #333333;}
+    .alike-dropdown-button{height:40px;line-height:40px;padding:0 15px;border-radius:4px;box-sizing:border-box;outline:none;margin:0;color:#ffffff;}
+    .alike-dropdown-button:hover:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(255,255,255,.1);}
+    .alike-dropdown-button:active:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.1);}
+    .alike-dropdown-button--primary{background-color:$alike-color-primary;}
+    .alike-dropdown-button--default{background-color:$alike-color-default;color:$alike-color-9;}
+	.alike-dropdown-button--success{background-color:$alike-color-success;}
+	.alike-dropdown-button--fail{background-color:$alike-color-fail;}
+	.alike-dropdown-button--warn{background-color:$alike-color-warn;}
+    .alike-dropdown-button--info{background-color:$alike-color-info;}
 </style>

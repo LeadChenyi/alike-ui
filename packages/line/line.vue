@@ -31,8 +31,13 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.alike-line{width:100%;}
-	.alike-line--white{background-color:#ffffff;}
-	.alike-line--default{background-color:#f8f8f8;}
+	.alike-line--white{background-color:$alike-color-white;}
+    .alike-line--default{background-color:$alike-color-default;}
+    .alike-line--primary{background-color:$alike-color-primary;}
+	.alike-line--success{background-color:$alike-color-success;}
+	.alike-line--fail{background-color:$alike-color-fail;}
+	.alike-line--warn{background-color:$alike-color-warn;}
+    .alike-line--info{background-color:$alike-color-info;}
 </style>

@@ -136,12 +136,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    .alike-movable-view{
-        position:fixed;display:inline-block;overflow:hidden;
-
-        &:hover{
-            cursor:move;
-        }
-    }
+<style scoped>
+    .alike-movable-view{position:fixed;display:inline-block;overflow:hidden;cursor:move;}
 </style>

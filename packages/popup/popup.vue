@@ -83,7 +83,6 @@ export default {
         opacity:0;
     }    
    
-
     .alike-zoom-enter-active,.alike-zoom-leave-active{
         transition-property:opacity,transform;
         transition-duration:300ms;
@@ -98,10 +97,6 @@ export default {
         transform:scale(.1,.1);
     }   
 
-    .alike-popup-mask{
-        position:fixed;top:0;left:0;bottom:0;right:0;background-color:rgba(0,0,0,.7);z-index:1000;
-    }
-    .alike-popup-dialog{
-        position:fixed;top:50%;left:50%;width:500px;height:300px;background-color:#ffffff;margin-left:-250px;margin-top:-150px;z-index:1001;
-    }
+    .alike-popup-mask{position:fixed;top:0;left:0;bottom:0;right:0;background-color:rgba(0,0,0,.7);z-index:1000;}
+    .alike-popup-dialog{position:fixed;top:50%;left:50%;width:500px;height:300px;background-color:#ffffff;margin-left:-250px;margin-top:-150px;z-index:1001;}
 </style>

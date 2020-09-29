@@ -154,40 +154,12 @@ export default {
 }
 </script>
 
-<style scoped>
-    .alike-uploader{
-        display:inline-block;
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
-    }
-
-    .alike-uploader:hover{
-        border-color:#409EFF;
-    }
-
-    .alike-previews{
-        display:inline-flex;
-    }
-
-    .alike-preview__item{
-        position:relative;width: 178px;height: 178px;border-radius:6px;margin-right:10px;
-    }
-    
-    .alike-preview__item-image{width:100%;height:100%;border-radius:6px;}
-    .alike-preview__item-delete{
-        position:absolute;top:5px;right:5px;cursor:pointer;
-    }
-
-    .alike-uploader__input {
-        display: none;
-    }
+<style lang="scss" scoped>
+.alike-uploader{position:relative;display:inline-block;overflow:hidden;width:178px;height:178px;border:1px dashed #d9d9d9;border-radius:6px;color:#8c939d;text-align:center;font-size:28px;line-height:178px;cursor:pointer;}
+.alike-uploader:hover{border-color:$alike-color-primary;}
+.alike-previews{display:inline-flex;}
+.alike-preview__item{position:relative;margin-right:10px;width:178px;height:178px;border-radius:6px;}
+.alike-preview__item-image{width:100%;height:100%;border-radius:6px;}
+.alike-preview__item-delete{position:absolute;top:5px;right:5px;cursor:pointer;}
+.alike-uploader__input{display:none;}
 </style>

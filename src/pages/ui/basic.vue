@@ -48,6 +48,15 @@
                 <alike-dropdown-item name="ali">阿里</alike-dropdown-item>
                 <alike-dropdown-item name="tencent">腾讯</alike-dropdown-item>
             </alike-dropdown-menu>
+        </alike-dropdown>       
+
+        <alike-dropdown type="button" @change="changeDropdown">
+            下拉列表
+            <alike-dropdown-menu>
+                <alike-dropdown-item name="baidu">百度列表</alike-dropdown-item>
+                <alike-dropdown-item name="ali">阿里列表</alike-dropdown-item>
+                <alike-dropdown-item name="tencent">腾讯列表</alike-dropdown-item>
+            </alike-dropdown-menu>
         </alike-dropdown>
 
         <alike-divider>preview 图片预览</alike-divider>

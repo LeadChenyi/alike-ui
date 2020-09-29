@@ -53,7 +53,7 @@ export default {
     props:{
         transfers:{
             type:Array,
-            defualt:()=>[]
+            default:()=>[]
         }
     },
     data(){
@@ -149,6 +149,10 @@ export default {
     width:600px;
     display:flex;
 
+    .alike-transfer-center{
+        width:100px;margin:0 20px;display:flex;justify-content:space-between;align-items:center;
+    }
+
     .alike-transfer-area{
         flex:1;
         border-radius:5px;
@@ -160,15 +164,12 @@ export default {
         border-bottom: 1px solid rgba(0,0,0,.125);
     }
 
-    .alike-transfer-center{
-        width:100px;margin:0 20px;display:flex;justify-content:space-between;align-items:center;
-    }
-
     .alike-transfer__item{
         display:flex;
         align-items:center;
         padding:10px;
         cursor: pointer;
+
         &:hover{
             background-color:#f8f8f8;
         }
@@ -182,12 +183,9 @@ export default {
 
         .alike-transfer__item-label{
             font-size:15px;color:#333333;user-select:none;
-            &:hover{
-                color:#3485FB;
-            }
         }
         .alike-transfer__item-label--active{
-            color:#3485FB;
+            color:$alike-color-primary;
         }
     }
 }

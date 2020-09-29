@@ -142,38 +142,14 @@ export default {
 };
 </script>
 
-<style scoped>
-    .alike-uploader{
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
-    }
-    .alike-uploader--default:hover{
-        border-color:#409EFF;
-    }
-    .alike-uploader--active{
-        cursor:auto;
-    }
-
-    .alike-uploader__preview{position:relative;width:100%;height:100%;border-radius:6px;}
-    .alike-uploader__preview-image{width:100%;height:100%;border-radius:6px;}
-    .alike-uploader__preview-mask{
-        position:absolute;top:0;left:0;bottom:0;right:0;background-color:rgba(0,0,0,.7);opacity:0;
-        transition:opacity 500ms ease;
-    }
-    .alike-uploader__preview:hover .alike-uploader__preview-mask{opacity:1;}
-    .alike-uploader__preview-icon{
-        cursor: pointer;
-    }
-    .alike-uploader__input {
-        display: none;
-    }
+<style lang="scss" scoped>
+.alike-uploader{position:relative;overflow:hidden;width:178px;height:178px;border:1px dashed #d9d9d9;border-radius:6px;color:#8c939d;text-align:center;font-size:28px;line-height:178px;cursor:pointer;}
+.alike-uploader--default:hover{border-color:$alike-color-primary;}
+.alike-uploader--active{cursor:auto;}
+.alike-uploader__preview{position:relative;width:100%;height:100%;border-radius:6px;}
+.alike-uploader__preview-image{width:100%;height:100%;border-radius:6px;}
+.alike-uploader__preview-mask{position:absolute;top:0;right:0;bottom:0;left:0;background-color:rgba(0,0,0,.7);opacity:0;transition:opacity .5s ease;}
+.alike-uploader__preview:hover .alike-uploader__preview-mask{opacity:1;}
+.alike-uploader__preview-icon{cursor:pointer;}
+.alike-uploader__input{display:none;}
 </style>
