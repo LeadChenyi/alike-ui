@@ -12,6 +12,7 @@
 * @property type {String} 元素类型（默认值：text，可选值：button）
 * @event change {Function}  点击下拉列表项时触发
 */
+import Bus from './bus.js'
 export default {
     name:"alike-dropdown",
     props:{
@@ -31,6 +32,7 @@ export default {
         }
     },
     mounted(){
+        Bus.$on('close',this.close);
         this.$on('item-click',this.changeItem);
     },
     methods:{
@@ -43,12 +45,17 @@ export default {
             }
             
             if(this.$children[0].unionName == 'alike-dropdown-menu'){
+                // 先通知同级组件关闭，后通知当前组件显示
+                Bus.$emit('close');
                 this.$children[0].$emit('toggle',rect);
             }
         },
         changeItem(detail){
-            this.$children[0].$emit('toggle',{});
+            this.close();
             this.$emit('change',detail);
+        },
+        close(){
+            this.$children[0].aniShow = false;
         }
     }
 }

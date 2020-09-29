@@ -32,9 +32,7 @@ export default {
     methods:{
         runCount(){
             /**
-             * 每秒的动画函数不适合设置可持续时间的业务场景
-             * cancelAnimationFrame
-             * requestAnimationFrame
+             * 业务逻辑：每秒走多少步，多少秒走完，这种场景不适合用（requestAnimationFrame/cancelAnimationFrame）因为无法自定义持续时间
              */
 
             // 速度 = 路程 / 时间

@@ -18,7 +18,6 @@
 
         <alike-divider>其他按钮</alike-divider>
         <div class="global-wrapper">    
-                    
             <alike-button class="mr-20" type="primary" :radius="true">圆角按钮</alike-button>
             <alike-button class="mr-20" type="primary" :disabled="true">禁用按钮</alike-button>
             <alike-button class="mr-20" type="primary">

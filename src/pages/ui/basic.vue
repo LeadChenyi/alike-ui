@@ -45,7 +45,7 @@
 
         <alike-divider>dropdown 下拉菜单</alike-divider>
         <alike-dropdown type="button" @change="changeDropdown">
-            下拉菜单
+            下拉列表
             <alike-dropdown-menu>
                 <alike-dropdown-item name="baidu">百度</alike-dropdown-item>
                 <alike-dropdown-item name="ali">阿里</alike-dropdown-item>
@@ -54,11 +54,11 @@
         </alike-dropdown>       
 
         <alike-dropdown type="button" @change="changeDropdown">
-            下拉列表
+            下拉菜单
             <alike-dropdown-menu>
-                <alike-dropdown-item name="baidu">百度列表</alike-dropdown-item>
-                <alike-dropdown-item name="ali">阿里列表</alike-dropdown-item>
-                <alike-dropdown-item name="tencent">腾讯列表</alike-dropdown-item>
+                <alike-dropdown-item name="eleme">饿了么</alike-dropdown-item>
+                <alike-dropdown-item name="meituan">美团</alike-dropdown-item>
+                <alike-dropdown-item name="pupu">朴朴</alike-dropdown-item>
             </alike-dropdown-menu>
         </alike-dropdown>
 
