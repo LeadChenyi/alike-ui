@@ -29,11 +29,9 @@ export default {
     },
     methods:{
         toggle(detail){
-            if(Object.keys(detail).length){
-                this.$el.style.left = (detail.left + detail.width / 2 - 70 / 2) +"px";
-                this.$el.style.top = (detail.top + detail.height) +"px";
-            }
-
+            this.$el.style.left = (detail.left + detail.width / 2 - 70 / 2) +"px";
+            this.$el.style.top = (detail.top + detail.height) +"px";
+        
             this.aniShow = !this.aniShow;
             document.onclick = (e)=>{
                 if(this.aniShow && e.target.id != this.$parent.unionId){

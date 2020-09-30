@@ -5,16 +5,30 @@
             <div class="rect-view">可移动的元素</div>
         </alike-movable-view>
         <alike-line type="white" height="1000px"></alike-line>
+        <alike-context @change="contextMenuChange">
+            <div class="video-area"></div>
+            <alike-context-menu>
+                <alike-context-item name="shipin">视频源头</alike-context-item>
+                <alike-context-item name="xianlu">播放线路</alike-context-item>
+                <alike-context-item name="shuaxin">刷新页面</alike-context-item>
+            </alike-context-menu>
+        </alike-context>
   </div>
 </template>
 
 <script>
 import alikeMovableView from '../../../packages/movable-view/movable-view'
+import alikeContext from '../../../packages/context/context'
+import alikeContextMenu from '../../../packages/context/context-menu'
+import alikeContextItem from '../../../packages/context/context-item'
 
 export default {
     name:"Mouse",
     components:{
-        alikeMovableView
+        alikeMovableView,
+        alikeContext,
+        alikeContextMenu,
+        alikeContextItem
     },
     methods:{
         changeMovable(detail){
@@ -22,6 +36,9 @@ export default {
         },
         finishMovable(detail){
             console.log('监听元素移动完成时位置：',detail);
+        },
+        contextMenuChange(detail){
+            console.log('contextMenuChange：',detail)
         }
     }
 }
@@ -40,5 +57,11 @@ export default {
         &:hover{
             color:#ffffff;
         }
+    }
+
+    .video-area{
+        width:600px;
+        height:300px;
+        background-color:#8ca9f8;
     }
 </style>
