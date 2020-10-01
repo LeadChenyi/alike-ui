@@ -101,6 +101,11 @@ const router = new VueRouter({
             path:'/carousel',
             name:'Carousel',
             component:() => import('@/pages/ui/carousel')
+        },        
+        {
+            path:'/canvas',
+            name:'Canvas',
+            component:() => import('@/pages/ui/canvas')
         }, 
         {
             path:'/*',
