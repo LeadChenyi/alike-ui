@@ -37,6 +37,15 @@ export default {
                 if(this.aniShow && e.target.id != this.$parent.unionId){
                     this.aniShow = false;
                     document.onclick = null;
+                    document.oncontextmenu = null;
+                }
+            }
+
+            document.oncontextmenu = (e)=>{
+                if(this.aniShow && e.target.id != this.$parent.unionId){
+                    this.aniShow = false;
+                    document.onclick = null;
+                    document.oncontextmenu = null;
                 }
             }
         }
