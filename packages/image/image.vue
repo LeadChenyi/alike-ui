@@ -95,7 +95,7 @@ export default {
                     // 指定滚动容器时的公式需要减去该滚动容器的向上偏移值
                     if((scrollTop + offsetHeight) >= (elOffsetTop - doc.offsetTop)){
                         this.startLoading = true;
-                        doc.onscroll = null
+                        // doc.onscroll = null
                     }
                 }
             }else{
@@ -105,7 +105,7 @@ export default {
                     let offsetHeight = e.target.scrollingElement.offsetHeight;
                     if((scrollTop + offsetHeight) >= elOffsetTop){
                         this.startLoading = true;
-                        document.onscroll = null;
+                        // document.onscroll = null;
                     }
                 }
             }

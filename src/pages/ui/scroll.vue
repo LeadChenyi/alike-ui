@@ -6,11 +6,21 @@
             </div>
         </alike-scroll-view>
 
-        <alike-scroll-view id="innerlazy">
+        <alike-sticky top="20px">
+            <alike-button type="primary">Sticky</alike-button>
+        </alike-sticky>
+
+        <alike-line type="white" height="500px"></alike-line>
+
+        <alike-scroll-view id="innerContainer">
             <div class="cell-item" v-for="item in 30" :key="item">
                 测试图片在内层滚动容器里的懒加载{{item}}
             </div>
-            <alike-image src="http://cloud7.galloping.xyz/photo_006.jpg" width="300" height="300" :original="false" :lazyLoad="true" scrollView="innerlazy"></alike-image>
+            <!-- <alike-sticky scrollView="innerContainer">
+                <alike-button type="primary">Inner Sticky</alike-button>
+            </alike-sticky> -->
+            <alike-line type="white" height="500px"></alike-line>
+            <alike-image src="http://cloud7.galloping.xyz/photo_006.jpg" width="300" height="300" :original="false" :lazyLoad="true" scrollView="innerContainer"></alike-image>
         </alike-scroll-view>
     </div>
 </template>

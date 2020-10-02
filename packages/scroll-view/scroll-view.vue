@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
     .alike-scroll-view{
-        overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;background-color:#f8f8f8;
+        overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;background-color:#f8f8f8;position:relative;
 
         &::-webkit-scrollbar{
             width:8px;
