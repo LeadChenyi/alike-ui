@@ -1,5 +1,5 @@
 <template>
-    <div :id="unionId" class="alike-dropdown" :class="['alike-dropdown-'+type,type == 'button'?'alike-dropdown-button--'+buttonType:'']" @click="handleClick">
+    <div :id="unionId" class="alike-dropdown" :class="['alike-dropdown-'+type,type == 'button'?'alike-dropdown-button--'+buttonType:'']" @click.stop="handleClick">
         <slot></slot>
     </div>
 </template>

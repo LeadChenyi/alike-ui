@@ -1,5 +1,15 @@
 <template>
     <div class="form-page">
+        <alike-divider>表单选择器</alike-divider>
+        <alike-select v-model="selectValue" :readonly="selectReadonly" @change="changeSelectValue">
+            <alike-select-options>
+                <alike-select-item name="北京">北京</alike-select-item>
+                <alike-select-item name="上海">上海</alike-select-item>
+                <alike-select-item name="广州">广州</alike-select-item>
+            </alike-select-options>
+        </alike-select>
+        <div>{{selectValue}}</div>
+
         <alike-divider>单图上传器</alike-divider>
         <alike-uploader :enable-drag="true" :file="file" @success="successFile" @fail="failFile" @delete="deleteFile"></alike-uploader>
         
@@ -19,16 +29,20 @@
 <script>
 import alikeUploader from '../../../packages/uploader/uploader'
 import alikeUploaders from '../../../packages/uploaders/uploaders'
-import alikeInput from '../../../packages/input/input'
 import alikeTransfer from '../../../packages/transfer/transfer'
+import alikeSelect from '../../../packages/select/select'
+import alikeSelectOptions from '../../../packages/select/select-options'
+import alikeSelectItem from '../../../packages/select/select-item'
 
 export default {
     name:"Form",
     components:{
         alikeUploader,
         alikeUploaders,
-        alikeInput,
-        alikeTransfer
+        alikeTransfer,
+        alikeSelect,
+        alikeSelectOptions,
+        alikeSelectItem
     },
     data(){
         return {
@@ -77,10 +91,16 @@ export default {
                 }
             ],
             userName:"此言很差矣",
-            password:"123456"
+            password:"123456",
+            selectValue:"北京",
+            // 表单选择器当前readonly为false时即可表单输入
+            selectReadonly:true
         }
     },
     methods:{
+        changeSelectValue(detail){
+            console.log('changeSelectValue：',detail);
+        },
         successFile(e){
             console.log(e);
             this.file = e.filePath;

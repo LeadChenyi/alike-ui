@@ -33,7 +33,7 @@ export default {
         handleClick(){
             if(this.name){
                 if(this.$parent.$parent.unionName == 'alike-dropdown'){
-                    this.$parent.$parent.$emit('item-click',{name:this.name})
+                    this.$parent.$parent.$emit('item-click',{name:this.name});
                 }
             }
         }

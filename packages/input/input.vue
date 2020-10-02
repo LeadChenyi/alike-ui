@@ -1,6 +1,6 @@
 <template>
     <div class="alike-input">
-        <input class="alike-input__inner" :type="elType" :value="value" :placeholder="placeholder" @input="$emit('change',$event.target.value)"/>
+        <input class="alike-input__inner" :type="elType" :value="value" :readonly="readonly" :placeholder="placeholder" @input="$emit('change',$event.target.value)" />
         <div class="alike-input__password" @click="toggleType" v-if="showPassword">
             <alike-icon :type="elType == 'password' ? 'like-fill':'like' " color="#999999"></alike-icon>
         </div>
@@ -29,6 +29,10 @@ export default {
             type:[String,Number],
             default:""
         },  
+        readonly:{
+            type:Boolean,
+            default:false
+        },
         placeholder:{
             type:String,
             default:""
@@ -65,7 +69,7 @@ export default {
         font-size:14px;
         display:inline-block;
         width:100%;
-        
+        cursor:pointer;
 
         .alike-input__inner{
             background-color: #fff;
@@ -85,6 +89,20 @@ export default {
 
             &:focus{
                 border: 1px solid $alike-color-primary;
+            }
+        }
+
+        .alike-input__inner{
+            &:focus{
+                border: 1px solid $alike-color-primary;
+            }
+
+            &[readonly]{
+                cursor:pointer;
+            }            
+
+            &[readonly]:focus{
+                border: 1px solid #dcdfe6;
             }
         }
 

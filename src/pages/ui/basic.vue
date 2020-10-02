@@ -1,5 +1,8 @@
 <template>
     <div class="basic-page">
+        <alike-divider>nav 导航</alike-divider>
+        <alike-menu></alike-menu>
+
         <alike-divider>count 计数</alike-divider>
         <alike-count></alike-count>
 
@@ -79,6 +82,7 @@
 </template>
 
 <script>
+import alikeMenu from '../../../packages/menu/menu'
 import alikeCollapse from '../../../packages/collapse/collapse'
 import alikeCollapseItem from '../../../packages/collapse/collapse-item'
 import alikePopup from '../../../packages/popup/popup'
@@ -92,6 +96,7 @@ import alikeCount from '../../../packages/count/count'
 export default {
     name:"Basic",
     components:{
+        alikeMenu,
         alikeCollapse,
         alikeCollapseItem,
         alikePopup,
