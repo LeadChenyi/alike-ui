@@ -90,7 +90,6 @@ import alikeDropdown from '../../../packages/dropdown/dropdown'
 import alikeDropdownMenu from '../../../packages/dropdown/dropdown-menu'
 import alikeDropdownItem from '../../../packages/dropdown/dropdown-item'
 import alikePreview from '../../../packages/preview/preview'
-import alikeImage from '../../../packages/image/image'
 import alikeCount from '../../../packages/count/count'
 
 export default {
@@ -104,7 +103,6 @@ export default {
         alikeDropdownMenu,
         alikeDropdownItem,
         alikePreview,
-        alikeImage,
         alikeCount
     },
     data(){

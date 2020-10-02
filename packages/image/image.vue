@@ -61,6 +61,10 @@ export default {
             type:Boolean,
             default:false
         },
+        scrollView:{
+            type:String,
+            default:""
+        },
         disabled:{
             type:Boolean,
             default:false
@@ -82,14 +86,27 @@ export default {
     methods: {
         initLazyLoad(){
             let elOffsetTop = this.$el.getBoundingClientRect().top;
-            let docOffsetHeight = document.documentElement.offsetHeight || document.body.offsetHeight;
-
-            document.onscroll = (e)=>{
-                // console.log('initLazy',e.target.scrollingElement.scrollTop);
-                let scrollTop = e.target.scrollingElement.scrollTop;
-                if((docOffsetHeight + scrollTop) >= elOffsetTop){
-                    this.startLoading = true;
-                    document.onscroll = null;
+            if(this.scrollView){
+                let doc = document.querySelector(`#${this.scrollView}`);
+                doc.onscroll = (e)=>{
+                    // console.log('scrollview scrollTop',e.target.scrollTop);
+                    let scrollTop = e.target.scrollTop;
+                    let offsetHeight = e.target.offsetHeight;
+                    // 指定滚动容器时的公式需要减去该滚动容器的向上偏移值
+                    if((scrollTop + offsetHeight) >= (elOffsetTop - doc.offsetTop)){
+                        this.startLoading = true;
+                        doc.onscroll = null
+                    }
+                }
+            }else{
+                document.onscroll = (e)=>{
+                    // console.log('document scrollTop',e.target.scrollingElement.scrollTop);
+                    let scrollTop = e.target.scrollingElement.scrollTop;
+                    let offsetHeight = e.target.scrollingElement.offsetHeight;
+                    if((scrollTop + offsetHeight) >= elOffsetTop){
+                        this.startLoading = true;
+                        document.onscroll = null;
+                    }
                 }
             }
         },

@@ -1,9 +1,16 @@
 <template>
     <div class="scroll-page">
-        <alike-scroll-view @scrolltolower="scrolltolower">
+        <alike-scroll-view height="625px" @scrolltolower="scrolltolower">
             <div class="cell-item" v-for="(item,index) in articles" :key="index">
                 {{item.text}}
             </div>
+        </alike-scroll-view>
+
+        <alike-scroll-view id="innerlazy">
+            <div class="cell-item" v-for="item in 30" :key="item">
+                测试图片在内层滚动容器里的懒加载{{item}}
+            </div>
+            <alike-image src="http://cloud7.galloping.xyz/photo_006.jpg" width="300" height="300" :original="false" :lazyLoad="true" scrollView="innerlazy"></alike-image>
         </alike-scroll-view>
     </div>
 </template>
