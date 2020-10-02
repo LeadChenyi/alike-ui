@@ -35,12 +35,12 @@ export default {
         initSticky(){
             if(this.scrollView){
                 let doc = document.querySelector(`#${this.scrollView}`);
+                let elOffsetTop = this.$el.offsetTop;
                 doc.onscroll = (e)=>{
                     // console.log('scrollview scrollTop',e.target.scrollTop);
                     let scrollTop = e.target.scrollTop;
-                    let offsetHeight = e.target.offsetHeight;
-                    // console.log(scrollTop,this.offsetTop,offsetHeight,this.$el.offsetTop)
-                    if(scrollTop >= (offsetHeight - this.offsetTop)){
+                    if(scrollTop >= (elOffsetTop - this.offsetTop)){
+                        this.topValue = scrollTop + this.offsetTop + "px"
                         this.sticked = true;
                     }else{
                         this.sticked = false;
