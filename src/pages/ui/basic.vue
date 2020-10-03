@@ -1,5 +1,29 @@
 <template>
     <div class="basic-page">
+        <alike-divider>transform 元素缩放</alike-divider>
+        <div class="alike-transform">
+            <!-- 夹角 -->
+            <div class="alike-transform-dot alike-transform-dot-tl"></div>
+            <div class="alike-transform-dot alike-transform-dot-bl"></div>
+            <div class="alike-transform-dot alike-transform-dot-tr"></div>
+            <div class="alike-transform-dot alike-transform-dot-br"></div>
+            
+            <!-- 边 -->
+            <div class="alike-transform-side alike-transform-side-top"></div>
+            <div class="alike-transform-side alike-transform-side-bottom"></div>
+            <div class="alike-transform-side alike-transform-side-left"></div>
+            <div class="alike-transform-side alike-transform-side-right"></div>
+        </div>
+
+        <alike-divider>swiper-action 左滑</alike-divider>
+        <alike-swiper-action>
+            <alike-swiper-action-item>
+                <div class="alike-field">
+                    吾问无为谓
+                </div>
+            </alike-swiper-action-item>
+        </alike-swiper-action>
+
         <alike-divider>nav 导航</alike-divider>
         <alike-menu></alike-menu>
 
@@ -82,6 +106,8 @@
 </template>
 
 <script>
+import alikeSwiperAction from '../../../packages/swiper-action/swiper-action'
+import alikeSwiperActionItem from '../../../packages/swiper-action/swiper-action-item'
 import alikeMenu from '../../../packages/menu/menu'
 import alikeCollapse from '../../../packages/collapse/collapse'
 import alikeCollapseItem from '../../../packages/collapse/collapse-item'
@@ -95,6 +121,8 @@ import alikeCount from '../../../packages/count/count'
 export default {
     name:"Basic",
     components:{
+        alikeSwiperAction,
+        alikeSwiperActionItem,
         alikeMenu,
         alikeCollapse,
         alikeCollapseItem,
@@ -158,6 +186,79 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .alike-transform{
+        display:inline-block;
+        width:200px;
+        height:200px;
+        background-color:#ff8300;
+        position:relative;
+
+        .alike-transform-dot{
+            position: absolute;
+            z-index: 2;
+            opacity: 0.5;
+            width: 7px;
+            height: 7px;
+            background-color: #333;
+            border: 1px #eee solid;
+        }
+        .alike-transform-dot-tl{
+            top:0;
+            left:0;
+            cursor:nw-resize;
+        }        
+        .alike-transform-dot-bl{
+            bottom:0;
+            left:0;
+            cursor:ne-resize;
+        }        
+        .alike-transform-dot-tr{
+            top:0;
+            right:0;
+            cursor:sw-resize;
+        }        
+        .alike-transform-dot-br{
+            bottom:0;
+            right:0;
+            cursor:se-resize;
+        }
+
+        .alike-transform-side{
+            background: #ffffff url('../../assets/img/border_001.gif') top left repeat;
+            z-index:1;
+        }
+        .alike-transform-side-top,.alike-transform-side-bottom{
+            height: 1px;width: 100%;position: absolute;left:0;right:0;
+        }
+        .alike-transform-side-top{
+            top:0;cursor: n-resize;
+        }
+        .alike-transform-side-bottom{
+            bottom:0;cursor: s-resize;
+        }
+        .alike-transform-side-left,.alike-transform-side-right{
+            height: 100%;width: 1px;position: absolute;top:0;bottom:0;
+        }
+        .alike-transform-side-left{
+            left:0;cursor:w-resize;
+        }
+        .alike-transform-side-right{
+            right:0;cursor:e-resize;
+        }
+    }
+
+    .alike-field{
+        display: flex;
+        box-sizing: border-box;
+        padding: 10px;
+        height: 40px;
+        background-color: #f8f8f8;
+        align-items: center;
+        &:hover{
+            background-color: #e8e8e8;
+        }
+    }
+    
     .nav-wrap{
         display: inline-block;
         border-radius: 30px;
