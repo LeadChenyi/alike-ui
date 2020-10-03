@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style scoped>
-    .alike-select{width:300px;height:40px;display:inline-block;box-sizing:border-box;position:relative;}
+    .alike-select{width:300px;display:inline-block;box-sizing:border-box;position:relative;}
     .alike-select-input >>> .alike-input__inner{
         padding-right:30px;
     }
@@ -73,5 +73,6 @@ export default {
         top:50%;
         right:8px;
         transform:translateY(-50%);
+        cursor:pointer;
     }
 </style>

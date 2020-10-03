@@ -24,7 +24,7 @@
             </alike-swiper-action-item>
         </alike-swiper-action>
 
-        <alike-divider>nav 导航</alike-divider>
+        <alike-divider>menu 菜单</alike-divider>
         <alike-menu></alike-menu>
 
         <alike-divider>count 计数</alike-divider>

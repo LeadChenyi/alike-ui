@@ -1,5 +1,8 @@
 <template>
     <div class="form-page">
+        <alike-divider>cascade 联级选择器</alike-divider>
+        <alike-cascade :value="cascadeValue" :cascades="cascades"></alike-cascade>
+
         <alike-divider>表单选择器</alike-divider>
         <alike-select v-model="selectValue" :readonly="selectReadonly" @change="changeSelectValue">
             <alike-select-options>
@@ -27,6 +30,7 @@
 </template>
 
 <script>
+import alikeCascade from '../../../packages/cascade/cascade'
 import alikeUploader from '../../../packages/uploader/uploader'
 import alikeUploaders from '../../../packages/uploaders/uploaders'
 import alikeTransfer from '../../../packages/transfer/transfer'
@@ -37,6 +41,7 @@ import alikeSelectItem from '../../../packages/select/select-item'
 export default {
     name:"Form",
     components:{
+        alikeCascade,
         alikeUploader,
         alikeUploaders,
         alikeTransfer,
@@ -94,7 +99,82 @@ export default {
             password:"123456",
             selectValue:"北京",
             // 表单选择器当前readonly为false时即可表单输入
-            selectReadonly:true
+            selectReadonly:true,
+            cascades:[
+                {
+                    label:"福建省",
+                    value:"fujianshen",
+                    children:[
+                        {
+                            label:"福州市",
+                            value:"fujianshi",
+                            children:[
+                                {
+                                    label:"仓山区",
+                                    value:"cangshanqu",
+                                },                                
+                                {
+                                    label:"晋安区",
+                                    value:"cangshanqu",
+                                },                                
+                                {
+                                    label:"台江区",
+                                    value:"taijiangqu",
+                                },                                
+                                {
+                                    label:"鼓楼区",
+                                    value:"gulouqu",
+                                },                                
+                                {
+                                    label:"马尾区",
+                                    value:"maweiqu",
+                                }
+                            ]
+                        },
+                        {
+                            label:"厦门市",
+                            value:"xiamenshi",
+                            children:[
+                                {
+                                    label:"思明区",
+                                    value:"simingqu",
+                                },                                
+                                {
+                                    label:"集美区",
+                                    value:"jimeiqu",
+                                }
+                            ]
+                        }
+                    ]
+                },                
+                {
+                    label:"浙江省",
+                    value:"zhejiangshen",
+                    children:[
+                        {
+                            label:"杭州市",
+                            value:"hangzhoushi",
+                            children:[
+                                {
+                                    label:"西湖区",
+                                    value:"xihuqu",
+                                }
+                            ]
+                        },
+                        {
+                            label:"绍兴市",
+                            value:"shaoxingshi",
+                            children:[
+                                {
+                                    label:"上虞区",
+                                    value:"shangyuqu",
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            cascadeValue:['福建省','福州市','仓山区']
         }
     },
     methods:{
