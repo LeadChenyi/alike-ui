@@ -1,5 +1,5 @@
 <template>
-    <div class="alike-swiper-action-item" @mousedown="mousedown">
+    <div class="alike-swiper-action-item" @mousedown="swiperActionMouseDown">
         <div class="alike-swiper-action-section" :style="{transform:`translate3d(${translateX}px,0,0)`}">
             <slot></slot>
         </div>
@@ -11,57 +11,61 @@
 </template>
 
 <script>
+import Bus from './bus.js'
 export default {
     name:"alike-swiper-action-item",
     data(){
         return {
             translateX:0,       // 当前值     
-            thresholdX:40,      // 门槛
-            limitX:120,         // 限制
+            thresholdX:40,      // 门槛值
+            limitX:120,         // 限制值
             recordX:0,          // 记录值
-            direction:"left"
+            direction:"left"    // 记录移动方向
         }
     },
+    mounted(){
+        Bus.$on('close',this.close);
+    },
     methods:{
-        mousedown(e){
+        swiperActionMouseDown(e){
             let downX = e.clientX;
-
+            Bus.$emit('close');
             document.onmousemove = (e)=>{
                 let moveX = e.clientX;
+                this.recordX = moveX - downX;
 
                 /**
                  * 记录值每次是会重新计算的
-                 * 左滑：当前值 = 记录值
-                 * 右滑：当前值 + 记录值
+                 * 左滑：当前值 = 记录值（如果为累加当中途反方向时用户体验不好）
+                 * 右滑：当前值 + 记录值（如果为等于无法从左滑方向的起始点递减）
                  */
-                this.recordX = moveX - downX;
 
                 if(this.recordX <= 0){
-                    if(Math.abs(this.recordX) >= this.limitX){
-                        this.recordX = -this.limitX;
-                    }
-                    this.translateX = this.recordX;
-                    this.direction = "left";
                     // console.log('向左滑...',this.recordX);
+                    this.direction = "left";
+                    this.translateX = this.recordX;
+                    if(this.translateX < -this.limitX){
+                        this.translateX = -this.limitX;
+                    }
                 }else{
+                    // console.log('向右滑...',this.recordX);
+                    this.direction = "right";
                     this.translateX += this.recordX;
                     if(this.translateX > 0){
-                        this.translateX = 0
+                        this.translateX = 0;
                     }
-                    this.direction = "right";
-                    // console.log('向右滑...',this.recordX);
                 }
             }
 
             document.onmouseup = ()=>{
                 if(this.direction == "left"){
-                    if(Math.abs(this.recordX) >= this.thresholdX){
+                    if(this.translateX < -this.thresholdX){
                         this.translateX = -this.limitX;
                     }else{
                         this.translateX = 0;
                     }
                 }else{
-                    if(Math.abs(this.translateX) < (this.limitX - this.thresholdX)){
+                    if(this.translateX > -(this.limitX - this.thresholdX)){
                         this.translateX = 0;
                     }else{
                         this.translateX = -this.limitX;
@@ -70,6 +74,9 @@ export default {
                 document.onmousemove = null;
                 document.onmouseup = null;
             }
+        },
+        close(){
+            this.translateX = 0;
         }
     }
 }
