@@ -1,10 +1,10 @@
 <template>
     <div class="alike-collapse-item">
-        <div class="alike-collapse-item__header" @click="handleClick">
+        <div class="alike-collapse-item__header" @click="handleItemClick">
             <div class="alike-collapse-item__header-title">{{title}}</div>
             <alike-icon type="arrow-right" size="16px" color="#999999"></alike-icon>
         </div>
-        <div ref="sectionFinder" class="alike-collapse-item__section" :class="[isActive ? 'alike-collapse-item__section--show':'alike-collapse-item__section--hide']" :style="{transition:transition,height:onceTotal || isActive ? sectionHeight+'px' : '0px'}">
+        <div ref="sectionFinder" class="alike-collapse-item__section" :class="[isOpen ? 'alike-collapse-item__section--show':'alike-collapse-item__section--hide']" :style="{transition:transition,height:onceTotal || isOpen ? sectionHeight+'px' : '0px'}">
             <div class="alike-collapse-item__section-inner">
                 <slot></slot>
             </div>
@@ -37,7 +37,25 @@ export default {
         return {
             onceTotal:true,       
             sectionHeight:null,
-            transition:"height 0s ease"
+            transition:"height 0s ease",
+            isOpen:false,
+            inName:""
+        }
+    },
+    created(){
+        // 初始唯一标识符
+        this.inName = this.name ? this.name : this.collapse.childrens.length;
+        this.collapse.childrens.push(this);
+        
+        // 初始激活选中项
+        if(Array.isArray(this.collapse.active)){
+            if(this.collapse.active.includes(this.inName)){
+                this.isOpen = true;
+            }
+        }else if(this.collapse.active){
+            if(this.collapse.active == this.inName){
+                this.isOpen = true;
+            }
         }
     },
     mounted(){
@@ -50,13 +68,20 @@ export default {
         this.transition = "height 300ms ease";
     },
     methods:{
-        handleClick(){
-            this.$parent.$emit('item-click',this);
-        }
-    },
-    computed:{
-        isActive(){
-            return this.collapse.activeName.indexOf(this.name) != -1;
+        handleItemClick(){
+            this.isOpen = !this.isOpen;
+            // 排他思想
+            if(this.collapse.accordion == true){
+                this.collapse.childrens.forEach(vm => {
+                    if (vm !== this) {
+                        vm.isOpen = false;
+                    }
+                })
+            }
+            // 触发父级事件
+            this.collapse.itemChange && this.collapse.itemChange();
+            // 强制更新父级数据
+            this.$forceUpdate();
         }
     }
 }

@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import Bus from './bus.js'
 export default {
     name:"alike-swiper-action-item",
     data(){
@@ -23,16 +22,23 @@ export default {
             direction:"left"    // 记录移动方向
         }
     },
-    mounted(){
-        Bus.$on('close',this.close);
+    inject: ['swiperAction'],
+    created(){
+        this.swiperAction.childrens.push(this);
     },
     methods:{
         swiperActionMouseDown(e){
             let downX = e.clientX;
-            Bus.$emit('close');
+            
+            // 排他思想
+            this.swiperAction.childrens.forEach(vm => {
+                if (vm !== this) {
+                    vm.translateX = 0;
+                }
+            })
+
             document.onmousemove = (e)=>{
-                let moveX = e.clientX;
-                this.recordX = moveX - downX;
+                this.recordX = e.clientX - downX;
 
                 /**
                  * 记录值每次是会重新计算的
@@ -71,6 +77,7 @@ export default {
                         this.translateX = -this.limitX;
                     }
                 }
+
                 document.onmousemove = null;
                 document.onmouseup = null;
             }

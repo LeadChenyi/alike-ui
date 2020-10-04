@@ -1,7 +1,7 @@
 <template>
     <div class="basic-page">
         <alike-divider>transform 元素缩放</alike-divider>
-        <alike-transform-view @changeBottomRight="transformChangeBottomRight"></alike-transform-view>
+        <alike-transform-view @changeBottomRight="changeBottomRightTransform"></alike-transform-view>
 
         <alike-divider>swiper-action 左滑</alike-divider>
         <alike-swiper-action>
@@ -24,15 +24,15 @@
         <alike-count></alike-count>
 
         <alike-divider>Collapse 静态布局</alike-divider>
-        <alike-collapse :active="collapseActive" :accordion="collapseAccordion">
-            <alike-collapse-item title="哪吒闹海" name="0">
+        <alike-collapse :active="[0,2]" :accordion="collapseAccordion" @change="changeCollapse">
+            <alike-collapse-item title="哪吒闹海">
                 <div>
                     <p>是他就是他我们的朋友小哪吒</p>
                     <p>是他就是他我们的朋友小哪吒</p>
                     <p>是他就是他我们的朋友小哪吒</p>
                 </div>
             </alike-collapse-item>            
-            <alike-collapse-item title="大闹天宫" name="1">
+            <alike-collapse-item title="大闹天宫">
                 <div>
                     <p>俺老孙老也，都给我闪开</p>
                     <p>俺老孙老也，都给我闪开</p>
@@ -41,7 +41,7 @@
                     <p>俺老孙老也，都给我闪开</p>
                 </div>
             </alike-collapse-item>            
-            <alike-collapse-item title="沉香救母" name="2">
+            <alike-collapse-item title="沉香救母">
                 <div>
                     <p>劈开华山，唯我独尊</p>
                     <p>劈开华山，唯我独尊</p>
@@ -131,7 +131,7 @@ export default {
     data(){
         return {
             collapseAccordion:true,
-            collapseActive:'0',
+            collapseActive:'1',
             navs:['JavaScript','UniApp','MiniProgram'],
             navActive:0,
             navAttrs:[],
@@ -151,8 +151,8 @@ export default {
         this.getNavAttrs();
     },
     methods:{
-        transformChangeBottomRight(detail){
-            console.log('transformChangeBottomRight',detail);
+        changeBottomRightTransform(detail){
+            console.log('changeBottomRightTransform',detail);
         },
         getNavAttrs(){
             for(let i = 0;i < this.$refs.navItemFinder.length;i++){
@@ -178,6 +178,9 @@ export default {
             this.previewUrls = urls;
             this.previewCurrent = current;
             this.$refs.previewFinder.open();
+        },
+        changeCollapse(detail){
+            console.log('changeCollapse：',detail);
         }
     }
 }

@@ -6,7 +6,20 @@
 
 <script>
 export default {
-    name:"alike-swiper-action"
+    name:"alike-swiper-action",
+    data(){
+        return {
+            childrens:[]
+        }
+    },
+    provide() {
+        return {
+            swiperAction:this
+        }
+    },
+    methods:{
+        
+    }
 }
 </script>
 

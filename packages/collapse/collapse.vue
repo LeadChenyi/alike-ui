@@ -20,7 +20,7 @@ export default {
             type:Boolean,
             default:false
         },
-        active:[String,Array]   // 不使用Number类型的原因是这两项数据类型都支持indexOf方法，更方便判断
+        active:[String,Number,Array]
     },
     provide(){
         return {
@@ -29,41 +29,28 @@ export default {
     },
     data(){
         return {
-            activeName:this.active
+            childrens:[]
         }
     },
-    created() {
-        this.$on('item-click', this.handleItemClick);
+    created(){
+        if(this.accordion && Array.isArray(this.active)){
+            console.error('当accordion为true即开启手风琴模式时，avtive属性值只能为String或Number类型。')
+        }
     },
     methods:{
-        handleItemClick(item){
+        itemChange(){
+            let activeItem = [];
+            this.childrens.forEach((vm, index) => {
+                if (vm.isOpen) {
+                    activeItem.push(vm.inName);
+                }
+            })
+
             if(this.accordion){
-                if(typeof this.activeName !== 'string'){
-                    console.error('当前不是手风琴模式，请将active属性值初始化字符串。');
-                    return false;
-                }
-
-                if(this.activeName != item.name){
-                    this.activeName = item.name;
-                }else{
-                    this.activeName = "";
-                }
+                this.$emit('change',activeItem.join(''));
             }else{
-                if(!Array.isArray(this.activeName)){
-                    console.error('当前为手风琴模式，请将active属性值初始化数组。');
-                    return false;
-                }
-
-                // 这里不推荐直接判断布尔值，因为数组是下标从0开始，而0即表示为false，或者用includes方法判断
-                if(this.activeName.indexOf(item.name) != -1){
-                    let index = this.activeName.indexOf(item.name);
-                    this.activeName.splice(index,1);
-                }else{
-                    this.activeName.push(item.name);
-                }
+                this.$emit('change',activeItem);
             }
-
-            this.$emit('change',{value:this.activeName});
         }
     }
 }
