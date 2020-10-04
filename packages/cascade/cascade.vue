@@ -6,7 +6,13 @@
         <transition name="alike-fade">
             <div ref="cascadePopupFinder" class="alike-cascade-popup alike-arrow-top" v-show="showPopup">
                 <div class="alike-cascade-options">
-                    <div class="alike-cascade-item" :class="['alike-cascade-item--'+type]" v-for="(item,index) in cascades" :key="index" @click.stop="itemClick(0,item.value,index)">{{item.label}}</div>
+                    <div class="alike-cascade-item" :class="['alike-cascade-item--'+type]" v-for="(item,index) in cascades" :key="index" @click.stop="itemClick(0,item,index)">{{item.label}}</div>
+                </div>
+                <div class="alike-cascade-options" v-show="f2.length">
+                    <div class="alike-cascade-item" :class="['alike-cascade-item--'+type]" v-for="(item,index) in f2" :key="index" @click.stop="itemClick(1,item,index)">{{item.label}}</div>
+                </div>                
+                <div class="alike-cascade-options" v-show="f3.length">
+                    <div class="alike-cascade-item" :class="['alike-cascade-item--'+type]" v-for="(item,index) in f3" :key="index" @click.stop="itemClick(2,item,index)">{{item.label}}</div>
                 </div>
             </div>
         </transition>
@@ -33,7 +39,10 @@ export default {
     data(){
         return {
             showPopup:false,
-            defaultValue:""
+            defaultValue:"",
+            f2:[],
+            f3:[],
+            inValue:[]
         }
     },
     mounted(){
@@ -74,10 +83,30 @@ export default {
                 }
             }
         },
-        itemClick(colum,value,index){
-            console.log(colum,value,index);
-            // 正常逻辑是点击最后一列时关闭联级选择器
-            this.showPopup = false;
+        itemClick(colum,item,index){
+            // console.log(colum,item,index);
+            
+            if(colum == 0 && this.cascades[index].children && this.cascades[index].children.length){
+                this.f2 = this.cascades[index].children;
+                this.f3 = [];
+                this.inValue = [];
+                this.inValue[this.inValue.length] = item.label;
+            }else if(colum == 1 && this.f2[index].children && this.f2[index].children.length){
+                this.f3 = this.f2[index].children;
+                this.inValue = [this.inValue[0]];
+                this.inValue[this.inValue.length] = item.label;
+            }else{
+                this.inValue[this.inValue.length] = item.label;
+                this.showPopup = false;
+                this.$emit('change',this.inValue);
+            }
+        }
+    },
+    watch:{
+        value(newVal,oldVal){
+            if(newVal != oldVal){
+                this.initDefaultValue();
+            }
         }
     }
 }

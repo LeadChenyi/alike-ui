@@ -1,7 +1,7 @@
 <template>
     <div class="form-page">
         <alike-divider>cascade 联级选择器</alike-divider>
-        <alike-cascade :value="cascadeValue" :cascades="cascades"></alike-cascade>
+        <alike-cascade :value="cascadeValue" :cascades="cascades" @change="changeCascade"></alike-cascade>
 
         <alike-divider>表单选择器</alike-divider>
         <alike-select v-model="selectValue" :readonly="selectReadonly" @change="changeSelectValue">
@@ -178,6 +178,10 @@ export default {
         }
     },
     methods:{
+        changeCascade(detail){
+            console.log('changeCascade：',detail);
+            this.cascadeValue = detail;
+        },
         changeSelectValue(detail){
             console.log('changeSelectValue：',detail);
         },

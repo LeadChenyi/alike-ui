@@ -106,6 +106,11 @@ const router = new VueRouter({
             path:'/canvas',
             name:'Canvas',
             component:() => import('@/pages/ui/canvas')
+        },        
+        {
+            path:'/wrapper',
+            name:'Wrapper',
+            component:() => import('@/pages/ui/wrapper')
         }, 
         {
             path:'/*',

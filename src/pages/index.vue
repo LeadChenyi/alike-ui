@@ -30,6 +30,7 @@
         <alike-divider>UI - 自定义组件</alike-divider>
         <div class="global-wrapper">
             <alike-button class="mr-10" @click="linkUrls('Basic')">Basic 基础</alike-button>
+            <alike-button class="mr-10" @click="linkUrls('Wrapper')">Wrapper 包装</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Button')">Button 按钮</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Form')">Form 表单</alike-button>
             <alike-button class="mr-10" @click="linkUrls('Scroll')">Scroll 滚动容器</alike-button>
