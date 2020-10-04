@@ -18,13 +18,23 @@
         </alike-swiper-action>
 
         <alike-divider>menu 菜单</alike-divider>
-        <alike-menu></alike-menu>
+        <alike-menu>
+            <alike-menu-item title="导航1">
+                <alike-menu-item title="导航1-1">
+                    <alike-menu-item>导航1-1-1</alike-menu-item>
+                    <alike-menu-item>导航1-1-2</alike-menu-item>
+                </alike-menu-item>
+                <alike-menu-item>导航1-2</alike-menu-item>
+            </alike-menu-item>
+            <alike-menu-item>导航2</alike-menu-item>
+            <alike-menu-item>导航3</alike-menu-item>
+        </alike-menu>
 
         <alike-divider>count 计数</alike-divider>
         <alike-count></alike-count>
 
         <alike-divider>Collapse 静态布局</alike-divider>
-        <alike-collapse :active="[0,2]" :accordion="collapseAccordion" @change="changeCollapse">
+        <alike-collapse :active="0" :accordion="collapseAccordion" @change="changeCollapse">
             <alike-collapse-item title="哪吒闹海">
                 <div>
                     <p>是他就是他我们的朋友小哪吒</p>
@@ -103,6 +113,7 @@ import alikeTransformView from '../../../packages/transform-view/transform-view'
 import alikeSwiperAction from '../../../packages/swiper-action/swiper-action'
 import alikeSwiperActionItem from '../../../packages/swiper-action/swiper-action-item'
 import alikeMenu from '../../../packages/menu/menu'
+import alikeMenuItem from '../../../packages/menu/menu-item'
 import alikeCollapse from '../../../packages/collapse/collapse'
 import alikeCollapseItem from '../../../packages/collapse/collapse-item'
 import alikePopup from '../../../packages/popup/popup'
@@ -119,6 +130,7 @@ export default {
         alikeSwiperAction,
         alikeSwiperActionItem,
         alikeMenu,
+        alikeMenuItem,
         alikeCollapse,
         alikeCollapseItem,
         alikePopup,
