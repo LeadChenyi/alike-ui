@@ -32,7 +32,6 @@ Vue.component(alikeSticky.name,alikeSticky);
 
 Vue.config.productionTip = false
 
-
 new Vue({
     store,
     router,

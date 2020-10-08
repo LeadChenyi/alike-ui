@@ -38,6 +38,21 @@ const router = new VueRouter({
             component:() => import('@/pages/render')
         },        
         {
+            path:'/jsx',
+            name:'JSX',
+            component:() => import('@/pages/jsx')
+        },        
+        {
+            path:'/tree',
+            name:'Tree',
+            component:() => import('@/pages/tree')
+        },         
+        {
+            path:'/reg',
+            name:'Reg',
+            component:() => import('@/pages/reg')
+        },        
+        {
             path:'/hover',
             name:'Hover',
             component:() => import('@/pages/effect/hover')
@@ -123,9 +138,9 @@ const router = new VueRouter({
 // 全局后置导航栏（优先级最高）
 router.beforeEach((to, from, next) => {
     console.log('beforeEach：',to,from)
-
+    // 判断当前路由是否需要用户授权登录
     if(to.matched.some(record => record.meta.requiresAuth)){
-        // 判断用户是否已经登录，未登录重定向跳转至登录页
+        // 用户未登录且当前不在登录页面，则重定向跳转至登录页
         if(!localStorage.getItem('token') && to.name != 'Login'){
             next({
                 path:'/login',
@@ -135,6 +150,7 @@ router.beforeEach((to, from, next) => {
             next();
         }
     }else{
+        // 用户已登录且将前往登录页，则强制返回到上一个页面。如果没有路由历史记录，则返回到首页。
         if(localStorage.getItem('token') && to.name == 'Login'){
             if(from.name){
                 next({name:from.name});
