@@ -18,7 +18,7 @@ module.exports = {
         }
     },
     css: {
-        loaderOptions: {// 向预处理器Loader传递选项，共享Sass/Less的全局变量
+        loaderOptions: {// 向预处理器Loader传递选项，共享Sass/Scss全局变量
             scss: {
                 additionalData: `@import '@/assets/css/variables.scss';`
             }
