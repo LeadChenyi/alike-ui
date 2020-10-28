@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <alike-preview ref="previewFinder" :urls="previewUrls" :current="previewCurrent" :mask-close="true"></alike-preview>
+        <!-- <alike-preview ref="previewFinder" :urls="previewUrls" :current="previewCurrent" :mask-close="true"></alike-preview> -->
 
         <alike-line type="white" height="1000px"></alike-line>
 
@@ -60,7 +60,7 @@ import alikePopup from '../../../packages/popup/popup'
 import alikeDropdown from '../../../packages/dropdown/dropdown'
 import alikeDropdownMenu from '../../../packages/dropdown/dropdown-menu'
 import alikeDropdownItem from '../../../packages/dropdown/dropdown-item'
-import alikePreview from '../../../packages/preview/preview'
+import Previewer from '../../../packages/preview/previewer.js'
 import alikeCount from '../../../packages/count/count'
 
 export default {
@@ -71,7 +71,6 @@ export default {
         alikeDropdown,
         alikeDropdownMenu,
         alikeDropdownItem,
-        alikePreview,
         alikeCount
     },
     data(){
@@ -118,10 +117,16 @@ export default {
             console.log('changeDropdown',detail);
         },
         chooseImage(urls,current){
-            console.log('chooseImage：',urls,current);
+            // console.log('chooseImage：',urls,current);
             this.previewUrls = urls;
             this.previewCurrent = current;
-            this.$refs.previewFinder.open();
+            // this.$refs.previewFinder.open();
+
+            Previewer({
+                urls:this.previewUrls,
+                current:this.previewCurrent
+            })
+
         }
     }
 }
