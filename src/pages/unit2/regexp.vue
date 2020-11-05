@@ -1,6 +1,6 @@
 <template>
     <div class="reg-page">
-        
+        正则表达式
     </div>
 </template>
 
@@ -11,7 +11,7 @@
  * RegExp：https://www.runoob.com/jsref/jsref-obj-regexp.html
  * 在线测试：http://c.runoob.com/front-end/854
  */
-import Validate from '@/utils/validate'
+import Validate from '@/utils/validate.js'
 export default {
     name:"Reg",
     data(){

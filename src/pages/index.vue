@@ -21,6 +21,7 @@
             <alike-button type="primary" class="mr-10" @click="linkUrls('Regexp')">正则表达式</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('Mouse')">鼠标事件</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('Drag')">拖动事件</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('Class')">类</alike-button>
         </div>
 
         <alike-divider>unit3 - vue进阶</alike-divider>
