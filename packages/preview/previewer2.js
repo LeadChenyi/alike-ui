@@ -1,13 +1,10 @@
 import Vue from 'vue';
+import PreviewTemp from './previewer.vue';
 
-/*
-    Vue.extend扩展方式不能使用template
-    1、无法存放组件自带样式
-    2、无法有效控制组件插入的位置
-*/
 const previewer = (options)=>{
-    let MyPreview =  Vue.extend({
-        template:'<p>这里必须是字符串模板，而不只能存放组件</p>',
+    const Constructor =  Vue.extend(PreviewTemp)
+
+    new Constructor({
         data(){
             return {
                 urls:options.urls || [],
@@ -18,7 +15,7 @@ const previewer = (options)=>{
             }
         },
         mounted(){
-            console.log('Vue.extend mounted')
+            console.log('previewer2')
             this.open();
         },
         methods:{
@@ -43,11 +40,11 @@ const previewer = (options)=>{
             open(){
                 this.getCurrent();
                 this.aniShow = true;
-                // document.body.appendChild(this.$el);
+                document.body.appendChild(this.$el);
             },
             close(){
                 this.aniShow = false;
-                // document.body.removeChild(this.$el);
+                document.body.removeChild(this.$el);
             },
             handleMask(){
                 if(!this.maskClose){
@@ -56,10 +53,8 @@ const previewer = (options)=>{
                 this.close();
             }
         }
-    })
 
-    new MyPreview().$mount('body');
+        // 挂载到DOM上
+    }).$mount();
 }
 export default previewer;
-
-

@@ -11,26 +11,26 @@
  * RegExp：https://www.runoob.com/jsref/jsref-obj-regexp.html
  * 在线测试：http://c.runoob.com/front-end/854
  */
-import Validate from '@/utils/validate.js'
+import Validator from '@/utils/validator.js'
 export default {
     name:"Reg",
     data(){
         return {
             username:"愁云楚驿长",
             password:"a123456",
-            validate:null,
+            validator:null,
             test1:"lala不正确",
             test2:"0000false",
             test3:"0000false"
         }
     },
     mounted(){
-        this.validateUsername();
-        this.validatePassword();
-        this.initValidate();
+        this.validatorUsername();
+        this.validatorPassword();
+        this.initvalidator();
     },
     methods:{
-        validateUsername(){
+        validatorUsername(){
             // RegExp的对象方法
             let r1 = /云/.exec(this.username);          // 返回有关的数组信息（同于String的对象match方法）
             let r2 = /\w+/.test(this.username);         // 返回Boolean
@@ -52,7 +52,7 @@ export default {
             console.log('s4',s4);
             console.log('-----分界线-----');
         },
-        validatePassword(){
+        validatorPassword(){
             // a-zA-Z0-9_ 等同于 \w
             let p1 = /^[a-zA-Z0-9_]{6,40}$/.test(this.password);
             let p2 = /^[\w]{6,40}$/.test(this.password);
@@ -60,12 +60,12 @@ export default {
             console.log('p2',p2)
             console.log('-----分界线-----');
         },
-        initValidate(){
-            this.validate = new Validate();
-            console.log(this.validate.chinese(this.test1));
-            console.log(this.validate.chinese(this.test2));
-            console.log(this.validate.password(this.test3));
-            console.log(this.validate.confirm(this.test2,this.test3));
+        initvalidator(){
+            this.validator = new Validator();
+            console.log(this.validator.chinese(this.test1));
+            console.log(this.validator.chinese(this.test2));
+            console.log(this.validator.password(this.test3));
+            console.log(this.validator.confirm(this.test2,this.test3));
             console.log('-----分界线-----');
         }
     }

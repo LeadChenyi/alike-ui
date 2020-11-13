@@ -1,7 +1,8 @@
 export default class Father {
     constructor(){
-        this.nameFunction = "父类"
         console.log('Father Class Ready');
+        
+        this.functionName = "父类";
     }
 
     comment(){

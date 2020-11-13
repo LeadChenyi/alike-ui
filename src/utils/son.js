@@ -1,20 +1,21 @@
 
 import Father from './father.js'
 
-export default class Children extends Father{
+export default class Son extends Father{
 
     a = "公共属性";
     static b = "静态属性";
 
     constructor(){
         super();
-
-        console.log('Children Class Ready');
+        console.log('Son Class Ready');
+        
+        this.functionName = "子类";
         this.c = "实例属性";
     }
 
     comment(){
-        console.log('Children Class Comment');
+        console.log('Son Class Comment');
     }
 
     getPublic(){

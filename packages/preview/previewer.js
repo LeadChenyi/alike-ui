@@ -58,5 +58,3 @@ const previewer = (options)=>{
     // console.log('vm',vm.$el)
 }
 export default previewer;
-
-

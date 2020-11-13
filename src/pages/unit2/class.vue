@@ -5,28 +5,28 @@
 </template>
 
 <script>
-import Children from '@/utils/children.js'
+import Son from '@/utils/son.js'
 export default {
     name:"Class",
     data(){
         return {
-            children:null
+            son:null
         }
     },
     mounted(){
-        this.initChildren();
+        this.initSon();
     },
     methods:{
-        initChildren(){
-            this.children =  new Children();
-            this.children.comment();
+        initSon(){
+            this.son =  new Son();
+            this.son.comment();
             console.log('-------class method-------');
-            this.children.getPublic();
-            Children.getPrivate();
+            this.son.getPublic();
+            Son.getPrivate();
             console.log('-------class data-------');
-            console.log(this.children.a);
-            console.log(Children.b);
-            console.log(this.children.c);
+            console.log(this.son.a);
+            console.log(Son.b);
+            console.log(this.son.c);
         }
     }
 }

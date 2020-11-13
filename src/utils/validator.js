@@ -1,8 +1,6 @@
-export default class Validate {
+export default class Validator {// 验证器
     constructor(){
-        // { required: true, message: '请输入活动名称', trigger: 'blur' },
-        // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        console.log('validate ready')
+        console.log('验证器：Validator ready');
     }
 
     chinese(str){
