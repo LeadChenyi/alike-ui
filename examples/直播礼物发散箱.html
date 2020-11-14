@@ -3,8 +3,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>直播礼物发散箱</title>
+    <style>
+        *{
+            margin:0;
+        }
+
+        #app{
+            width:300px;
+            height:500px;
+            position:relative;
+            overflow:hidden;
+            background-color:rgba(198,216,250,.8);
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="app"></div>
+
+    <script>
+        function Gift(){
+            this.initProps();
+        }
+
+        Gift.prototype = {
+            constrcutor:Gift,
+            initProps:function(options = {}){
+                this.el = options.el || "#app";
+                this.left = options.left || 100;
+                this.top = options.top || 500;
+                this.width = options.width || 20;
+                this.height = options.height || 20;
+                this.type = this.getImageType();
+                this.translateY = this.getRange(1,3);
+            },
+            create:function(){
+                let parentEle = document.querySelector(this.el);
+                let imgEle = document.createElement("img");
+
+                imgEle.src = `./image/live/${this.type}.png`;
+                imgEle.style.position = "absolute";
+                imgEle.style.left = this.left + "px";
+                imgEle.style.top = this.top + "px";
+                imgEle.style.width = this.width + "px";
+                imgEle.style.height = this.height + "px";
+
+                parentEle.appendChild(imgEle);
+
+                return imgEle;
+            },
+            update:function(moveY){
+                this.top -= this.translateY;
+
+                if(this.top <= moveY){
+                    this.destroy(gifts);
+                }
+            },
+            destroy:function(box){
+                let index = 0;
+                for(let i = 0;i < box.length;i++){
+                    if(box[i] == this){
+                        index = i;
+                    }
+                }
+                box.splice(index,1);
+            },
+            getImageType:function(){
+                const types = ['love','star','bubble'];
+                let index = Math.floor(Math.random() * types.length);
+                return types[index];
+            },
+            getRange(min,max){
+                return Math.floor(Math.random() * (max - min + 1) ) + min;
+            }
+        }
+
+        const gifts = [];
+        const appEle = document.querySelector("#app");
+
+        // 一次性完成动画
+        function cssGift(){
+            // 创建元素
+            let gift = new Gift();
+            let ele = gift.create();
+
+            // 移动元素
+            setTimeout(function(){
+                ele.style.transition = "top 1.5s linear,left 1.5s linear";
+                ele.style.top = 300 + 'px';
+            },60);
+
+            // 这里移除元素和生产元素同是异步调用，且同作用域所以可以避免，否则会被下一次的生产元素覆盖
+            
+            // 移除元素
+            setTimeout(function(){
+                ele.remove();
+            },1600)
+
+            // 生产元素
+            setTimeout(function(){
+                window.requestAnimationFrame(cssGift);
+            },300)
+        }
+        
+        window.requestAnimationFrame(cssGift);
+
+
+
+        /*  逐帧完成动画
+        function createGift(){
+            let gift = new Gift();
+            gifts.push(gift);
+
+            setTimeout(function(){
+                window.requestAnimationFrame(createGift);
+            },500)
+        }
+
+        window.requestAnimationFrame(createGift);
+
+        function aniGift(){
+            for(let i = 0;i < appEle.children.length;i++){
+                appEle.children[i].remove();
+            }
+
+            for(let i = 0;i < gifts.length;i++){
+                gifts[i].create();
+                gifts[i].update(300);
+            }
+
+            console.log('剩余礼物：',gifts);
+            window.requestAnimationFrame(aniGift);
+        }
+        
+        window.requestAnimationFrame(aniGift);
+        */
+
+
+
+        /* 错误示例：同步会影响异步的最终执行结果
+        function failDemo(){
+            let index = 0;
+            let gift = new Gift();
+            gifts.push(gift);
+            gift.create();
+
+            for(let i = 0;i < gifts.length;i++){
+                if(gifts[i] == gift){
+                    index = i;
+                }
+            }
+
+            setTimeout(function(){
+                appEle.children[index].style.transition = "top 1.5s linear,left 1.5s linear";
+                appEle.children[index].style.top = 200 + 'px';
+            },60);
+
+          
+            setTimeout(function(){
+                appEle.children[index].remove();
+                gifts.splice(index,1);
+            },1000)
+
+            // 生产元素
+            setTimeout(function(){
+                window.requestAnimationFrame(failDemo);
+            },300)
+        }
+
+        window.requestAnimationFrame(failDemo);
+        */
+    </script>
 </body>
 </html>
