@@ -33,5 +33,10 @@ export default [// alike - 自定义组件
         path:'/wrapper',
         name:'Wrapper',
         component:() => import('@/pages/alike/wrapper')
+    },        
+    {
+        path:'/video',
+        name:'Video',
+        component:() => import('@/pages/alike/video')
     }
 ]

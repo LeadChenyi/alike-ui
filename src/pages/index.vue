@@ -54,6 +54,7 @@
             <alike-button type="primary" class="mr-10" @click="linkUrls('Scroll')">Scroll 滚动容器</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('Carousel')">Carousel 轮播图</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('Canvas')">Canvas 画布绘制</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('Video')">Video 播放器</alike-button>
         </div>
     </div>
 </template>
