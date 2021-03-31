@@ -9,10 +9,10 @@
             </video>
             <div class="video-player-controls">
                 <!-- 视频进度条 -->
-                <div class="video-controls-b">
+                <div ref="queryProgress" class="video-controls-b" @click="changeProgress">
                     <!-- <div class="loading-bar" style="width:80%"></div> -->
                     <div class="progress-bar" :style="{width:init.currentStyleVal}"></div>
-                    <div class="progress-ball-wrap yiku-flex-c" :style="{left:init.currentStyleVal}">
+                    <div ref="queryBall" class="progress-ball-wrap yiku-flex-c" :style="{left:init.currentStyleVal}" @mousedown.stop="mousedownBall"  @click.stop="">
                         <div class="progress-ball"></div>
                     </div>
                 </div>
@@ -63,8 +63,8 @@
         data(){
             return {
                 video:{
-                    url:"https://f.video.weibocdn.com/qGSDqipzlx07J2TZB99m01041200g5XI0E010.mp4?label=mp4_ld&template=640x360.25.0&trans_finger=6006a648d0db83b7d9951b3cee381a9c&ori=0&ps=1BVp4ysnknHVZu&Expires=1617120489&ssig=7M6ndumMlf&KID=unistore,video",
-                    url2:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-43c20c00-3790-42e0-9745-d92b13b8e402/1eed9978-4260-43dc-83c2-c093246d82db.mp4",
+                    url2:"https://f.video.weibocdn.com/qGSDqipzlx07J2TZB99m01041200g5XI0E010.mp4?label=mp4_ld&template=640x360.25.0&trans_finger=6006a648d0db83b7d9951b3cee381a9c&ori=0&ps=1BVp4ysnknHVZu&Expires=1617120489&ssig=7M6ndumMlf&KID=unistore,video",
+                    url:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-43c20c00-3790-42e0-9745-d92b13b8e402/1eed9978-4260-43dc-83c2-c093246d82db.mp4",
                     title:"小爷"
                 },
                 init:{
@@ -112,6 +112,51 @@
             }
         },
         methods:{
+            mousedownBall(e){
+                console.log('mousedownBall',e);
+                // 目标物球
+                const elRect = this.$refs.queryBall.getBoundingClientRect();
+                // 参照物是线段
+                const {width,left} = this.$refs.queryProgress.getBoundingClientRect();
+
+                // 点击目标物球的处理
+                let isClickUp = true;
+                let upX = e.clientX - left;
+
+                // 移动目标物的处理
+                let downX = e.clientX - elRect.left;
+                let moveX = downX;
+
+                document.onmousemove = (ev)=>{
+                    isClickUp = false;
+                    moveX = ev.clientX - left - downX;
+                    if(moveX <= 0){
+                        moveX = 0;
+                    }else if(moveX >= width){
+                        moveX = width;
+                    }         
+                    
+                    let current = moveX / width * this.init.duration;
+                    this.init.currentStyleVal = this.formatProgress(current,this.init.duration);
+                    this.setCurrentTime(current);
+                }
+
+                document.onmouseup = ()=>{
+                    if(isClickUp){
+                        let current = upX / width * this.init.duration;
+                        this.init.currentStyleVal = this.formatProgress(current,this.init.duration);
+                        this.setCurrentTime(current);
+                    }
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            },
+            changeProgress(e){
+                console.log('changeProgress');
+                const {width} = this.$refs.queryProgress.getBoundingClientRect();
+                let current = e.offsetX / width * this.init.duration;
+                this.setCurrentTime(current);
+            },
             toggleVideo(){
                 this.init.isPlay = !this.init.isPlay;
                 if(this.init.isPlay){
@@ -159,7 +204,7 @@
                 return h+':'+m+':'+s
             },
             setCurrentTime(value){
-                // this.$refs.queryVideo.currentTime = value;
+                this.$refs.queryVideo.currentTime = value;
             },
             setBackRate(e){
                 // console.log('setBackRate',e,this.$refs.queryBackRate.value);
