@@ -1,12 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import unit1Router from './unit1'
-import unit2Router from './unit2'
-import unit3Router from './unit3'
-import exampleRouter from './example'
-import libraryRouter from './library'
-import editorRouter from './editor'
-import alikeRouter from './alike'
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location){
@@ -14,28 +7,26 @@ VueRouter.prototype.push = function push(location){
 }
 Vue.use(VueRouter);
 
+let routes = [
+    {
+        path:'/',
+        name:'Index',
+        component:() => import('@/pages/index')
+    }   
+];
+const files = require.context('./modules',false,/\.js$/);
+files.keys().forEach((item)=>{
+    routes = [...routes,...files(item).default];
+});
+routes.push({
+    path:'/*',
+    redirect:{name:'Index'}
+});
+
 const router = new VueRouter({
     mode: 'history',
-    routes:[
-        {
-            path:'/',
-            name:'Index',
-            component:() => import('@/pages/index')
-        },
-        ...unit1Router,                                                            
-        ...unit2Router,                                                            
-        ...unit3Router,                                                            
-        ...exampleRouter,                                                            
-        ...libraryRouter,                                                            
-        ...editorRouter,                                                            
-        ...alikeRouter,                                                            
-        {
-            path:'/*',
-            redirect:{name:'Index'}
-        }
-    ]
+    routes
 })
-
 
 // 全局后置导航栏（优先级最高）
 router.beforeEach((to, from, next) => {

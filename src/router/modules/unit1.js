@@ -28,5 +28,15 @@ export default [// unit1 - 样式效果
         path:'/barrage',
         name:'Barrage',
         component:() => import('@/pages/unit1/barrage')
-    },
+    },    
+    {
+        path:'/scrollbehavior',
+        name:'ScrollBehavior',
+        component:() => import('@/pages/unit1/scrollbehavior')
+    },    
+    {
+        path:'/maskback',
+        name:'MaskBack',
+        component:() => import('@/pages/unit1/maskback')
+    }
 ]
