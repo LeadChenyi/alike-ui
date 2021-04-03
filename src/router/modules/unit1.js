@@ -30,9 +30,9 @@ export default [// unit1 - 样式效果
         component:() => import('@/pages/unit1/barrage')
     },    
     {
-        path:'/scrollbehavior',
-        name:'ScrollBehavior',
-        component:() => import('@/pages/unit1/scrollbehavior')
+        path:'/scrollup',
+        name:'ScrollUp',
+        component:() => import('@/pages/unit1/scrollup')
     },    
     {
         path:'/maskback',

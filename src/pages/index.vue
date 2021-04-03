@@ -13,7 +13,7 @@
             <alike-button type="primary" class="mr-10" @click="linkUrls('Animation')">Animation</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('AnimationUp')">Animation Up</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('Barrage')">Barrage</alike-button>
-            <alike-button type="primary" class="mr-10" @click="linkUrls('ScrollBehavior')">ScrollBehavior</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('ScrollUp')">Scroll Up Demo</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('MaskBack')">MaskBack</alike-button>
         </div>
 

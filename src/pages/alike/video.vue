@@ -1,7 +1,7 @@
 <template>
     <div class="video-view">
         <div ref="queryVideoPlayer" class="video-player">
-            <video ref="queryVideo" class="video-player-area" :controls="false" :autoplay="true" :muted="init.isMuted" @canplay="canplayVideo" @timeupdate="timeupdateVideo" @playing="playingVideo" @waiting="waitingVideo" @ended="endedVideo" @error="errorVideo" @progress="progressVideo">
+            <video ref="queryVideo" class="video-player-area" :controls="false" :autoplay="true" :muted="init.isMuted" :poster="video.poster" @canplay="canplayVideo" @timeupdate="timeupdateVideo" @playing="playingVideo" @waiting="waitingVideo" @ended="endedVideo" @error="errorVideo" @progress="progressVideo">
                 <source :src="video.url" type="video/mp4">
                 <source :src="video.url" type="video/webm">
                 <source :src="video.url" type="video/ogg">
@@ -65,7 +65,8 @@
                 video:{
                     url2:"https://f.video.weibocdn.com/qGSDqipzlx07J2TZB99m01041200g5XI0E010.mp4?label=mp4_ld&template=640x360.25.0&trans_finger=6006a648d0db83b7d9951b3cee381a9c&ori=0&ps=1BVp4ysnknHVZu&Expires=1617120489&ssig=7M6ndumMlf&KID=unistore,video",
                     url:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-43c20c00-3790-42e0-9745-d92b13b8e402/1eed9978-4260-43dc-83c2-c093246d82db.mp4",
-                    title:"小爷"
+                    title:"小爷",
+                    poster:""
                 },
                 init:{
                     isPlay:true,        // 默认自动静态播放
@@ -222,7 +223,13 @@
             },
             toggleMuted(){
                 this.init.isMuted = !this.init.isMuted;
-            },            
+            },    
+            openPictrue(){// 打开画中画（小窗口播放功能其就是画中画，通过一个变量来控制）
+                this.$refs.queryVideoPlayer.requestPictureInPicture();
+            },
+            closePictrue(){// 退出画中画
+                document.exitPictureInPicture();
+            },  
             openFullScreen(){
                 this.init.isFullScreen = true;
                 this.openFS(this.$refs.queryVideoPlayer);
@@ -252,6 +259,25 @@
                 } else if (document.msExitFullscreen) { /* IE/Edge */
                     document.msExitFullscreen();
                 }
+            },
+            getVideoPoster(url){// 获取视频的第一帧作为封面图
+                return new Promise((resolve,reject)=>{
+                    let videoEle = document.createElement("video");
+                    videoEle.setAttribute('crossOrigin', 'anonymous');// 处理跨域
+                    videoEle.setAttribute('src', url);
+                    videoEle.setAttribute('width', 400);
+                    videoEle.setAttribute('height', 240);
+                    videoEle.addEventListener('loadeddata', function () {
+                        let canvas = document.createElement("canvas");
+                        let width = videoEle.width;
+                        let height = videoEle.height;
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.getContext("2d").drawImage(videoEle,0,0,width,height);
+                        let posterURL = canvas.toDataURL('image/jpeg');
+                        resolve(posterURL);
+                    });
+                })
             }
         }
     }
