@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    name:"MaskBack"
+    name:"MaskCase"
 }
 </script>
 

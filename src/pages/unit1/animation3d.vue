@@ -26,7 +26,7 @@
 
 <script>
 export default {
-    name:"AnimationUp",
+    name:"Animation3d",
     data(){
         return {
             brandActive:false,

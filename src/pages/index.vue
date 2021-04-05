@@ -7,14 +7,14 @@
 
         <alike-divider>unit1 - 样式效果</alike-divider>
         <div class="global-wrapper">
-            <alike-button type="primary" class="mr-10" @click="linkUrls('Hover')">Hover</alike-button>
-            <alike-button type="primary" class="mr-10" @click="linkUrls('HoverUp')">Hover Up</alike-button>
-            <alike-button type="primary" class="mr-10" @click="linkUrls('Atransition')">Transition</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('HoverCase')">Hover</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('ClickCase')">Click</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('TransitionCase')">Transition</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('Animation')">Animation</alike-button>
-            <alike-button type="primary" class="mr-10" @click="linkUrls('AnimationUp')">Animation Up</alike-button>
-            <alike-button type="primary" class="mr-10" @click="linkUrls('Barrage')">Barrage</alike-button>
-            <alike-button type="primary" class="mr-10" @click="linkUrls('ScrollUp')">Scroll Up Demo</alike-button>
-            <alike-button type="primary" class="mr-10" @click="linkUrls('MaskBack')">MaskBack</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('Animation3d')">Animation 3D</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('Notice')">Notice</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('ScrollCase')">Scroll</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('MaskCase')">Mask</alike-button>
         </div>
 
         <alike-divider>unit2 - 脚本效果</alike-divider>

@@ -47,7 +47,7 @@
 
 <script>
 export default {
-    name:"Hover"
+    name:"HoverCase"
 }
 </script>
 

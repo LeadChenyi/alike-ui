@@ -16,7 +16,7 @@
 
         <alike-divider>滑块验证</alike-divider>
         <alike-slider-verify @change="changeSliderVerify" @finish="finishSliderVerify"></alike-slider-verify>
-
+        
         <alike-line type="white" height="1000px"></alike-line>
   </div>
 </template>

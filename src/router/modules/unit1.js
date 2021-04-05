@@ -1,18 +1,18 @@
 export default [// unit1 - 样式效果
     {
-        path:'/hover',
-        name:'Hover',
-        component:() => import('@/pages/unit1/hover')
+        path:'/hovercase',
+        name:'HoverCase',
+        component:() => import('@/pages/unit1/hovercase')
     },          
     {
-        path:'/hoverup',
-        name:'HoverUp',
-        component:() => import('@/pages/unit1/hoverup')
+        path:'/clickcase',
+        name:'ClickCase',
+        component:() => import('@/pages/unit1/clickcase')
     },  
     {
-        path:'/atransition',
-        name:'Atransition',
-        component:() => import('@/pages/unit1/atransition')
+        path:'/transitioncase',
+        name:'TransitionCase',
+        component:() => import('@/pages/unit1/transitioncase')
     },      
     {
         path:'/animation',
@@ -20,23 +20,28 @@ export default [// unit1 - 样式效果
         component:() => import('@/pages/unit1/animation')
     },                
     {
-        path:'/animationup',
-        name:'AnimationUp',
-        component:() => import('@/pages/unit1/animationup')
+        path:'/animation3d',
+        name:'Animation3d',
+        component:() => import('@/pages/unit1/animation3d')
     },        
     {
         path:'/barrage',
         name:'Barrage',
         component:() => import('@/pages/unit1/barrage')
+    },     
+    {
+        path:'/notice',
+        name:'Notice',
+        component:() => import('@/pages/unit1/notice')
     },    
     {
-        path:'/scrollup',
-        name:'ScrollUp',
-        component:() => import('@/pages/unit1/scrollup')
+        path:'/scrollcase',
+        name:'ScrollCase',
+        component:() => import('@/pages/unit1/scrollcase')
     },    
     {
-        path:'/maskback',
-        name:'MaskBack',
-        component:() => import('@/pages/unit1/maskback')
+        path:'/maskcase',
+        name:'MaskCase',
+        component:() => import('@/pages/unit1/maskcase')
     }
 ]

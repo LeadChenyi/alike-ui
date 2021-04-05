@@ -1,5 +1,9 @@
 <template>
     <div class="animation-page">
+        <alike-divider>again 多段动画</alike-divider>
+        <div class="transform-view"></div>
+        <div>在未设定延迟动画情况下：设置多个animation等同于在一个keyframes中设置多个属性</div>
+        <div>如果多个animation都设置无限循环，那么前者animation将全部失效</div>
         <alike-divider>round 环绕动画</alike-divider>
         <div class="rect-view"></div>
         <div class="circle-view"></div>
@@ -27,6 +31,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .transform-view{
+        width:100px;
+        height:100px;
+        margin:0 auto;
+        border-radius:5px;
+        background-color:#f7563a;
+        // animation:aniLove 1s cubic-bezier(.22,.18,.72,.88) 0s infinite;
+        animation:aniTwist 1s linear 0s,aniLove 1s cubic-bezier(.22,.18,.72,.88) 1s infinite;
+    }
+
+
     .frame-image__item{
         display:inline-block;margin-right:20px;
     }
@@ -192,4 +207,27 @@ export default {
             transform:scale(1) rotate(360deg);
         }
 	} 
+
+    @keyframes aniLove {
+        0%{
+            transform:scale(0.5);
+        }
+        50% {
+            transform:scale(1);
+        }
+        100% {
+            transform:scale(0.5);
+        }
+	}    
+    @keyframes aniTwist {
+        0%{
+            transform:skewX(0deg);
+        }
+        50% {
+            transform:skewX(180deg);
+        }
+        100% {
+            transform:skewX(0deg);
+        }
+	}
 </style>
