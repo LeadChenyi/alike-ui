@@ -3,6 +3,10 @@
         <div class="backdrop backdrop-after"></div>
         <div class="backdrop backdrop-mask"></div>
         <div class="backdrop backdrop-ani"></div>
+
+        <alike-divider>遮罩层镂空</alike-divider>
+        <!-- <div class="mask-shadow"></div> -->
+        <!-- <div class="mask-border"></div> -->
     </div>
 </template>
 
@@ -13,6 +17,35 @@ export default {
 </script>
 
 <style scoped>
+    .mask-shadow{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        -webkit-transform:translate(-50%,-50%);
+        z-index:2;
+        
+        width:300px;
+        height:300px;
+        border-radius:5px;
+        border:1px dashed #ff0000;
+        box-shadow: 0px 0px 0px 1000px rgba(0,0,0,.5);
+        box-sizing: border-box;
+    }
+    .mask-border{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        -webkit-transform:translate(-50%,-50%);
+        z-index:2;
+        
+        width: 300px;
+        height: 300px;
+        border-radius:5px;
+        border: 1000px solid rgba(0,0,0,0.5);
+    }
+
     .backdrop{
         position:relative;
         width:640px;
