@@ -21,12 +21,26 @@
             <div class="frame-image__item frame-image__item-v3"></div>
             <div class="frame-image__item frame-image__item-v4"></div>
         </div>
+
+        <alike-divider>loop 水果机</alike-divider>
+        <div class="fruit-view">
+            <div class="fruit-scroll" style="transform:translateY(0px)">
+                <div class="fruit-item" :class="['fruit-item_s'+item]" v-for="(item,index) in fruits" :key="index">
+                    <img :src="require(`@/assets/img/fruit/fruit_00${item}.png`)">
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
-    name:"Animation"
+    name:"Animation",
+    data(){
+        return {
+            fruits:[1,2,3,4,5,6,7,1]
+        }
+    }
 }
 </script>
 
@@ -230,4 +244,37 @@ export default {
             transform:skewX(0deg);
         }
 	}
+
+    .fruit-view{
+        position:relative;
+        width:200px;
+        height:200px;
+        overflow:hidden;
+    }
+    .fruit-scroll{
+        position:absolute;
+        top:0;
+        left:0;
+        width:200px;
+        animation:aniHu 5s linear infinite;
+    }
+    .fruit-item{
+        width:200px;
+        height:200px;
+        box-sizing:border-box;
+    }
+    .fruit-item img{
+        width:100%;
+        height:100%;
+        vertical-align:bottom;
+    }
+    @keyframes aniHu {
+        0% {
+            transform:translateY(0px);
+        }
+
+        100% {
+            transform:translateY(-1400px);
+        }
+    }
 </style>
