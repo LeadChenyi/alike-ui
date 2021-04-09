@@ -43,5 +43,10 @@ export default [// unit1 - 样式效果
         path:'/maskcase',
         name:'MaskCase',
         component:() => import('@/pages/unit1/maskcase')
+    },    
+    {
+        path:'/inputcase',
+        name:'InputCase',
+        component:() => import('@/pages/unit1/inputcase')
     }
 ]

@@ -15,6 +15,7 @@
             <alike-button type="primary" class="mr-10" @click="linkUrls('Notice')">Notice</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('ScrollCase')">Scroll</alike-button>
             <alike-button type="primary" class="mr-10" @click="linkUrls('MaskCase')">Mask</alike-button>
+            <alike-button type="primary" class="mr-10" @click="linkUrls('InputCase')">Input Selection Cursor</alike-button>
         </div>
 
         <alike-divider>unit2 - 脚本效果</alike-divider>
