@@ -1,6 +1,6 @@
 <template>
     <div class="alike-input">
-        <input class="alike-input__inner" :type="elType" :value="value" :readonly="readonly" :placeholder="placeholder" @input="$emit('change',$event.target.value)" />
+        <input class="alike-input__inner" :type="elType" :value="value" :readonly="readonly" :placeholder="placeholder" @input="$emit('input',$event.target.value)" />
         <div class="alike-input__password" @click="toggleType" v-if="showPassword">
             <alike-icon :type="elType == 'password' ? 'like-fill':'like' " color="#999999"></alike-icon>
         </div>
@@ -16,7 +16,7 @@
 * @property value {String,Number} 表单的值（默认值：text，可选值参考原生input标签）
 * @property placeholder {String} 表单为空时的占位符
 * @property showPassword {Boolean} 是否显示明文密码
-* @event change {Function} 修改表单的值时触发
+* @event input {Function} 修改表单的值时触发
 */
 export default {
     name:"alike-input",
@@ -44,7 +44,7 @@ export default {
     },
     model:{
         prop:'value',
-        event:'change'
+        event:'input'
     },
     data(){
         return {

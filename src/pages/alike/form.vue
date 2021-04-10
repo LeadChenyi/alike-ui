@@ -26,6 +26,17 @@
         <alike-input v-model="userName"></alike-input>
         <div>{{userName}}</div>
         <alike-input type="password" v-model="password" :show-password="true"></alike-input>
+
+        <alike-divider>表单验证器</alike-divider>
+        <alike-form ref="queryForm" :value="forms" :rules="rules">
+            <alike-form-item label="用户名" name="username">
+                <alike-form-input type="text" placeholder="请输入用户名" v-model="forms.username"></alike-form-input>
+            </alike-form-item>            
+            <alike-form-item label="密码" name="username">
+                <alike-form-input type="text" placeholder="请输入密码" v-model="forms.password"></alike-form-input>
+            </alike-form-item>
+        </alike-form>
+        <alike-button @click="submitForm">提交</alike-button>
     </div>
 </template>
 
@@ -37,6 +48,9 @@ import alikeTransfer from '../../../packages/transfer/transfer'
 import alikeSelect from '../../../packages/select/select'
 import alikeSelectOptions from '../../../packages/select/select-options'
 import alikeSelectItem from '../../../packages/select/select-item'
+import alikeForm from '../../../packages/form/form'
+import alikeFormItem from '../../../packages/form-item/form-item'
+import alikeFormInput from '../../../packages/form-input/form-input'
 
 export default {
     name:"Form",
@@ -47,7 +61,10 @@ export default {
         alikeTransfer,
         alikeSelect,
         alikeSelectOptions,
-        alikeSelectItem
+        alikeSelectItem,
+        alikeForm,
+        alikeFormItem,
+        alikeFormInput
     },
     data(){
         return {
@@ -174,7 +191,16 @@ export default {
                     ]
                 }
             ],
-            cascadeValue:['福建省','福州市','仓山区']
+            cascadeValue:['福建省','福州市','仓山区'],
+            forms:{
+                username:"陈先生",
+                password:""
+            },
+            rules:{
+                username:[
+                    {required:true,message:'请输入用户名'}
+                ]
+            }
         }
     },
     methods:{
@@ -238,6 +264,15 @@ export default {
         },
         changeTransfer(detail){
             console.log('changeTransfer：',detail);
+        },
+        submitForm(){
+            this.$refs.queryForm.validator((isValid)=>{
+                if(isValid){
+                    console.log('Success 验证通过');
+                }else{
+                    console.log('Fail 验证失败');
+                }
+            })
         }
     }
 }
