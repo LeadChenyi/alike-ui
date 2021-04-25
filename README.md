@@ -1,6 +1,6 @@
-# alike-ui
+# AliveUI
 
-## Project setup
+### Project setup
 ```
 npm install
 ```
