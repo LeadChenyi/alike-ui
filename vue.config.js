@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     pages: {
         index: {// 构建应用入口
-            entry: 'src/main.js',  
+            entry: 'src/main.js',
             template: 'public/index.html',
             filename: 'index.html'
         }
@@ -18,7 +18,7 @@ module.exports = {
         }
     },
     css: {
-        loaderOptions: {// 向预处理器Loader传递选项，共享Sass/Scss全局变量
+        loaderOptions: {// 全局共享Sass/Scss（后续将单独放入packages中只提供给组件使用，外部则只能通过重置方式注入）
             scss: {
                 additionalData: `@import '@/assets/css/variables.scss';`
             }
@@ -26,8 +26,7 @@ module.exports = {
     },
     chainWebpack: config => {
         // 配置路径别名
-        config.resolve.alias.set('@',path.join(__dirname,'./src'))
-        .set('~img',path.join(__dirname,'./src/assets/img'))
+        config.resolve.alias.set('@', path.join(__dirname, './src'))
 
         // 解决ie11兼容ES6
         config.entry('main').add('babel-polyfill')
