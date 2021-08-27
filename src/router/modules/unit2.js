@@ -5,11 +5,6 @@ export default [// unit2 - 脚本效果
         component: () => import('@/pages/unit2/cssom')
     },
     {
-        path: '/regexp',
-        name: 'Regexp',
-        component: () => import('@/pages/unit2/regexp')
-    },
-    {
         path: '/mouse',
         name: 'Mouse',
         component: () => import('@/pages/unit2/mouse')
@@ -18,6 +13,11 @@ export default [// unit2 - 脚本效果
         path: '/drag',
         name: 'Drag',
         component: () => import('@/pages/unit2/drag')
+    },
+    {
+        path: '/regexp',
+        name: 'Regexp',
+        component: () => import('@/pages/unit2/regexp')
     },
     {
         path: '/class',

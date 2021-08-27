@@ -69,12 +69,6 @@
             <alike-button
                 type="primary"
                 class="mr-10"
-                @click="linkUrls('Regexp')"
-                >正则表达式</alike-button
-            >
-            <alike-button
-                type="primary"
-                class="mr-10"
                 @click="linkUrls('Mouse')"
                 >鼠标事件</alike-button
             >
@@ -84,24 +78,14 @@
             <alike-button
                 type="primary"
                 class="mr-10"
-                @click="linkUrls('Class')"
-                >类</alike-button
+                @click="linkUrls('Regexp')"
+                >正则表达式</alike-button
             >
-        </div>
-
-        <alike-divider>unit3 - vue进阶</alike-divider>
-        <div class="unit-item">
             <alike-button
                 type="primary"
                 class="mr-10"
-                @click="linkUrls('Render')"
-                >Render渲染模板</alike-button
-            >
-            <alike-button type="primary" class="mr-10" @click="linkUrls('Tree')"
-                >Tree无限递归组件</alike-button
-            >
-            <alike-button type="primary" class="mr-10" @click="linkUrls('Jsx')"
-                >Jsx渲染模板</alike-button
+                @click="linkUrls('Class')"
+                >类</alike-button
             >
         </div>
 
@@ -181,5 +165,12 @@ export default {
 </script>
 
 <style scoped>
-.unit-item{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;min-height:100px;padding:20px;}
+.unit-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 100px;
+    padding: 20px;
+}
 </style>
